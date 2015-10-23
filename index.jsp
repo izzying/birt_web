@@ -95,6 +95,10 @@
             </p>
 
             <p><a data-js-href="<%= request.getContextPath( ) + "/frameset?__report=report_001.rptdesign" %>">查看报表report_001.rptdesign</a>
+            </p>
+
+            <p><a href="<%= request.getContextPath( ) + "/birts" %>">BirtWeb报表首页</a>
+            </p>
         </td>
     </tr>
     </tbody>
