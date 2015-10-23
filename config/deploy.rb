@@ -1,6 +1,7 @@
 require 'mina/git'
 
 set :domains, ['121.40.117.95']
+set :domain, '121.40.117.95'
 set :deploy_to, '/usr/local/tomcat/webapps/birt'
 set :repository, 'git@github.com:mumaoxi/birt_web.git'
 set :branch, 'master'
@@ -60,7 +61,9 @@ end
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
+    invoke :'git:clone'
+    invoke :'deploy:cleanup'
+    invoke :'deploy:link_shared_paths'
     queue "cd #{app_path} ; gradle clean && gradle build ; cp -r build/classes/main WEB-INF/classes"
-
   end
 end
