@@ -15,6 +15,8 @@ public class BirtServlet extends MumaoxiServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestURI = req.getRequestURI();
         resp.getWriter().append("requestURI:" + requestURI + "<br>");
+        resp.getWriter().append("getServletPath:" + req.getServletPath() + "<br>");
+        resp.getWriter().append("getContextPath:" + req.getContextPath() + "<br>");
         if ("/birts/new".equalsIgnoreCase(requestURI)) {
             this._new(req, resp);
         } else if ("/birts/show".equalsIgnoreCase(requestURI)) {
