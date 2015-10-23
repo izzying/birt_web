@@ -5,12 +5,8 @@
 .mtj.tmp/
 
 # Package Files #
-./*.jar
-./*.war
-./*.ear
 /documents/
-/logs/*.log
-/logs/*.lck
+/logs/
 /report/images/*
 /.idea/
 /out/
