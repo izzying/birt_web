@@ -65,5 +65,6 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
     invoke :'deploy:link_shared_paths'
     queue "cd #{app_path} ; gradle clean && gradle build ; cp -r build/classes/main WEB-INF/classes"
+    queue "rm -r /usr/local/tomcat/webapps/b;cp -r #{app_path} /usr/local/tomcat/webapps/b"
   end
 end
