@@ -1,0 +1,17 @@
+apply plugin: 'java'
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'webcontent'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: '/usr/local/tomcat/lib', include: ['*.jar'])
+//    compile fileTree(dir: '/usr/local/Cellar/tomcat/8.0.21/libexec/lib', include: ['*.jar'])
+    compile fileTree(dir: 'WEB-INF/libs', include: ['*.jar'])
+}
