@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%--
   Created by IntelliJ IDEA.
   User: saxer
@@ -5,7 +7,6 @@
   Time: 12:26 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,27 +20,28 @@
           rel="stylesheet"/>
 </head>
 <body>
-<h2>报表列表</h2>
-<table class="table table-hover">
-    <tr>
-        <th>文件名</th>
-        <th>操作</th>
-    </tr>
-    <%
-        for (String file : ((String[]) session.getAttribute("reports"))) {
-    %>
-    <tr>
-        <td data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file%>"><%=file%>
-        </td>
-        <th>
-            <button class="btn btn-xs btn-default"
-                    data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file%>">查看
-            </button>
-        </th>
-    </tr>
-    <%}%>
-</table>
-
+<div class="container">
+    <h2>报表列表</h2>
+    <table class="table table-hover table-bordered table-striped table-condensed">
+        <tr>
+            <th>文件名</th>
+            <th>操作</th>
+        </tr>
+        <%
+            for (String file : ((String[]) session.getAttribute("reports"))) {
+        %>
+        <tr>
+            <td><%=file%>
+            </td>
+            <th>
+                <button class="btn btn-xs btn-default"
+                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file%>">查看
+                </button>
+            </th>
+        </tr>
+        <%}%>
+    </table>
+</div>
 
 <script src="<%=request.getContextPath()%>/webcontent/birt/scripts/jquery-2.1.4.js"></script>
 <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>

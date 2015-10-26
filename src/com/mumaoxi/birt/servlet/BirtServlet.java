@@ -1,5 +1,7 @@
 package com.mumaoxi.birt.servlet;
 
+import com.mumaoxi.birt.model.Report;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ public class BirtServlet extends MumaoxiServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
         String requestURI = req.getRequestURI();
         String pathInfo = requestURI.replaceFirst(req.getContextPath(), "");
 
@@ -23,7 +26,6 @@ public class BirtServlet extends MumaoxiServlet {
         resp.getWriter().append("getContextPath:" + req.getContextPath() + "<br>");
         resp.getWriter().append("pathInfo:" + pathInfo + "<br>");
         resp.getWriter().append("</body></html>");
-
 
         if ("/birts/new".equalsIgnoreCase(pathInfo)) {
             this._new(req, resp);
@@ -36,10 +38,17 @@ public class BirtServlet extends MumaoxiServlet {
         }
     }
 
+    /**
+     * 获取报表的列表
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     private void _index(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String[] reports = new File(req.getServletContext().getRealPath("/report/rpts")).list();
-        session.setAttribute("reports", reports);
+        session.setAttribute("reports", Report.getAll(req.getServletContext()));
         super.render(req, resp, "index");
     }
 

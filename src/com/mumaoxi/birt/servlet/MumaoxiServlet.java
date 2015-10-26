@@ -18,6 +18,12 @@ public class MumaoxiServlet extends HttpServlet {
         layoutPath += this.getClass().getSimpleName().toLowerCase().replace("servlet", "") + "/";
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=utf-8");
+    }
+
     /**
      * 模板渲染
      *
