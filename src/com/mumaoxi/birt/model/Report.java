@@ -20,7 +20,7 @@ public class Report implements Serializable {
     private static final String BASE_FILE_PATH = "/report/rpts";
 
     private String displayName;
-    private DataSource dataSource;
+    private String dataSourceName;
 
     private String realPath;
     private String fileName;
@@ -45,9 +45,22 @@ public class Report implements Serializable {
 
         //标题
         Node displayNameElement = doc.selectSingleNode("//root:text-property[@name='title']");
-        System.out.println("displayNameElement::" + displayNameElement);
+        System.out.println("displayNameElement::" + (displayNameElement != null ? displayNameElement.getText() : ""));
         if (displayNameElement != null)
             displayName = displayNameElement.getText();
+
+        //数据库
+        Node dataSourceName = doc.selectSingleNode("//root:oda-data-source/@name");
+        Node odaURL = doc.selectSingleNode("//root:property[@name='odaURL']");
+        Node odaUser = doc.selectSingleNode("//root:property[@name='odaUser']");
+        Node odaPassword = doc.selectSingleNode("//root:encrypted-property[@name='odaPassword']");
+        System.out.println("datasourceName::" + (dataSourceName != null ? dataSourceName.getText() : ""));
+        System.out.println("odaURL::" + (odaURL != null ? odaURL.getText() : ""));
+        System.out.println("odaUser::" + (odaUser != null ? odaUser.getText() : ""));
+        System.out.println("odaPassword::" + (odaPassword != null ? odaPassword.getText() : ""));
+        System.out.println("\n");
+
+        setDataSourceName(dataSourceName != null ? dataSourceName.getText() : null);
     }
 
     /**
@@ -58,13 +71,7 @@ public class Report implements Serializable {
      */
     public static List<Report> getAll(ServletContext context) {
         String reportDirRealPath = context.getRealPath(Report.BASE_FILE_PATH);
-        String databaseRealPath = reportDirRealPath + "database.properties";
-
         String[] reportFileNames = new File(reportDirRealPath).list();
-        DataSource dataSource = null;
-        if (new File(databaseRealPath).exists()) {
-            dataSource = new DataSource(databaseRealPath);
-        }
 
         List<Report> reports = new ArrayList<>();
         for (String name : reportFileNames) {
@@ -72,9 +79,25 @@ public class Report implements Serializable {
                 continue;
             Report report = new Report(reportDirRealPath + name);
             report.setFileName(name);
-            if (dataSource != null) {
-                report.setDataSource(dataSource);
-            }
+            reports.add(report);
+        }
+        return reports;
+    }
+
+    /**
+     * 获取本地所有的报表
+     *
+     * @param reportDirRealPath
+     * @return
+     */
+    public static List<Report> getAll(String reportDirRealPath) {
+        String[] reportFileNames = new File(reportDirRealPath).list();
+        List<Report> reports = new ArrayList<>();
+        for (String name : reportFileNames) {
+            if (!name.endsWith("rptdesign"))
+                continue;
+            Report report = new Report(reportDirRealPath + name);
+            report.setFileName(name);
             reports.add(report);
         }
         return reports;
@@ -88,12 +111,12 @@ public class Report implements Serializable {
         return fileName;
     }
 
-    public DataSource getDataSource() {
-        return dataSource;
+    public void setDataSourceName(String dataSourceName) {
+        this.dataSourceName = dataSourceName;
     }
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public String getDataSourceName() {
+        return dataSourceName;
     }
 
     public String getDisplayName() {

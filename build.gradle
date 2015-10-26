@@ -1,4 +1,5 @@
 apply plugin: 'java'
+
 sourceSets {
     main {
         java {
@@ -13,4 +14,11 @@ sourceSets {
 dependencies {
     compile fileTree(dir: 'WEB-INF/lib', include: ['*.jar'])
     compile fileTree(dir: '/usr/local/Cellar/tomcat/8.0.21/libexec/lib', include: ['*.jar'])
+}
+
+//切换datasource的方法
+task change_datasource(type: JavaExec, dependsOn: 'classes') {
+    description '运行指定main函数的java'
+    classpath = sourceSets.main.runtimeClasspath
+    main = "com.mumaoxi.birt.model.DataSource"
 }

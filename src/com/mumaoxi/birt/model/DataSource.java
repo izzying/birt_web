@@ -1,6 +1,10 @@
 package com.mumaoxi.birt.model;
 
+import java.io.FileInputStream;
 import java.io.Serializable;
+import java.util.Enumeration;
+import java.util.Properties;
+import java.io.File;
 
 /**
  * Created by saxer on 10/26/15.
@@ -18,6 +22,37 @@ public class DataSource implements Serializable {
 
     public DataSource(String realPath) {
         this.realPath = realPath;
+        loadConfig();
+    }
+
+    private void loadConfig() {
+        try {
+            File file = new File(realPath);
+            if (!file.exists()) {
+                return;
+            }
+            Properties pps = new Properties();
+            pps.load(new FileInputStream(realPath));
+            Enumeration enum1 = pps.propertyNames();
+            while (enum1.hasMoreElements()) {
+                String strKey = (String) enum1.nextElement();
+                String strValue = pps.getProperty(strKey);
+                if (strKey.equals("name"))
+                    name = strValue;
+                else if (strKey.equals("host"))
+                    host = strValue;
+                else if (strKey.equals("port"))
+                    port = strValue;
+                else if (strKey.equals("username"))
+                    username = strValue;
+                else if (strKey.equals("password"))
+                    password = strValue;
+                else if (strKey.equals("database"))
+                    database = strValue;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getRealPath() {
@@ -70,5 +105,24 @@ public class DataSource implements Serializable {
 
     public void setDatabase(String database) {
         this.database = database;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Report.getAll("./report/rpts/");
+        System.out.print(new DataSource("./report/rpts/database.properties"));
+    }
+
+
+    @Override
+    public String toString() {
+        return "DataSource{" +
+                "realPath='" + realPath + '\'' +
+                ", name='" + name + '\'' +
+                ", host='" + host + '\'' +
+                ", port='" + port + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", database='" + database + '\'' +
+                '}';
     }
 }

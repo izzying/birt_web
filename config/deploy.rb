@@ -8,7 +8,7 @@ set :branch, 'master'
 set :keep_releases, 20
 set :rails_env, :production
 
-set :shared_paths, ['build.gradle', 'logs', 'build', 'documents', 'report/images']
+set :shared_paths, ['build.gradle', 'logs', 'build', 'documents', 'report/images','report/rpts/database.properties']
 
 # mina deploy to=s1
 case ENV['to']
@@ -51,10 +51,15 @@ task :setup => :environment do
 
   queue! %[mkdir -p "#{deploy_to}/shared/report"]
   queue! %[mkdir -p "#{deploy_to}/shared/report/images"]
+  queue! %[mkdir -p "#{deploy_to}/shared/report/rpts"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/report/images"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/report/rpts"]
 
   queue! %[touch "#{deploy_to}/shared/build.gradle"]
   queue %[echo "-----> Be sure to edit 'shared/build.gradle'."]
+
+  queue! %[touch "#{deploy_to}/shared/report/rpts/database.properties"]
+  queue %[echo "-----> Be sure to edit 'shared/report/rpts/database.properties'."]
 
 end
 
