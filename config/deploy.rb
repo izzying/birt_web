@@ -75,6 +75,7 @@ task :deploy => :environment do
       queue! "cd #{app_path} ; gradle build "
       queue! "cd #{app_path} ; cp -r build/classes/main WEB-INF/classes"
       queue! "cd #{app_path} ; gradle change_datasource"
+      queue! "cd #{app_path} ; source ~/.bash_profile ; restart_tomcat.sh"
     end
   end
 end
