@@ -23,8 +23,6 @@ public class Report implements Serializable {
     private static final String BASE_FILE_PATH = "/report/rpts";
 
     private String displayName;
-    private String dataSourceName;
-
     private String realPath;
     private String fileName;
 
@@ -56,18 +54,11 @@ public class Report implements Serializable {
             displayName = displayNameElement.getText();
 
         //数据库
-        Node dataSourceName = doc.selectSingleNode("//root:oda-data-source/@name");
-        Node odaURL = doc.selectSingleNode("//root:property[@name='odaURL']");
-        Node odaUser = doc.selectSingleNode("//root:property[@name='odaUser']");
-        Node odaPassword = doc.selectSingleNode("//root:encrypted-property[@name='odaPassword']");
-
-        System.out.println("datasourceName::" + (dataSourceName != null ? dataSourceName.getText() : ""));
-        System.out.println("odaURL::" + (odaURL != null ? odaURL.getText() : ""));
-        System.out.println("odaUser::" + (odaUser != null ? odaUser.getText() : ""));
-        System.out.println("odaPassword::" + (odaPassword != null ? odaPassword.getText() : ""));
-        System.out.println("\n");
-
-        setDataSourceName(dataSourceName != null ? dataSourceName.getText() : null);
+//        Node dataSourceName = doc.selectSingleNode("//root:oda-data-source/@name");
+//        Node odaURL = doc.selectSingleNode("//root:property[@name='odaURL']");
+//        Node odaUser = doc.selectSingleNode("//root:property[@name='odaUser']");
+//        Node odaPassword = doc.selectSingleNode("//root:encrypted-property[@name='odaPassword']");
+//
     }
 
     /**
@@ -91,6 +82,7 @@ public class Report implements Serializable {
             odaUser.setText(dataSource.getUsername());
             odaPassword.setText(dataSource.getEncryptPwd());
 
+            System.out.println("====changeDataSource==="+this.fileName);
             if (dataSetDataSources != null) {
                 for (Node node : dataSetDataSources) {
                     node.setText(dataSource.getName());
@@ -153,13 +145,6 @@ public class Report implements Serializable {
         return fileName;
     }
 
-    public void setDataSourceName(String dataSourceName) {
-        this.dataSourceName = dataSourceName;
-    }
-
-    public String getDataSourceName() {
-        return dataSourceName;
-    }
 
     public String getDisplayName() {
         return displayName == null ? fileName : displayName;
