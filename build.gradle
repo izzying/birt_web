@@ -11,6 +11,6 @@ sourceSets {
 }
 
 dependencies {
+    compile fileTree(dir: 'WEB-INF/lib', include: ['*.jar'])
     compile fileTree(dir: '/usr/local/Cellar/tomcat/8.0.21/libexec/lib', include: ['*.jar'])
-    compile fileTree(dir: 'WEB-INF/libs', include: ['*.jar'])
 }
