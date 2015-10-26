@@ -2,10 +2,14 @@ package com.mumaoxi.birt.model;
 
 import org.dom4j.Document;
 import org.dom4j.Node;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
+import javax.print.Doc;
 import javax.servlet.ServletContext;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,13 +40,16 @@ public class Report implements Serializable {
 
     }
 
-    private void parseXml() throws Exception {
+    private Document getSAXDocument() throws Exception {
         Map<String, String> xmlMap = new HashMap<>();
         xmlMap.put("root", "http://www.eclipse.org/birt/2005/design");
         SAXReader saxReader = new SAXReader();
         saxReader.getDocumentFactory().setXPathNamespaceURIs(xmlMap);
-        Document doc = saxReader.read(new File(realPath));
+        return saxReader.read(new File(realPath));
+    }
 
+    private void parseXml() throws Exception {
+        Document doc = getSAXDocument();
         //标题
         Node displayNameElement = doc.selectSingleNode("//root:text-property[@name='title']");
         System.out.println("displayNameElement::" + (displayNameElement != null ? displayNameElement.getText() : ""));
@@ -54,6 +61,7 @@ public class Report implements Serializable {
         Node odaURL = doc.selectSingleNode("//root:property[@name='odaURL']");
         Node odaUser = doc.selectSingleNode("//root:property[@name='odaUser']");
         Node odaPassword = doc.selectSingleNode("//root:encrypted-property[@name='odaPassword']");
+
         System.out.println("datasourceName::" + (dataSourceName != null ? dataSourceName.getText() : ""));
         System.out.println("odaURL::" + (odaURL != null ? odaURL.getText() : ""));
         System.out.println("odaUser::" + (odaUser != null ? odaUser.getText() : ""));
@@ -61,6 +69,41 @@ public class Report implements Serializable {
         System.out.println("\n");
 
         setDataSourceName(dataSourceName != null ? dataSourceName.getText() : null);
+    }
+
+    /**
+     * 修改报表文件的数据源
+     *
+     * @param dataSource 数据源
+     */
+    public void changeDataSource(DataSource dataSource) throws Exception {
+        Document doc = getSAXDocument();
+        Node dataSourceName = doc.selectSingleNode("//root:oda-data-source/@name");
+        Node odaDriverClass = doc.selectSingleNode("//root:property[@name='odaDriverClass']");
+        Node odaURL = doc.selectSingleNode("//root:property[@name='odaURL']");
+        Node odaUser = doc.selectSingleNode("//root:property[@name='odaUser']");
+        Node odaPassword = doc.selectSingleNode("//root:encrypted-property[@name='odaPassword']");
+
+        List<Node> dataSetDataSources = doc.selectNodes("//root:property[@name='dataSource']");
+
+        if (odaDriverClass != null && "com.mysql.jdbc.Driver".equals(odaDriverClass.getText()) && dataSourceName != null && odaURL != null && odaUser != null && odaPassword != null) {
+            dataSourceName.setText(dataSource.getName());
+            odaURL.setText(String.format("jdbc:mysql://%1$s:%2$s/%3$s", dataSource.getHost(), dataSource.getPort(), dataSource.getDatabase()));
+            odaUser.setText(dataSource.getUsername());
+            odaPassword.setText(dataSource.getEncryptPwd());
+
+            if (dataSetDataSources != null) {
+                for (Node node : dataSetDataSources) {
+                    node.setText(dataSource.getName());
+                }
+            }
+        }
+
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        FileOutputStream output = new FileOutputStream(new File(this.realPath));
+        XMLWriter writer = new XMLWriter(output, format);
+        writer.write(doc);
+        writer.flush();
     }
 
     /**

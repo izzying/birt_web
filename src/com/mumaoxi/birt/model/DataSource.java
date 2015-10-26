@@ -1,8 +1,11 @@
 package com.mumaoxi.birt.model;
 
+import org.apache.axis.encoding.Base64;
+
 import java.io.FileInputStream;
 import java.io.Serializable;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 import java.io.File;
 
@@ -95,6 +98,13 @@ public class DataSource implements Serializable {
         return password;
     }
 
+    /**
+     * @return 加密后的密码
+     */
+    public String getEncryptPwd() {
+        return Base64.encode(password.getBytes());
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -108,8 +118,14 @@ public class DataSource implements Serializable {
     }
 
     public static void main(String[] args) throws Exception {
-        Report.getAll("./report/rpts/");
-        System.out.print(new DataSource("./report/rpts/database.properties"));
+        DataSource dataSource = new DataSource("./report/rpts/database.properties");
+        System.out.println("DataSource config:" + dataSource);
+        List<Report> reports = Report.getAll("./report/rpts/");
+        for (Report report : reports) {
+            if (dataSource.getName() != null) {
+                report.changeDataSource(dataSource);
+            }
+        }
     }
 
 

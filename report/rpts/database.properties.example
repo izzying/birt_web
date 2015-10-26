@@ -1,0 +1,6 @@
+name=testModeDatasource
+host=xxx.mysql.rds.aliyuncs.com
+port=3306
+username=staging
+password=staging
+database=production
