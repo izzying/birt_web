@@ -14,16 +14,23 @@ public class BirtServlet extends MumaoxiServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestURI = req.getRequestURI();
+        String pathInfo = requestURI.replaceFirst(req.getContextPath(), "");
+
+        resp.getWriter().append("<html><body>");
         resp.getWriter().append("requestURI:" + requestURI + "<br>");
         resp.getWriter().append("getServletPath:" + req.getServletPath() + "<br>");
         resp.getWriter().append("getContextPath:" + req.getContextPath() + "<br>");
-        if ("/birts/new".equalsIgnoreCase(requestURI)) {
+        resp.getWriter().append("pathInfo:" + pathInfo + "<br>");
+        resp.getWriter().append("</body></html>");
+
+
+        if ("/birts/new".equalsIgnoreCase(pathInfo)) {
             this._new(req, resp);
-        } else if ("/birts/show".equalsIgnoreCase(requestURI)) {
+        } else if ("/birts/show".equalsIgnoreCase(pathInfo)) {
             this._show(req, resp);
-        } else if ("/birts/edit".equalsIgnoreCase(requestURI)) {
+        } else if ("/birts/edit".equalsIgnoreCase(pathInfo)) {
             this._edit(req, resp);
-        } else if ("/birts/".equalsIgnoreCase(requestURI) || "/birts".equalsIgnoreCase(requestURI)) {
+        } else if ("/birts/".equalsIgnoreCase(pathInfo) || "/birts".equalsIgnoreCase(pathInfo)) {
             this._index(req, resp);
         }
     }
