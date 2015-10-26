@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by saxer on 10/23/15.
@@ -21,11 +22,12 @@ public class BirtServlet extends MumaoxiServlet {
         String pathInfo = requestURI.replaceFirst(req.getContextPath(), "");
 
         resp.getWriter().append("<html><body>");
+
         resp.getWriter().append("requestURI:" + requestURI + "<br>");
         resp.getWriter().append("getServletPath:" + req.getServletPath() + "<br>");
         resp.getWriter().append("getContextPath:" + req.getContextPath() + "<br>");
         resp.getWriter().append("pathInfo:" + pathInfo + "<br>");
-        resp.getWriter().append("</body></html>");
+
 
         if ("/birts/new".equalsIgnoreCase(pathInfo)) {
             this._new(req, resp);
@@ -36,6 +38,8 @@ public class BirtServlet extends MumaoxiServlet {
         } else if ("/birts/".equalsIgnoreCase(pathInfo) || "/birts".equalsIgnoreCase(pathInfo)) {
             this._index(req, resp);
         }
+
+        resp.getWriter().append("</body></html>");
     }
 
     /**
@@ -48,7 +52,8 @@ public class BirtServlet extends MumaoxiServlet {
      */
     private void _index(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute("reports", Report.getAll(req.getServletContext()));
+        List<Report> reports = Report.getAll(req.getServletContext());
+        session.setAttribute("reports", reports);
         super.render(req, resp, "index");
     }
 

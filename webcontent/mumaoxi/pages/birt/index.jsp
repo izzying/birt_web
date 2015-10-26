@@ -1,3 +1,5 @@
+<%@ page import="com.mumaoxi.birt.model.Report" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%--
@@ -25,17 +27,22 @@
     <table class="table table-hover table-bordered table-striped table-condensed">
         <tr>
             <th>文件名</th>
+            <th>报表名</th>
             <th>操作</th>
         </tr>
         <%
-            for (String file : ((String[]) session.getAttribute("reports"))) {
+            for (Report file : ((ArrayList<Report>) session.getAttribute("reports"))) {
         %>
         <tr>
-            <td><%=file%>
+            <td><span data-toggle="tooltip" data-placement="top"
+                      title="报表名：<%=file.getDisplayName()%>"><%=file.getFileName()%></span>
+            </td>
+            <td><span data-toggle="tooltip" data-placement="top"
+                      title="文件名：<%=file.getFileName()%>"><%=file.getDisplayName()%></span>
             </td>
             <th>
                 <button class="btn btn-xs btn-default"
-                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file%>">查看
+                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file.getFileName()%>">查看
                 </button>
             </th>
         </tr>
@@ -46,6 +53,7 @@
 <script src="<%=request.getContextPath()%>/webcontent/birt/scripts/jquery-2.1.4.js"></script>
 <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
 <script>
+    $('[data-toggle="tooltip"]').tooltip();
     $("[data-js-href]").click(function () {
         var windowHeight = window.screen.height;
         var windowWidth = window.screen.width;
