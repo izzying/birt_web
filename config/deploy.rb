@@ -8,7 +8,7 @@ set :branch, 'master'
 set :keep_releases, 20
 set :rails_env, :production
 
-set :shared_paths, ['build.gradle', 'logs', 'build', 'documents', 'report/images','report/rpts/database.properties']
+set :shared_paths, ['build.gradle', 'logs', 'build', 'documents', 'report/images', 'report/rpts/database.properties']
 
 # mina deploy to=s1
 case ENV['to']
@@ -71,7 +71,10 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
 
     to :launch do
-      queue! "cd #{app_path} ; gradle clean && gradle build ; cp -r build/classes/main WEB-INF/classes"
+      queue! "cd #{app_path} ; gradle clean "
+      queue! "cd #{app_path} ; gradle build "
+      queue! "cd #{app_path} ; cp -r build/classes/main WEB-INF/classes"
+      queue! "cd #{app_path} ; gradle change_datasource"
     end
   end
 end
