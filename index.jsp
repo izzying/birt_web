@@ -106,14 +106,13 @@
 <script src="webcontent/birt/scripts/jquery-2.1.4.js"></script>
 <script>
     $("[data-js-href]").click(function () {
-//        window.open("http://www.w3schools.com", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400");
         var windowHeight = window.screen.height;
         var windowWidth = window.screen.width;
         var width = 800;
         var height = windowHeight;
         var top = 0;
         var left = (windowWidth - width) / 2;
-        window.open($(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
+        window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
     });
 </script>
 </body>

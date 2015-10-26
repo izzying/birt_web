@@ -256,8 +256,4 @@
     }
 
 </script>
-<%--<script src="birt/scripts/jquery-2.1.4.js"></script>--%>
-<%--<script>--%>
-<%--$("#progressBar").show();--%>
-<%--</script>--%>
 </HTML>

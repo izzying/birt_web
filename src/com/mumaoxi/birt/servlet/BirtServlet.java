@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -37,8 +38,8 @@ public class BirtServlet extends MumaoxiServlet {
 
     private void _index(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute("files", new String[]{"report_001", "test", "test1", "haha", "stream", "saxer"});
-        resp.getWriter().append(new String[]{"report_001", "test", "test1", "haha", "stream", "saxer"}.toString());
+        String[] reports = new File(req.getServletContext().getRealPath("/report/rpts")).list();
+        session.setAttribute("reports", reports);
         super.render(req, resp, "index");
     }
 
