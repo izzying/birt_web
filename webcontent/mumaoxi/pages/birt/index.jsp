@@ -40,7 +40,7 @@
             <td><%=report.getAuthor()%>
             </td>
             <th>
-                <a class="btn btn-xs btn-default"
+                <a class="btn btn-xs btn-default" target="birt"
                     href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
                         data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
                 </a>
