@@ -40,9 +40,10 @@
             <td><%=report.getAuthor()%>
             </td>
             <th>
-                <button class="btn btn-xs btn-default"
+                <a class="btn btn-xs btn-default"
+                    href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
                         data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
-                </button>
+                </a>
             </th>
         </tr>
         <%}%>
@@ -53,15 +54,15 @@
 <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
 <script>
     $('[data-toggle="tooltip"]').tooltip();
-    $("[data-js-href]").click(function () {
-        var windowHeight = window.screen.height;
-        var windowWidth = window.screen.width;
-        var width = 800;
-        var height = windowHeight;
-        var top = 0;
-        var left = (windowWidth - width) / 2;
-        window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
-    });
+//    $("[data-js-href]").click(function () {
+//        var windowHeight = window.screen.height;
+//        var windowWidth = window.screen.width;
+//        var width = 800;
+//        var height = windowHeight;
+//        var top = 0;
+//        var left = (windowWidth - width) / 2;
+//        window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
+//    });
 </script>
 </body>
 </html>
