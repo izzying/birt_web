@@ -20,6 +20,9 @@ public class Report implements Serializable {
     private static final String BASE_FILE_PATH = "/report/rpts";
 
     private String displayName;
+    private String title;
+    private String author;
+    private String description;
     private String realPath;
     private String fileName;
 
@@ -44,9 +47,21 @@ public class Report implements Serializable {
 
     private void parseXml() throws Exception {
         Document doc = getSAXDocument();
-        //标题
-        Node displayNameElement = doc.selectSingleNode("//root:text-property[@name='title']");
+
+        //标题、作者、描述等信息
+        Node titleElement = doc.selectSingleNode("//root:text-property[@name='title']");
+        Node authorElement = doc.selectSingleNode("//root:property[@name='author']");
+        Node descriptionElement = doc.selectSingleNode("//root:html-property[@name='description']");
+        Node displayNameElement = doc.selectSingleNode("//root:text-property[@name='displayName']");
+        System.out.println("titleElement::" + (titleElement != null ? titleElement.getText() : ""));
+        System.out.println("descriptionElement::" + (descriptionElement != null ? descriptionElement.getText() : ""));
         System.out.println("displayNameElement::" + (displayNameElement != null ? displayNameElement.getText() : ""));
+        if (titleElement != null)
+            title = titleElement.getText();
+        if (authorElement != null)
+            author = authorElement.getText();
+        if (descriptionElement != null)
+            description = descriptionElement.getText();
         if (displayNameElement != null)
             displayName = displayNameElement.getText();
 
@@ -141,6 +156,22 @@ public class Report implements Serializable {
         return reports;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
@@ -150,7 +181,15 @@ public class Report implements Serializable {
     }
 
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
     public String getDisplayName() {
-        return displayName == null ? fileName : displayName;
+        return displayName;
     }
 }

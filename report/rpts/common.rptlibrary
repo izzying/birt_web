@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <property name="units">in</property>
+    <property name="theme">defaultTheme</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6">
+            <text-property name="displayName"></text-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://blsmshop.mysql.rds.aliyuncs.com:3306/adultshop_production</property>
+            <property name="odaUser">staging_user</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c3RhZ2luZzEyMDc=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <themes>
+        <theme name="defaultTheme" id="4">
+            <styles>
+                <style name="tableHeader" id="7">
+                    <property name="backgroundColor">#F9F9F9</property>
+                    <property name="fontSize">14px</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="color">#191919</property>
+                    <property name="borderBottomColor">#DDDDDD</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#DDDDDD</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="paddingTop">5px</property>
+                    <property name="paddingLeft">5px</property>
+                    <property name="paddingBottom">5px</property>
+                    <property name="paddingRight">5px</property>
+                </style>
+                <style name="tableDetailRow" id="8">
+                    <property name="borderBottomColor">#DDDDDD</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                </style>
+                <style name="tableDetailRowCell" id="9">
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                </style>
+            </styles>
+        </theme>
+    </themes>
+    <page-setup>
+        <simple-master-page name="NewSimpleMasterPage" id="3"/>
+    </page-setup>
+</library>

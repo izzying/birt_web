@@ -24,25 +24,24 @@
 <body>
 <div class="container">
     <h2>报表列表</h2>
-    <table class="table table-hover table-bordered table-striped table-condensed">
+    <table class="table table-hover table-striped table-condensed">
         <tr>
-            <th>文件名</th>
-            <th>报表名</th>
+            <th>报表</th>
+            <th>上传者</th>
             <th>操作</th>
         </tr>
         <%
-            for (Report file : ((ArrayList<Report>) session.getAttribute("reports"))) {
+            for (Report report : ((ArrayList<Report>) session.getAttribute("reports"))) {
         %>
         <tr>
             <td><span data-toggle="tooltip" data-placement="top"
-                      title="报表名：<%=file.getDisplayName()%>"><%=file.getFileName()%></span>
+                      title="<%=report.getDescription()%>"><%=report.getTitle() != null ? report.getTitle() : report.getFileName()%></span>
             </td>
-            <td><span data-toggle="tooltip" data-placement="top"
-                      title="文件名：<%=file.getFileName()%>"><%=file.getDisplayName()%></span>
+            <td><%=report.getAuthor()%>
             </td>
             <th>
                 <button class="btn btn-xs btn-default"
-                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=file.getFileName()%>">查看
+                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
                 </button>
             </th>
         </tr>
