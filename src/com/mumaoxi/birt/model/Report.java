@@ -111,7 +111,7 @@ public class Report implements Serializable {
         for (String name : reportFileNames) {
             if (!name.endsWith("rptdesign"))
                 continue;
-            Report report = new Report(reportDirRealPath + name);
+            Report report = new Report(reportDirRealPath +"/"+ name);
             report.setFileName(name);
             reports.add(report);
         }
