@@ -10,10 +10,7 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by saxer on 10/26/15.
@@ -82,7 +79,7 @@ public class Report implements Serializable {
             odaUser.setText(dataSource.getUsername());
             odaPassword.setText(dataSource.getEncryptPwd());
 
-            System.out.println("====changeDataSource==="+this.fileName);
+            System.out.println("====changeDataSource===" + this.fileName);
             if (dataSetDataSources != null) {
                 for (Node node : dataSetDataSources) {
                     node.setText(dataSource.getName());
@@ -107,11 +104,18 @@ public class Report implements Serializable {
         String reportDirRealPath = context.getRealPath(Report.BASE_FILE_PATH);
         String[] reportFileNames = new File(reportDirRealPath).list();
 
+        Arrays.sort(reportFileNames, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.toLowerCase().compareTo(o1.toLowerCase());
+            }
+        });
+
         List<Report> reports = new ArrayList<>();
         for (String name : reportFileNames) {
             if (!name.endsWith("rptdesign"))
                 continue;
-            Report report = new Report(reportDirRealPath +"/"+ name);
+            Report report = new Report(reportDirRealPath + "/" + name);
             report.setFileName(name);
             reports.add(report);
         }
