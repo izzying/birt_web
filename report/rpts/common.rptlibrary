@@ -81,6 +81,10 @@
                     <property name="paddingBottom">3px</property>
                     <property name="paddingRight">3px</property>
                 </style>
+                <style name="chart" id="18">
+                    <property name="height">100%</property>
+                    <property name="width">100%</property>
+                </style>
             </styles>
         </theme>
     </themes>
