@@ -5,7 +5,7 @@ set :domain, '121.40.117.95'
 set :deploy_to, '/usr/local/tomcat/webapps/birt'
 set :repository, 'git@github.com:mumaoxi/birt_web.git'
 set :branch, 'master'
-set :keep_releases, 20
+set :keep_releases, 10
 set :rails_env, :production
 
 set :shared_paths, ['build.gradle', 'logs', 'build', 'documents', 'report/images', 'report/rpts/database.properties']
