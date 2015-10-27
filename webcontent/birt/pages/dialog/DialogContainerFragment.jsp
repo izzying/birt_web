@@ -77,9 +77,9 @@
 						<div id="<%= fragment.getClientId( ) %>okButton">
 							<div id="<%= fragment.getClientId( ) %>okButtonLeft" class="dialogBtnBarButtonLeftBackgroundEnabled"></div>
 							<div id="<%= fragment.getClientId( ) %>okButtonRight" class="dialogBtnBarButtonRightBackgroundEnabled"></div>
-							<input type="button" value="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.ok" ) %>" 
+							<input type="button" value="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.ok" ) %>"
 								title="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.ok" ) %>"  
-								class="dialogBtnBarButtonText dialogBtnBarButtonEnabled"/>
+								class="dialogBtnBarButtonText dialogBtnBarButtonEnabled btn btn-sm btn-success"/>
 						</div>
 						<div class="dialogBtnBarDivider"></div>
 						<div id="<%= fragment.getClientId( ) %>cancelButton">
@@ -87,7 +87,7 @@
 							<div class="dialogBtnBarButtonRightBackgroundEnabled"></div>
 							<input type="button" value="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.cancel" )%>" 
 								title="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.cancel" )%>"  
-								class="dialogBtnBarButtonText dialogBtnBarButtonEnabled"/>
+								class="dialogBtnBarButtonText dialogBtnBarButtonEnabled  btn btn-sm btn-danger"/>
 						</div> 
 					</div>							
 				</div>

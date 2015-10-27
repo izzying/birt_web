@@ -22,7 +22,7 @@
 	Progress bar fragment
 -----------------------------------------------------------------------------%>
 <DIV ID="progressBar" STYLE="display:none;position:absolute;z-index:310">
-	<TABLE WIDTH="250px" CLASS="birtviewer_progressbar" CELLSPACING="10px">
+	<TABLE WIDTH="250px" height="120px" CLASS="birtviewer_progressbar" CELLSPACING="10px">
 		<TR>
 			<TD ALIGN="center">
 				<B>
@@ -43,7 +43,7 @@
 							<TD ALIGN="center">
 								<INPUT TYPE="BUTTON" VALUE="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.cancel" )%>" 					   
 									   TITLE="<%= BirtResources.getHtmlMessage( "birt.viewer.dialog.cancel" )%>"
-									   CLASS="birtviewer_progressbar_button"/>
+									   CLASS="birtviewer_progressbar_button btn btn-xs btn-danger"/>
 							</TD>
 						</TR>
 					</TABLE>

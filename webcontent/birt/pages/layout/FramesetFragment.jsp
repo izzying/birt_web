@@ -134,6 +134,14 @@
     <script src="birt/ajax/core/BirtSoapRequest.js" type="text/javascript"></script>
     <script src="birt/ajax/core/BirtSoapResponse.js" type="text/javascript"></script>
 
+
+    <link href="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/css/bootstrap.css"
+          rel="stylesheet"/>
+
+    <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
+
+    <LINK REL="stylesheet" HREF="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/datepicker/css/bootstrap-datepicker.css" MEDIA="screen" TYPE="text/css"/>
+    <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/datepicker/js/bootstrap-datepicker.js"></script>
 </HEAD>
 
 <BODY
@@ -256,4 +264,5 @@
     }
 
 </script>
+
 </HTML>

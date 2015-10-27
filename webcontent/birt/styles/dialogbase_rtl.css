@@ -160,7 +160,7 @@
 {
 	float: right;
 	cursor: pointer;
-	height: 24px;
+	min-height: 24px;
 	width: 80px;
 	overflow: hidden;
 	color: black; /* Font color */ 

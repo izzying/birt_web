@@ -31,32 +31,51 @@
     <themes>
         <theme name="defaultTheme" id="4">
             <styles>
-                <style name="tableHeader" id="7">
+                <style name="table" id="10">
+                    <property name="marginTop">8px</property>
+                    <property name="marginBottom">8px</property>
+                </style>
+                <style name="table-header" id="11">
                     <property name="backgroundColor">#F9F9F9</property>
-                    <property name="fontSize">14px</property>
-                    <property name="fontWeight">bold</property>
                     <property name="color">#191919</property>
                     <property name="borderBottomColor">#DDDDDD</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                    <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">thin</property>
-                    <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">thin</property>
+                    <property name="borderBottomWidth">1px</property>
                     <property name="borderTopColor">#DDDDDD</property>
                     <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">thin</property>
-                    <property name="paddingTop">5px</property>
-                    <property name="paddingLeft">5px</property>
-                    <property name="paddingBottom">5px</property>
-                    <property name="paddingRight">5px</property>
+                    <property name="borderTopWidth">1px</property>
                 </style>
-                <style name="tableDetailRow" id="8">
+                <style name="table-header-cell" id="12">
+                    <property name="fontSize">14px</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                </style>
+                <style name="table-detail" id="13">
                     <property name="borderBottomColor">#DDDDDD</property>
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">1px</property>
                 </style>
-                <style name="tableDetailRowCell" id="9">
+                <style name="table-detail-cell" id="14">
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                </style>
+                <style name="label" id="15">
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">bold</property>
+                </style>
+                <style name="table-footer" id="16">
+                    <property name="backgroundColor">#F9F9F9</property>
+                    <property name="borderBottomColor">#DDDDDD</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                </style>
+                <style name="table-footer-cell" id="17">
+                    <property name="fontSize">12px</property>
+                    <property name="fontWeight">bold</property>
                     <property name="paddingTop">3px</property>
                     <property name="paddingLeft">3px</property>
                     <property name="paddingBottom">3px</property>
