@@ -30,6 +30,42 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="channel" id="127">
+            <text-property name="helpText">客户端渠道</text-property>
+            <text-property name="promptText">客户端渠道</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">all</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">all</property>
+                    <property name="label">所有渠道</property>
+                </structure>
+                <structure>
+                    <property name="value">QQ腾讯应用宝</property>
+                    <property name="label">QQ腾讯应用宝</property>
+                </structure>
+                <structure>
+                    <property name="value">官网_自营</property>
+                    <property name="label">官网_自营</property>
+                </structure>
+                <structure>
+                    <property name="value">微店Android端</property>
+                    <property name="label">微店Android端</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
