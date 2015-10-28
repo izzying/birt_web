@@ -336,6 +336,8 @@ on a.`order_date`=b.`order_date`]]></xml-property>
             <property name="contentType">html</property>
         </text-data>
         <table id="6">
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
             <property name="width">100%</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
