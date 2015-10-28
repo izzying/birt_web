@@ -324,16 +324,17 @@ on a.`order_date`=b.`order_date`]]></xml-property>
         </simple-master-page>
     </page-setup>
     <body>
-        <text id="66">
-            <property name="contentType">html</property>
-            <text-property name="content"><![CDATA[<b>首趣微店日增订单发货统计</b>]]></text-property>
-        </text>
         <text-data id="65">
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"开始日期：" + params["date_start"].value + "&lt;br>"+
 "结束日期：" + params["date_end"].value</expression>
             <property name="contentType">html</property>
         </text-data>
+        <text id="66">
+            <property name="style">s-title-label</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<b>首趣微店日增订单发货统计</b>]]></text-property>
+        </text>
         <table id="6">
             <property name="pageBreakAfter">avoid</property>
             <property name="pageBreakBefore">avoid</property>

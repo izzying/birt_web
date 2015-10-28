@@ -125,10 +125,11 @@
                 <style name="s-title-label" id="19">
                     <property name="fontSize">14px</property>
                     <property name="fontWeight">bolder</property>
+                    <property name="color">#008080</property>
                     <property name="textLineThrough">none</property>
                     <property name="textOverline">none</property>
                     <property name="marginTop">5px</property>
-                    <property name="marginLeft">0px</property>
+                    <property name="marginLeft">8px</property>
                     <property name="marginBottom">5px</property>
                     <property name="marginRight">0px</property>
                     <property name="paddingTop">0px</property>
