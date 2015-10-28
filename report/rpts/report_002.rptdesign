@@ -325,8 +325,16 @@ on a.`order_date`=b.`order_date`]]></xml-property>
     </page-setup>
     <body>
         <label id="24">
+            <property name="style">s-title-label</property>
+            <property name="textAlign">left</property>
             <text-property name="text">微店新增订单(用设备区分)数据</text-property>
         </label>
+        <text-data id="65">
+            <property name="style">s-params-block</property>
+            <expression name="valueExpr">"开始日期：" + params["date_start"].value + "&lt;br>"+
+"结束日期：" + params["date_end"].value</expression>
+            <property name="contentType">html</property>
+        </text-data>
         <table id="6">
             <property name="width">100%</property>
             <property name="dataSet">ds_001</property>
@@ -729,6 +737,8 @@ on a.`order_date`=b.`order_date`]]></xml-property>
     <Visible>true</Visible>
   </Block>
   <Dimension>Two_Dimensional_With_Depth</Dimension>
+  <Script>
+</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <ExtendedProperties>
@@ -2235,8 +2245,10 @@ on a.`order_date`=b.`order_date`]]></xml-property>
 ]]></xml-property>
             <property name="outputFormat">SVG</property>
             <property name="inheritColumns">true</property>
-            <property name="height">285.5pt</property>
-            <property name="width">571pt</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakAfter">always</property>
+            <property name="height">350px</property>
+            <property name="width">600px</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>

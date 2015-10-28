@@ -5,7 +5,6 @@
     <property name="theme">defaultTheme</property>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6">
-            <text-property name="displayName"></text-property>
             <list-property name="privateDriverProperties">
                 <ex-property>
                     <name>metadataBidiFormatStr</name>
@@ -84,6 +83,28 @@
                 <style name="chart" id="18">
                     <property name="height">100%</property>
                     <property name="width">100%</property>
+                </style>
+                <style name="s-title-label" id="19">
+                    <property name="fontSize">14px</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="marginTop">5px</property>
+                    <property name="marginLeft">0px</property>
+                    <property name="marginBottom">5px</property>
+                    <property name="marginRight">0px</property>
+                    <property name="paddingTop">0px</property>
+                    <property name="paddingLeft">0px</property>
+                    <property name="paddingBottom">0px</property>
+                    <property name="paddingRight">0px</property>
+                    <property name="textTransform">capitalize</property>
+                </style>
+                <style name="s-params-block" id="20">
+                    <property name="fontWeight">lighter</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="color">#808080</property>
+                    <property name="marginLeft">1em</property>
+                    <property name="textIndent">0em</property>
                 </style>
             </styles>
         </theme>
