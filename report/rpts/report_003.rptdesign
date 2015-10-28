@@ -649,22 +649,6 @@
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
     </data-sets>
-    <styles>
-        <style name="order_rate_data" id="126">
-            <list-property name="highlightRules">
-                <structure>
-                    <property name="operator">lt</property>
-                    <property name="backgroundColor">#FFFF00</property>
-                    <property name="fontFamily">"Zapf Dingbats"</property>
-                    <property name="color">#FF0000</property>
-                    <expression name="testExpr" type="javascript">parseInt()</expression>
-                    <simple-property-list name="value1">
-                        <value type="javascript">60</value>
-                    </simple-property-list>
-                </structure>
-            </list-property>
-        </style>
-    </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <page-footer>
@@ -880,7 +864,16 @@
                     </cell>
                     <cell id="104">
                         <data id="121">
-                            <property name="style">order_rate_data</property>
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
@@ -920,7 +913,16 @@
                     </cell>
                     <cell id="105">
                         <data id="123">
-                            <property name="style">order_rate_data</property>
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding_1"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">Column Binding_1</property>
                         </data>
                     </cell>
@@ -1132,7 +1134,16 @@
                     </cell>
                     <cell id="111">
                         <data id="120">
-                            <property name="style">order_rate_data</property>
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
@@ -1172,7 +1183,16 @@
                     </cell>
                     <cell id="112">
                         <data id="125">
-                            <property name="style">order_rate_data</property>
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding_1"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">Column Binding_1</property>
                         </data>
                     </cell>

@@ -147,6 +147,11 @@
                     <property name="marginBottom">3px</property>
                     <property name="textIndent">0em</property>
                 </style>
+                <style name="s-highlight-label" id="21">
+                    <property name="backgroundColor">#FFFF00</property>
+                    <property name="fontFamily">fantasy</property>
+                    <property name="color">#FF0000</property>
+                </style>
             </styles>
         </theme>
     </themes>
