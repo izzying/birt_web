@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">odaDriverClass</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaURL</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaUser</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaAutoCommit</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaIsolationMode</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaPassword</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">odaJndiName</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">6</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">6</property>
+        </structure>
+    </list-property>
     <property name="units">in</property>
     <property name="theme">defaultTheme</property>
     <data-sources>
@@ -103,7 +141,9 @@
                     <property name="fontWeight">lighter</property>
                     <property name="fontStyle">normal</property>
                     <property name="color">#808080</property>
+                    <property name="marginTop">3px</property>
                     <property name="marginLeft">1em</property>
+                    <property name="marginBottom">3px</property>
                     <property name="textIndent">0em</property>
                 </style>
             </styles>

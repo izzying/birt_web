@@ -324,11 +324,10 @@ on a.`order_date`=b.`order_date`]]></xml-property>
         </simple-master-page>
     </page-setup>
     <body>
-        <label id="24">
-            <property name="style">s-title-label</property>
-            <property name="textAlign">left</property>
-            <text-property name="text">微店新增订单(用设备区分)数据</text-property>
-        </label>
+        <text id="66">
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<b>首趣微店日增订单发货统计</b>]]></text-property>
+        </text>
         <text-data id="65">
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"开始日期：" + params["date_start"].value + "&lt;br>"+
