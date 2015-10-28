@@ -362,7 +362,7 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["order_money"]</expression>
+                            <expression name="value" type="javascript">row["total_count"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -375,6 +375,18 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                         <structure>
                             <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["send_out_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["order_money"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -407,7 +419,7 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <cell id="53">
                         <label id="57">
                             <property name="textAlign">left</property>
-                            <text-property name="text">销售额(发货订单)</text-property>
+                            <text-property name="text">发货销售额(元)</text-property>
                         </label>
                     </cell>
                 </row>
@@ -454,8 +466,8 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                         </data>
                     </cell>
                     <cell id="55">
-                        <data id="59">
-                            <property name="resultSetColumn">Aggregation</property>
+                        <data id="61">
+                            <property name="resultSetColumn">Aggregation_2</property>
                         </data>
                     </cell>
                 </row>
