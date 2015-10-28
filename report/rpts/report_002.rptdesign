@@ -4,20 +4,6 @@
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <text-property name="title">微店日新增订单统计</text-property>
     <html-property name="description">根据时间段统计微店每日的新增订单、发货订单数目等数据</html-property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">queryText</property>
-            <property name="id">5</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">5</property>
-        </structure>
-        <structure>
-            <property name="name">rowFetchSize</property>
-            <property name="id">5</property>
-        </structure>
-    </list-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -112,6 +98,12 @@
                     <text-property name="displayName">send_out_count</text-property>
                     <text-property name="heading">send_out_count</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">order_money</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">order_money</text-property>
+                    <text-property name="heading">order_money</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -172,6 +164,11 @@
                         <property name="name">send_out_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">order_money</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">testModeDatasource</property>
@@ -197,8 +194,15 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">order_money</property>
+                    <property name="nativeName">order_money</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select a.`order_date`,a.`total_count` ,b.`send_out_count` from 
+            <xml-property name="queryText"><![CDATA[select a.`order_date`,a.`total_count` ,b.`send_out_count`,b.`order_money` from 
 (SELECT left(created_at,10) as `order_date`, count(distinct(device_id)) as `total_count` FROM 
 orders where created_at>=?
 and created_at<=?
@@ -210,7 +214,8 @@ group by `order_date`
 
 left join
 (
-SELECT left(created_at,10) as `order_date`, count(distinct(device_id)) as `send_out_count` FROM 
+SELECT left(created_at,10) as `order_date`, count(distinct(device_id)) as `send_out_count`,
+sum(shipping_charge+item_total) as `order_money` FROM 
 orders where created_at>=?
 and created_at<=?
 and deleted_at is null
@@ -345,13 +350,19 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
+                    <property name="name">order_money</property>
+                    <text-property name="displayName">order_money</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["order_money"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
                     <property name="name">Aggregation</property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["total_count"]</expression>
+                            <expression name="value" type="javascript">row["order_money"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -372,6 +383,7 @@ on a.`order_date`=b.`order_date`]]></xml-property>
             <column id="20"/>
             <column id="21"/>
             <column id="45"/>
+            <column id="56"/>
             <header>
                 <row id="7">
                     <cell id="8">
@@ -390,6 +402,12 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                         <label id="46">
                             <property name="textAlign">left</property>
                             <text-property name="text">发货订单</text-property>
+                        </label>
+                    </cell>
+                    <cell id="53">
+                        <label id="57">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">销售额(发货订单)</text-property>
                         </label>
                     </cell>
                 </row>
@@ -411,6 +429,11 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                             <property name="resultSetColumn">send_out_count</property>
                         </data>
                     </cell>
+                    <cell id="54">
+                        <data id="58">
+                            <property name="resultSetColumn">order_money</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
@@ -426,8 +449,13 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                         </data>
                     </cell>
                     <cell id="44">
-                        <data id="49">
+                        <data id="60">
                             <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="55">
+                        <data id="59">
+                            <property name="resultSetColumn">Aggregation</property>
                         </data>
                     </cell>
                 </row>
