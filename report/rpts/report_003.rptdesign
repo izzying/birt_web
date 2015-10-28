@@ -775,6 +775,7 @@
             <column id="44"/>
             <column id="45"/>
             <column id="46"/>
+            <column id="106"/>
             <column id="47"/>
             <header>
                 <row id="9">
@@ -806,6 +807,12 @@
                         <label id="19">
                             <property name="textAlign">left</property>
                             <text-property name="text">发出设备单</text-property>
+                        </label>
+                    </cell>
+                    <cell id="103">
+                        <label id="107">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">成单率</text-property>
                         </label>
                     </cell>
                     <cell id="20">
@@ -843,6 +850,12 @@
                             <property name="resultSetColumn">send_out_device_count</property>
                         </data>
                     </cell>
+                    <cell id="104">
+                        <text-data id="119">
+                            <expression name="valueExpr">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["device_count"]),2)+'%'</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
                     <cell id="33">
                         <data id="34">
                             <property name="resultSetColumn">send_out_sale</property>
@@ -877,6 +890,7 @@
                             <property name="resultSetColumn">Aggregation_3</property>
                         </data>
                     </cell>
+                    <cell id="105"/>
                     <cell id="41">
                         <data id="53">
                             <property name="resultSetColumn">Aggregation_4</property>
@@ -990,12 +1004,19 @@
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["device_count"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="91"/>
             <column id="92"/>
             <column id="93"/>
             <column id="94"/>
             <column id="95"/>
+            <column id="113"/>
             <column id="96"/>
             <header>
                 <row id="58">
@@ -1027,6 +1048,12 @@
                         <label id="68">
                             <property name="textAlign">left</property>
                             <text-property name="text">发出设备单</text-property>
+                        </label>
+                    </cell>
+                    <cell id="110">
+                        <label id="114">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">成单率</text-property>
                         </label>
                     </cell>
                     <cell id="69">
@@ -1064,6 +1091,11 @@
                             <property name="resultSetColumn">send_out_device_count</property>
                         </data>
                     </cell>
+                    <cell id="111">
+                        <data id="120">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="82">
                         <data id="83">
                             <property name="resultSetColumn">send_out_sale</property>
@@ -1098,6 +1130,7 @@
                             <property name="resultSetColumn">Aggregation_3</property>
                         </data>
                     </cell>
+                    <cell id="112"/>
                     <cell id="90">
                         <data id="102">
                             <property name="resultSetColumn">Aggregation_4</property>
