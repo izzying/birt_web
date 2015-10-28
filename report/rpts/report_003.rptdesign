@@ -769,6 +769,18 @@
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["device_count"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]*100 / new Number(row["Aggregation_1"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="42"/>
             <column id="43"/>
@@ -851,10 +863,9 @@
                         </data>
                     </cell>
                     <cell id="104">
-                        <text-data id="119">
-                            <expression name="valueExpr">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["device_count"]),2)+'%'</expression>
-                            <property name="contentType">html</property>
-                        </text-data>
+                        <data id="121">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
                     </cell>
                     <cell id="33">
                         <data id="34">
@@ -890,7 +901,11 @@
                             <property name="resultSetColumn">Aggregation_3</property>
                         </data>
                     </cell>
-                    <cell id="105"/>
+                    <cell id="105">
+                        <data id="123">
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
                     <cell id="41">
                         <data id="53">
                             <property name="resultSetColumn">Aggregation_4</property>
@@ -1007,6 +1022,12 @@
                 <structure>
                     <property name="name">Column Binding</property>
                     <expression name="expression" type="javascript">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["device_count"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]*100 / new Number(row["Aggregation_1"]),2)+'%'</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -1130,7 +1151,11 @@
                             <property name="resultSetColumn">Aggregation_3</property>
                         </data>
                     </cell>
-                    <cell id="112"/>
+                    <cell id="112">
+                        <data id="125">
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
                     <cell id="90">
                         <data id="102">
                             <property name="resultSetColumn">Aggregation_4</property>
