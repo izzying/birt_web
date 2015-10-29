@@ -20,6 +20,7 @@
     <title>报表列表</title>
     <link href="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/css/bootstrap.css"
           rel="stylesheet"/>
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
 </head>
 <body>
 <div class="container">

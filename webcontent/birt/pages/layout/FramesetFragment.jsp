@@ -50,6 +50,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <LINK REL="stylesheet" HREF="birt/styles/style.css" TYPE="text/css">
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
     <%
         if (attributeBean.isRtl()) {
     %>

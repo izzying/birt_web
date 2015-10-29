@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Birt报表首页</title>
-    <link href="http://www.eclipse.org/images/eclipse.ico" type=image/x-icon rel="shortcut icon">
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
     <style>
         .warningMessage {
             color: red;
