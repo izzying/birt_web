@@ -1771,6 +1771,12 @@
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
+                    <property name="name">client_package</property>
+                    <text-property name="displayName">client_package</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["client_package"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
                     <property name="name">device_count</property>
                     <text-property name="displayName">device_count</text-property>
                     <expression name="expression" type="javascript">dataSetRow["device_count"]</expression>
