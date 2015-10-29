@@ -1267,7 +1267,7 @@
                                 <structure>
                                     <property name="linkType">hyperlink</property>
                                     <property name="toolTip">点击跳转至应用宝详情</property>
-                                    <expression name="uri" type="constant">"http://android.myapp.com/myapp/detail.htm?apkName="+row['client_package']</expression>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row["client_package"]</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>
