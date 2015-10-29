@@ -123,11 +123,14 @@
                     <property name="width">100%</property>
                 </style>
                 <style name="s-title-label" id="19">
-                    <property name="fontSize">14px</property>
+                    <property name="fontFamily">"Marker Felt"</property>
+                    <property name="fontSize">15px</property>
                     <property name="fontWeight">bolder</property>
-                    <property name="color">#008080</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="color">#000000</property>
                     <property name="textLineThrough">none</property>
                     <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
                     <property name="marginTop">5px</property>
                     <property name="marginLeft">8px</property>
                     <property name="marginBottom">5px</property>
