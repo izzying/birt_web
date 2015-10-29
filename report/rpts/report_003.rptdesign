@@ -1924,6 +1924,14 @@
                     <cell id="145">
                         <data id="146">
                             <property name="resultSetColumn">client_label</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">跳转到应用宝详情</property>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row["client_package"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="147">
