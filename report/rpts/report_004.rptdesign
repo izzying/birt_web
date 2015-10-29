@@ -3,6 +3,7 @@
     <property name="author">saxer</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <text-property name="title">【首趣商城】新增转化统计</text-property>
+    <html-property name="description">【首趣商城】新增转化统计</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
