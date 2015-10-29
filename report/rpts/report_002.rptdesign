@@ -93,10 +93,22 @@
                     <text-property name="heading">total_count</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">total_device_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total_device_count</text-property>
+                    <text-property name="heading">total_device_count</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">send_out_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">send_out_count</text-property>
                     <text-property name="heading">send_out_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">send_out_device_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">send_out_device_count</text-property>
+                    <text-property name="heading">send_out_device_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">order_money</property>
@@ -126,26 +138,6 @@
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
-                <structure>
-                    <property name="name">param_3</property>
-                    <property name="paramName">date_start</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">-1</property>
-                    <property name="position">3</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">param_4</property>
-                    <property name="paramName">date_end</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">-1</property>
-                    <property name="position">4</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -161,11 +153,21 @@
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">send_out_count</property>
+                        <property name="name">total_device_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">send_out_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">send_out_device_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
                         <property name="name">order_money</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -189,78 +191,51 @@
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">send_out_count</property>
-                    <property name="nativeName">send_out_count</property>
+                    <property name="name">total_device_count</property>
+                    <property name="nativeName">total_device_count</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
+                    <property name="name">send_out_count</property>
+                    <property name="nativeName">send_out_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">send_out_device_count</property>
+                    <property name="nativeName">send_out_device_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
                     <property name="name">order_money</property>
                     <property name="nativeName">order_money</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select a.`order_date`,a.`total_count` ,b.`send_out_count`,b.`order_money` from 
-(SELECT left(created_at,10) as `order_date`, count(distinct(device_id)) as `total_count` FROM 
-orders where created_at>=?
-and created_at<=?
-and deleted_at is null
+            <xml-property name="queryText"><![CDATA[SELECT left(orders.created_at,10) as `order_date`, 
+count(1) as `total_count`,
+count(distinct(orders.device_id)) as `total_device_count`,
+sum(export_to_erp) as `send_out_count`,
+count(distinct(devices.id*export_to_erp))-1 as `send_out_device_count`,
+sum((shipping_charge+item_total)*export_to_erp) as `order_money`
+FROM 
+orders 
+inner join devices on devices.device_id=orders.device_id 
+where orders.created_at>=?
+and orders.created_at<=?
+and orders.deleted_at is null
 and client_id is null
 and come_from='Union_App'
-group by `order_date` 
-) as a
-
-left join
-(
-SELECT left(created_at,10) as `order_date`, count(distinct(device_id)) as `send_out_count`,
-sum(shipping_charge+item_total) as `order_money` FROM 
-orders where created_at>=?
-and created_at<=?
-and deleted_at is null
-and client_id is null
-and come_from='Union_App'
-and export_to_erp=true
-group by `order_date` 
-) as b
-
-on a.`order_date`=b.`order_date`]]></xml-property>
+group by `order_date` ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
-  <DataSetParameters>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>3</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>4</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -335,10 +310,7 @@ on a.`order_date`=b.`order_date`]]></xml-property>
             <property name="contentType">html</property>
             <text-property name="content"><![CDATA[<b>首趣微店日增订单发货统计</b>]]></text-property>
         </text>
-        <table id="6">
-            <property name="pageBreakAfter">avoid</property>
-            <property name="pageBreakBefore">avoid</property>
-            <property name="width">100%</property>
+        <table id="67">
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -354,9 +326,21 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
+                    <property name="name">total_device_count</property>
+                    <text-property name="displayName">total_device_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total_device_count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
                     <property name="name">send_out_count</property>
                     <text-property name="displayName">send_out_count</text-property>
                     <expression name="expression" type="javascript">dataSetRow["send_out_count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">send_out_device_count</property>
+                    <text-property name="displayName">send_out_device_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["send_out_device_count"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
@@ -384,7 +368,7 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["send_out_count"]</expression>
+                            <expression name="value" type="javascript">row["total_device_count"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -396,88 +380,195 @@ on a.`order_date`=b.`order_date`]]></xml-property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["send_out_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["send_out_device_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_4</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
                             <expression name="value" type="javascript">row["order_money"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["send_out_device_count"]*100 / new Number(row["total_device_count"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]*100 / new Number(row["Aggregation_1"]),2)+'%'</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
-            <column id="20"/>
-            <column id="21"/>
-            <column id="45"/>
-            <column id="56"/>
+            <column id="101"/>
+            <column id="102"/>
+            <column id="103"/>
+            <column id="104"/>
+            <column id="105"/>
+            <column id="116"/>
+            <column id="106"/>
             <header>
-                <row id="7">
-                    <cell id="8">
-                        <label id="9">
+                <row id="68">
+                    <cell id="69">
+                        <label id="70">
                             <property name="textAlign">left</property>
                             <text-property name="text">日期</text-property>
                         </label>
                     </cell>
-                    <cell id="10">
-                        <label id="11">
+                    <cell id="71">
+                        <label id="72">
                             <property name="textAlign">left</property>
-                            <text-property name="text">新增订单</text-property>
+                            <text-property name="text">总单数</text-property>
                         </label>
                     </cell>
-                    <cell id="42">
-                        <label id="46">
+                    <cell id="73">
+                        <label id="74">
                             <property name="textAlign">left</property>
-                            <text-property name="text">发货订单</text-property>
+                            <text-property name="text">总设备单数</text-property>
                         </label>
                     </cell>
-                    <cell id="53">
-                        <label id="57">
+                    <cell id="75">
+                        <label id="76">
                             <property name="textAlign">left</property>
-                            <text-property name="text">发货销售额(元)</text-property>
+                            <text-property name="text">发货单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="77">
+                        <label id="78">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">发货设备单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="113">
+                        <label id="117">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">成单率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="79">
+                        <label id="80">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">销售额(元)</text-property>
                         </label>
                     </cell>
                 </row>
             </header>
             <detail>
-                <row id="12">
-                    <cell id="13">
-                        <data id="14">
+                <row id="81">
+                    <cell id="82">
+                        <data id="83">
                             <property name="resultSetColumn">order_date</property>
                         </data>
                     </cell>
-                    <cell id="15">
-                        <data id="16">
+                    <cell id="84">
+                        <data id="85">
                             <property name="resultSetColumn">total_count</property>
                         </data>
                     </cell>
-                    <cell id="43">
-                        <data id="47">
+                    <cell id="86">
+                        <data id="87">
+                            <property name="resultSetColumn">total_device_count</property>
+                        </data>
+                    </cell>
+                    <cell id="88">
+                        <data id="89">
                             <property name="resultSetColumn">send_out_count</property>
                         </data>
                     </cell>
-                    <cell id="54">
-                        <data id="58">
+                    <cell id="90">
+                        <data id="91">
+                            <property name="resultSetColumn">send_out_device_count</property>
+                        </data>
+                    </cell>
+                    <cell id="114">
+                        <data id="118">
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
+                    <cell id="92">
+                        <data id="93">
                             <property name="resultSetColumn">order_money</property>
                         </data>
                     </cell>
                 </row>
             </detail>
             <footer>
-                <row id="17">
-                    <cell id="18">
-                        <label id="50">
+                <row id="94">
+                    <cell id="95">
+                        <label id="107">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
-                    <cell id="19">
-                        <data id="48">
+                    <cell id="96">
+                        <data id="108">
                             <property name="resultSetColumn">Aggregation</property>
                         </data>
                     </cell>
-                    <cell id="44">
-                        <data id="60">
+                    <cell id="97">
+                        <data id="109">
                             <property name="resultSetColumn">Aggregation_1</property>
                         </data>
                     </cell>
-                    <cell id="55">
-                        <data id="61">
+                    <cell id="98">
+                        <data id="110">
                             <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="99">
+                        <data id="111">
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                    <cell id="115">
+                        <data id="119">
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">lt</property>
+                                    <expression name="testExpr" type="javascript">row["Column Binding_1"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">60</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
+                    <cell id="100">
+                        <data id="112">
+                            <property name="resultSetColumn">Aggregation_4</property>
                         </data>
                     </cell>
                 </row>

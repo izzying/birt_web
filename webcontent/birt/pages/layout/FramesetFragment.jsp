@@ -269,7 +269,6 @@
         birtEventDispatcher.broadcastEvent(birtEvent.__E_GETPAGE, {name: "__bookmark", value: bookmark});
     }
 
-    jQuery("a[title]").data("toggle", "tooltip").data("placement", "top").attr("data-toggle", "tooltip").attr("data-placement", "top").tooltip();
 </script>
 
 </HTML>
