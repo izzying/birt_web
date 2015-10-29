@@ -31,7 +31,6 @@
             <th>#id</th>
             <th>报表</th>
             <th>上传者</th>
-            <th>创建时间</th>
             <th>操作</th>
         </tr>
         <%
@@ -45,7 +44,6 @@
             </td>
             <td><%=report.getAuthor()%>
             </td>
-            <td><%=report.getCreationTime()%>
             </td>
             <th>
                 <a class="btn btn-xs btn-default" target="birt"
