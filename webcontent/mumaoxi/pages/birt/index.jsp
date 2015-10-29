@@ -20,30 +20,37 @@
     <title>报表列表</title>
     <link href="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/css/bootstrap.css"
           rel="stylesheet"/>
-    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon
+          rel="shortcut icon">
 </head>
 <body>
 <div class="container">
     <h2>报表列表</h2>
     <table class="table table-hover table-striped table-condensed">
         <tr>
+            <th>#id</th>
             <th>报表</th>
             <th>上传者</th>
+            <th>创建时间</th>
             <th>操作</th>
         </tr>
         <%
             for (Report report : ((ArrayList<Report>) session.getAttribute("reports"))) {
         %>
         <tr>
+            <td><%=report.getId()%>
+            </td>
             <td><span data-toggle="tooltip" data-placement="top"
                       title="<%=report.getDescription()%>"><%=report.getTitle() != null ? report.getTitle() : report.getFileName()%></span>
             </td>
             <td><%=report.getAuthor()%>
             </td>
+            <td><%=report.getCreationTime()%>
+            </td>
             <th>
                 <a class="btn btn-xs btn-default" target="birt"
-                    href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
-                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
+                   href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
+                   data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
                 </a>
             </th>
         </tr>
@@ -55,15 +62,15 @@
 <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
 <script>
     $('[data-toggle="tooltip"]').tooltip();
-//    $("[data-js-href]").click(function () {
-//        var windowHeight = window.screen.height;
-//        var windowWidth = window.screen.width;
-//        var width = 800;
-//        var height = windowHeight;
-//        var top = 0;
-//        var left = (windowWidth - width) / 2;
-//        window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
-//    });
+    //    $("[data-js-href]").click(function () {
+    //        var windowHeight = window.screen.height;
+    //        var windowWidth = window.screen.width;
+    //        var width = 800;
+    //        var height = windowHeight;
+    //        var top = 0;
+    //        var left = (windowWidth - width) / 2;
+    //        window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
+    //    });
 </script>
 </body>
 </html>

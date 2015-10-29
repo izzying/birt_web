@@ -10,7 +10,15 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.text.DateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by saxer on 10/26/15.
@@ -19,6 +27,8 @@ public class Report implements Serializable {
 
     private static final String BASE_FILE_PATH = "/report/rpts";
 
+    private int id = 0;
+    private String creationTime;
     private String displayName;
     private String title;
     private String author;
@@ -134,6 +144,14 @@ public class Report implements Serializable {
             report.setFileName(name);
             reports.add(report);
         }
+
+        Collections.sort(reports, new Comparator<Report>() {
+            @Override
+            public int compare(Report o1, Report o2) {
+                return o2.getId() - o1.getId();
+            }
+        });
+
         return reports;
     }
 
@@ -181,6 +199,22 @@ public class Report implements Serializable {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        if (this.id == 0) {
+            Pattern p = Pattern.compile("\\d{1,11}");
+            Matcher matcher = p.matcher(this.fileName);
+            if (matcher.find()) {
+                this.id = Integer.valueOf(matcher.group(0));
+                System.out.println("this.id:" + this.id);
+            }
+        }
+        return id;
+    }
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -191,5 +225,26 @@ public class Report implements Serializable {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+
+    public String getCreationTime() {
+        if (creationTime == null) {
+            try {
+//                Path path = Paths.get(this.realPath);
+//                BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
+//                FileTime creationTime = attributes.creationTime();
+//                this.creationTime = DateFormat.getInstance().format(new Date(creationTime.toMillis()));
+//                this.creationTime = creationTime.toString();
+                this.creationTime = DateFormat.getInstance().format(new Date(new File(this.realPath).lastModified()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
     }
 }
