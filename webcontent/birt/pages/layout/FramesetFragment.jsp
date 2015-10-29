@@ -11,10 +11,10 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="false" buffer="none" %>
 <%@ page import="org.eclipse.birt.report.presentation.aggregation.IFragment,
-				 org.eclipse.birt.report.context.BaseAttributeBean,
-				 org.eclipse.birt.report.resource.ResourceConstants,
-				 org.eclipse.birt.report.resource.BirtResources,
-				 org.eclipse.birt.report.utility.ParameterAccessor" %>
+                 org.eclipse.birt.report.context.BaseAttributeBean,
+                 org.eclipse.birt.report.resource.ResourceConstants,
+                 org.eclipse.birt.report.resource.BirtResources,
+                 org.eclipse.birt.report.utility.ParameterAccessor" %>
 
 <%-----------------------------------------------------------------------------
 	Expected java beans
@@ -50,7 +50,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <LINK REL="stylesheet" HREF="birt/styles/style.css" TYPE="text/css">
-    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon
+          rel="shortcut icon">
     <%
         if (attributeBean.isRtl()) {
     %>
@@ -141,7 +142,9 @@
 
     <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
 
-    <LINK REL="stylesheet" HREF="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/datepicker/css/bootstrap-datepicker.css" MEDIA="screen" TYPE="text/css"/>
+    <LINK REL="stylesheet"
+          HREF="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/datepicker/css/bootstrap-datepicker.css"
+          MEDIA="screen" TYPE="text/css"/>
     <script src="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/datepicker/js/bootstrap-datepicker.js"></script>
 </HEAD>
 
@@ -214,6 +217,8 @@
 		    hasSVGSupport = IsObject(CreateObject("Adobe.SVGCtl"))
 		End If
 
+
+
 </script>
 
 <script type="text/javascript">
@@ -264,6 +269,7 @@
         birtEventDispatcher.broadcastEvent(birtEvent.__E_GETPAGE, {name: "__bookmark", value: bookmark});
     }
 
+    jQuery("a[title]").data("toggle", "tooltip").data("placement", "top").attr("data-toggle", "tooltip").attr("data-placement", "top").tooltip();
 </script>
 
 </HTML>
