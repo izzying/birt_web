@@ -964,7 +964,7 @@
        count(1) as `order_count`,
        count(distinct(orders.`device_id`)) as `device_count`,
        sum(`export_to_erp`) as `send_out_count`,
-       count(distinct(devices.`id`*export_to_erp)) -1 as `send_out_device_count`,
+       count(distinct(devices.`id`*export_to_erp)) as `send_out_device_count`,
        sum(`export_to_erp`*(orders.`shipping_charge`+ orders.`item_total`)) as `send_out_sale`
   from orders
   inner join devices on devices.`device_id`= orders.`device_id`
