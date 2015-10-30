@@ -613,7 +613,7 @@ group by `order_date` ]]></xml-property>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>新增/发货柱状对比图</Value>
+          <Value>新增/发货对比图</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -831,7 +831,7 @@ group by `order_date` ]]></xml-property>
     </Outline>
     <Visible>true</Visible>
   </Block>
-  <Dimension>Two_Dimensional_With_Depth</Dimension>
+  <Dimension>Two_Dimensional</Dimension>
   <Script>
 </Script>
   <Units>Points</Units>
