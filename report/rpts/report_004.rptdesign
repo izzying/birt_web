@@ -832,7 +832,7 @@ select
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>新增/发货对比图</Value>
+          <Value>新增转化率趋势图</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
