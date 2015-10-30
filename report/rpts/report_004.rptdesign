@@ -1405,7 +1405,7 @@ select
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>BirtMath.round(row[&quot;n_user_order_device_count&quot;]*100/row[&quot;device_count&quot;],2)</Definition>
+            <Definition>row[&quot;device_count&quot;]</Definition>
             <Grouping>
               <GroupType>Text</GroupType>
               <AggregateExpression>Sum</AggregateExpression>
