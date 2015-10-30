@@ -58,7 +58,7 @@
                 </td>
                 </td>
                 <th>
-                    <a class="btn btn-xs btn-default" target="birt"
+                    <a class="btn btn-xs btn-default" target="_blank"
                        href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
                        data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
                     </a>
