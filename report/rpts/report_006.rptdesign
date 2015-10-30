@@ -2,8 +2,22 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">柳溪</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【商城】新增转化率统计-APP</text-property>
+    <text-property name="title">【商城】新增加购率统计-APP</text-property>
     <html-property name="description">统计每个客户端在各个渠道的新增转化率数据</html-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">5</property>
+        </structure>
+    </list-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -98,6 +112,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ds_001" id="5">
+            <property name="nullsOrdering">nulls lowest</property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
@@ -124,28 +139,16 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <text-property name="heading">device_count</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">order_count</property>
+                    <property name="columnName">n_user_cart_count</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">order_count</text-property>
-                    <text-property name="heading">order_count</text-property>
+                    <text-property name="displayName">n_user_cart_count</text-property>
+                    <text-property name="heading">n_user_cart_count</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">order_device_count</property>
+                    <property name="columnName">n_user_cart_device_count</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">order_device_count</text-property>
-                    <text-property name="heading">order_device_count</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">n_user_order_count</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">n_user_order_count</text-property>
-                    <text-property name="heading">n_user_order_count</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">n_user_order_device_count</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">n_user_order_device_count</text-property>
-                    <text-property name="heading">n_user_order_device_count</text-property>
+                    <text-property name="displayName">n_user_cart_device_count</text-property>
+                    <text-property name="heading">n_user_cart_device_count</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -209,36 +212,6 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
-                <structure>
-                    <property name="name">param_7</property>
-                    <property name="paramName">date_order</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">-1</property>
-                    <property name="position">7</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">param_8</property>
-                    <property name="paramName">date_order</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">-1</property>
-                    <property name="position">8</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">param_9</property>
-                    <property name="paramName">channel</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">-1</property>
-                    <property name="position">9</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -264,22 +237,12 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">order_count</property>
+                        <property name="name">n_user_cart_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">order_device_count</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">n_user_order_count</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">n_user_order_device_count</property>
+                        <property name="name">n_user_cart_device_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -316,29 +279,15 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">order_count</property>
-                    <property name="nativeName">order_count</property>
+                    <property name="name">n_user_cart_count</property>
+                    <property name="nativeName">n_user_cart_count</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">order_device_count</property>
-                    <property name="nativeName">order_device_count</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">n_user_order_count</property>
-                    <property name="nativeName">n_user_order_count</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">n_user_order_device_count</property>
-                    <property name="nativeName">n_user_order_device_count</property>
+                    <property name="name">n_user_cart_device_count</property>
+                    <property name="nativeName">n_user_cart_device_count</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
@@ -347,10 +296,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
        tmp_device.label,
        tmp_device.package,
        tmp_device.device_count,
-       tmp_order.order_count,
-       tmp_order.order_device_count,
-       tmp_n_user_order.n_user_order_count,
-       tmp_n_user_order.n_user_order_device_count
+       tmp_n_user_order.n_user_cart_count,
+       tmp_n_user_order.n_user_cart_device_count
   from(
 select clients.id, clients .label, clients.package, count(1) as device_count
   from device_infos
@@ -358,36 +305,21 @@ select clients.id, clients .label, clients.package, count(1) as device_count
   left join `clients` on `clients` .id= `device_infos` .client_id
  where device_infos.client_id> 0
    and device_infos.created_at> ?
-   and device_infos.created_at< date_add(date(?),INTERVAL 1 DAY)
+   and device_infos.created_at< date_add(date(?), INTERVAL 1 DAY)
    and `devices` .channel_id like ?
  group by `clients` .id) as tmp_device
   inner join(
-select clients.id, clients.label, clients.package, count(1) as order_count, count(DISTINCT(orders.`device_id`)) as order_device_count
-  from orders
-  inner join clients on clients.id= orders.client_id
-  inner join devices on devices.`device_id`= orders.`device_id`
- where orders.deleted_at is null
-   and(orders.client_id> 0
-    or orders.come_from= 'Self_App')
-   and orders.created_at> ?
-   and orders.created_at< date_add(date(?),INTERVAL 1 DAY)
-   and `devices` .channel_id like ?
- group by clients.id) as tmp_order on tmp_device.id= tmp_order.id
-  inner join(
-select clients.id, clients.label, clients.package, count(1) as n_user_order_count, count(DISTINCT(orders.`device_id`)) as n_user_order_device_count
-  from orders
-  inner join `device_infos` ON `device_infos` .`device_id`= `orders` .device_id
-  inner join clients on clients.id= orders.client_id
-  inner join devices on devices.`device_id`= orders.`device_id`
+select clients.id, clients.label, clients.package, count(1) as n_user_cart_count, count(DISTINCT(carts.`device_id`)) as n_user_cart_device_count
+  from carts
+  inner join `device_infos` ON `device_infos` .`device_id`= `carts` .device_id
+  inner join clients on clients.id= `device_infos` .client_id
+  inner join devices on devices.`device_id`= carts.`device_id`
    and `device_infos` .client_id> 0
- where orders.deleted_at is null
-   and(orders.client_id> 0
-    or orders.come_from= 'Self_App')
-   and orders.created_at> ?
-   and orders.created_at< date_add(date(?),INTERVAL 1 DAY)
+ where carts.created_at> ?
+   and carts.created_at< date_add(date(?), INTERVAL 1 DAY)
    and `devices` .channel_id like ?
-   and date(orders.`created_at`)= date(`device_infos` .created_at)
- group by clients.id) as tmp_n_user_order on tmp_order.id= tmp_n_user_order.id]]></xml-property>
+   and date(carts.`created_at`)= date(`device_infos` .created_at)
+ group by clients.id) as tmp_n_user_order on tmp_device.id= tmp_n_user_order.id]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -474,51 +406,6 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
           <design:identifier>
             <design:name></design:name>
             <design:position>6</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>7</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>8</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>9</design:position>
           </design:identifier>
           <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
           <design:precision>0</design:precision>
@@ -720,10 +607,11 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
         <text-data id="67">
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"日期："+params["date_order"].value+"&lt;br>"+
-"渠道："+params["channel"].displayText</expression>
+"渠道："+params["channel"].displayText+"&lt;br>"+
+"注：这里的&lt;span class='text text-danger'>加购&lt;/span>是&lt;span class='text text-danger'>加入购物车&lt;/span>的简称"</expression>
             <property name="contentType">html</property>
         </text-data>
-        <table name="table_new_user_order_rate" id="6">
+        <table name="table_new_user_cart_rate" id="6">
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -745,27 +633,15 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">order_count</property>
-                    <text-property name="displayName">order_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["order_count"]</expression>
+                    <property name="name">n_user_cart_count</property>
+                    <text-property name="displayName">n_user_cart_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["n_user_cart_count"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">order_device_count</property>
-                    <text-property name="displayName">order_device_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["order_device_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">n_user_order_count</property>
-                    <text-property name="displayName">n_user_order_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["n_user_order_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">n_user_order_device_count</property>
-                    <text-property name="displayName">n_user_order_device_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["n_user_order_device_count"]</expression>
+                    <property name="name">n_user_cart_device_count</property>
+                    <text-property name="displayName">n_user_cart_device_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["n_user_cart_device_count"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
@@ -781,77 +657,45 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
+                    <property name="name">Aggregation_5</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["n_user_cart_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["n_user_cart_device_count"]*100/row["device_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
                     <property name="name">Aggregation_1</property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["order_count"]</expression>
+                            <expression name="value" type="javascript">row["n_user_cart_device_count"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">Aggregation_2</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["order_device_count"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Aggregation_3</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["n_user_order_count"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Aggregation_4</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["n_user_order_device_count"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Column Binding</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation"],2)+"%"</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Column Binding_1</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation"],2)+"%"</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">n_user_order_rate</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["n_user_order_device_count"]*100/row["device_count"],2)+"%"</expression>
+                    <property name="name">cart_rate_total</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_5"]*100/row["Aggregation"],2)+"%"</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
             <column id="40"/>
             <column id="41"/>
-            <column id="42"/>
-            <column id="43"/>
-            <column id="44"/>
+            <column id="71"/>
             <column id="45"/>
             <column id="55"/>
             <header>
@@ -868,34 +712,21 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                             <text-property name="text">激活设备数</text-property>
                         </label>
                     </cell>
-                    <cell id="12">
-                        <label id="13">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">订单数</text-property>
-                        </label>
-                    </cell>
-                    <cell id="14">
-                        <label id="15">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">订单设备数</text-property>
-                        </label>
-                    </cell>
-                    <cell id="16">
-                        <label id="17">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">新用户订单数</text-property>
+                    <cell id="68">
+                        <label id="72">
+                            <text-property name="text">新用户加购数</text-property>
                         </label>
                     </cell>
                     <cell id="18">
                         <label id="19">
                             <property name="textAlign">left</property>
-                            <text-property name="text">新用户订单设备数</text-property>
+                            <text-property name="text">加购新用户数</text-property>
                         </label>
                     </cell>
                     <cell id="52">
                         <label id="56">
                             <property name="textAlign">left</property>
-                            <text-property name="text">新增下单率</text-property>
+                            <text-property name="text">新增加购率</text-property>
                         </label>
                     </cell>
                 </row>
@@ -920,29 +751,19 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                             <property name="resultSetColumn">device_count</property>
                         </data>
                     </cell>
-                    <cell id="25">
-                        <data id="26">
-                            <property name="resultSetColumn">order_count</property>
-                        </data>
-                    </cell>
-                    <cell id="27">
-                        <data id="28">
-                            <property name="resultSetColumn">order_device_count</property>
-                        </data>
-                    </cell>
-                    <cell id="29">
-                        <data id="30">
-                            <property name="resultSetColumn">n_user_order_count</property>
+                    <cell id="69">
+                        <data id="89">
+                            <property name="resultSetColumn">n_user_cart_count</property>
                         </data>
                     </cell>
                     <cell id="31">
                         <data id="32">
-                            <property name="resultSetColumn">n_user_order_device_count</property>
+                            <property name="resultSetColumn">n_user_cart_device_count</property>
                         </data>
                     </cell>
                     <cell id="53">
-                        <data name="n_user_order_rate" id="60">
-                            <property name="resultSetColumn">n_user_order_rate</property>
+                        <data id="91">
+                            <property name="resultSetColumn">Column Binding_2</property>
                         </data>
                     </cell>
                 </row>
@@ -959,29 +780,19 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                             <property name="resultSetColumn">Aggregation</property>
                         </data>
                     </cell>
-                    <cell id="36">
-                        <data id="48">
-                            <property name="resultSetColumn">Aggregation_1</property>
-                        </data>
-                    </cell>
-                    <cell id="37">
-                        <data id="49">
-                            <property name="resultSetColumn">Aggregation_2</property>
-                        </data>
-                    </cell>
-                    <cell id="38">
-                        <data id="50">
-                            <property name="resultSetColumn">Aggregation_3</property>
+                    <cell id="70">
+                        <data id="90">
+                            <property name="resultSetColumn">Aggregation_5</property>
                         </data>
                     </cell>
                     <cell id="39">
-                        <data id="51">
-                            <property name="resultSetColumn">Aggregation_4</property>
+                        <data id="92">
+                            <property name="resultSetColumn">Aggregation_1</property>
                         </data>
                     </cell>
                     <cell id="54">
                         <data name="n_user_order_rate_avg" id="63">
-                            <property name="resultSetColumn">Column Binding_1</property>
+                            <property name="resultSetColumn">cart_rate_total</property>
                         </data>
                     </cell>
                 </row>
@@ -1024,7 +835,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>新增用户转化率对比图</Value>
+          <Value>新增用户加购物车率对比图</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -1605,7 +1416,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>BirtMath.round(row[&quot;n_user_order_device_count&quot;]*100/row[&quot;device_count&quot;],2)</Definition>
+            <Definition>BirtMath.round(row[&quot;n_user_cart_device_count&quot;]*100/row[&quot;device_count&quot;],2)</Definition>
             <Grouping>
               <Enabled>false</Enabled>
               <GroupType>Text</GroupType>
@@ -2115,45 +1926,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
             <property name="pageBreakAfter">auto</property>
             <property name="height">350px</property>
             <property name="width">600px</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">device_date</property>
-                    <text-property name="displayName">device_date</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["device_date"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">device_count</property>
-                    <text-property name="displayName">device_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["device_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">order_count</property>
-                    <text-property name="displayName">order_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["order_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">order_device_count</property>
-                    <text-property name="displayName">order_device_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["order_device_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">n_user_order_count</property>
-                    <text-property name="displayName">n_user_order_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["n_user_order_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">n_user_order_device_count</property>
-                    <text-property name="displayName">n_user_order_device_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["n_user_order_device_count"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-            </list-property>
-            <property name="dataBindingRef">table_new_user_order_rate</property>
+            <property name="dataBindingRef">table_new_user_cart_rate</property>
         </extended-item>
     </body>
 </report>
