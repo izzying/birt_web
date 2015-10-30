@@ -7,6 +7,7 @@
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">72</property>
     <list-property name="libraries">
@@ -462,6 +463,78 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <expression name="expression" type="javascript">dataSetRow["n_user_order_device_count"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["device_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["order_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["order_device_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["n_user_order_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_4</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["n_user_order_device_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="40"/>
             <column id="41"/>
@@ -469,6 +542,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
             <column id="43"/>
             <column id="44"/>
             <column id="45"/>
+            <column id="55"/>
             <header>
                 <row id="7">
                     <cell id="8">
@@ -507,6 +581,12 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                             <text-property name="text">新用户订单设备数</text-property>
                         </label>
                     </cell>
+                    <cell id="52">
+                        <label id="56">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">新增下单率</text-property>
+                        </label>
+                    </cell>
                 </row>
             </header>
             <detail>
@@ -541,16 +621,50 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                             <property name="resultSetColumn">n_user_order_device_count</property>
                         </data>
                     </cell>
+                    <cell id="53">
+                        <data id="60">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
                 <row id="33">
-                    <cell id="34"/>
-                    <cell id="35"/>
-                    <cell id="36"/>
-                    <cell id="37"/>
-                    <cell id="38"/>
-                    <cell id="39"/>
+                    <cell id="34">
+                        <label id="46">
+                            <text-property name="text">合计</text-property>
+                        </label>
+                    </cell>
+                    <cell id="35">
+                        <data id="47">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="36">
+                        <data id="48">
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="37">
+                        <data id="49">
+                            <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="38">
+                        <data id="50">
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                    <cell id="39">
+                        <data id="51">
+                            <property name="resultSetColumn">Aggregation_4</property>
+                        </data>
+                    </cell>
+                    <cell id="54">
+                        <data id="63">
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
                 </row>
             </footer>
         </table>
