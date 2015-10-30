@@ -1578,7 +1578,7 @@ Ajax.Request = Class.create(Ajax.Base, {
     for (var name in headers) {
       try {
         console.log("name:"+name+",value:"+headers[name]);
-        if(name && name!='Connection')
+        //if(name && name!='Connection')
           this.transport.setRequestHeader(name, headers[name]);
       } catch (e) {
       }
