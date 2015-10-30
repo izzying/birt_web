@@ -986,7 +986,7 @@ select
         <Visible>true</Visible>
       </Separator>
       <Position>Right</Position>
-      <ItemType>Categories</ItemType>
+      <ItemType>Series</ItemType>
       <Title>
         <Caption>
           <Value></Value>
@@ -1186,6 +1186,9 @@ select
       <SeriesDefinitions>
         <Query>
           <Definition></Definition>
+          <Grouping>
+            <GroupType>Numeric</GroupType>
+          </Grouping>
         </Query>
         <SeriesPalette>
           <Entries xsi:type="attribute:ColorDefinition">
@@ -1930,6 +1933,7 @@ select
       <Type>None</Type>
     </Angles>
   </Rotation>
+  <ReverseCategory>false</ReverseCategory>
 </model:ChartWithAxes>
 ]]></xml-property>
             <property name="outputFormat">SVG</property>
