@@ -1410,7 +1410,7 @@ select
             <Visible>false</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;device_count&quot;]</Definition>
+            <Definition>BirtMath.round(row[&quot;n_user_order_device_count&quot;]*100/row[&quot;device_count&quot;],2)</Definition>
             <Grouping>
               <Enabled>true</Enabled>
               <GroupType>Text</GroupType>
