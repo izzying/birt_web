@@ -24,7 +24,7 @@
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">var date = new Date(new Date().getTime()-24*60*60*1000);
+                <value type="javascript">var date = new Date(new Date().getTime()-7*24*60*60*1000);
 date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </simple-property-list>
             <list-property name="selectionList"/>
