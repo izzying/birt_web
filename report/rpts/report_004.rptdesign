@@ -274,7 +274,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
 select
   left(created_at, 10) as device_date, count(1) as device_count
   from device_infos
- where client_id> 0 
+ where client_id> 0
    and created_at> ?
    and created_at< ?
  group by device_date) as tmp_device
@@ -650,6 +650,18 @@ select
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">n_user_order_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["n_user_order_device_count"]*100/row["device_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="43"/>
             <column id="44"/>
@@ -657,36 +669,49 @@ select
             <column id="46"/>
             <column id="47"/>
             <column id="48"/>
+            <column id="58"/>
             <header>
                 <row id="10">
                     <cell id="11">
                         <label id="12">
+                            <property name="textAlign">left</property>
                             <text-property name="text">日期</text-property>
                         </label>
                     </cell>
                     <cell id="13">
                         <label id="14">
+                            <property name="textAlign">left</property>
                             <text-property name="text">激活设备数</text-property>
                         </label>
                     </cell>
                     <cell id="15">
                         <label id="16">
+                            <property name="textAlign">left</property>
                             <text-property name="text">订单数</text-property>
                         </label>
                     </cell>
                     <cell id="17">
                         <label id="18">
+                            <property name="textAlign">left</property>
                             <text-property name="text">订单设备数</text-property>
                         </label>
                     </cell>
                     <cell id="19">
                         <label id="20">
+                            <property name="textAlign">left</property>
                             <text-property name="text">新增用户下单数</text-property>
                         </label>
                     </cell>
                     <cell id="21">
                         <label id="22">
+                            <property name="textAlign">left</property>
                             <text-property name="text">新用户下单设备数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="55">
+                        <label id="59">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">新增下单率</text-property>
                         </label>
                     </cell>
                 </row>
@@ -723,6 +748,11 @@ select
                             <property name="resultSetColumn">n_user_order_device_count</property>
                         </data>
                     </cell>
+                    <cell id="56">
+                        <data id="60">
+                            <property name="resultSetColumn">n_user_order_rate</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
@@ -755,6 +785,11 @@ select
                     <cell id="42">
                         <data id="54">
                             <property name="resultSetColumn">Aggregation_4</property>
+                        </data>
+                    </cell>
+                    <cell id="57">
+                        <data id="62">
+                            <property name="resultSetColumn">Column Binding</property>
                         </data>
                     </cell>
                 </row>
