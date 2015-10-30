@@ -729,6 +729,12 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
+                    <property name="name">package</property>
+                    <text-property name="displayName">package</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["package"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
                     <property name="name">device_count</property>
                     <text-property name="displayName">device_count</text-property>
                     <expression name="expression" type="javascript">dataSetRow["device_count"]</expression>
@@ -895,6 +901,14 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <cell id="21">
                         <data id="22">
                             <property name="resultSetColumn">label</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">点击跳转到应用宝详情</property>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row['package']</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="23">
