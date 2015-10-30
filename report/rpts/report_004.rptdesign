@@ -84,36 +84,42 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="columnName">device_date</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">device_date</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">device_date</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">device_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">device_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">device_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">order_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">order_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">order_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">order_device_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">order_device_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">order_device_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">n_user_order_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">n_user_order_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">n_user_order_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">n_user_order_device_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">n_user_order_device_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">n_user_order_device_count</text-property>
                 </structure>
             </list-property>
@@ -268,7 +274,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
 select
   left(created_at, 10) as device_date, count(1) as device_count
   from device_infos
- where client_id> 0
+ where 
+   (client_id> 0 or come_from='Self_App')
    and created_at> ?
    and created_at< ?
  group by device_date) as tmp_device
@@ -277,7 +284,7 @@ select
   left(created_at, 10) as order_date, count(1) as order_count, count(DISTINCT(`device_id`)) as order_device_count
   from orders
  where deleted_at is null
-   and client_id> 0
+   and (client_id> 0 or come_from='Self_App')
    and created_at> ?
    and created_at< ?
  group by order_date) as tmp_order 
@@ -289,7 +296,7 @@ select
   inner join `device_infos` ON `device_infos` .`device_id`= `orders` .device_id
    and `device_infos` .client_id> 0
  where orders.deleted_at is null
-   and orders.client_id> 0
+   and (orders.client_id> 0 or orders.come_from='Self_App')
    and orders.created_at> ?
    and orders.created_at< ?
    and

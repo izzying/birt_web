@@ -1575,8 +1575,14 @@ Ajax.Request = Class.create(Ajax.Base, {
         $H(extras).each(function(pair) { headers[pair.key] = pair.value });
     }
 
-    for (var name in headers)
-      this.transport.setRequestHeader(name, headers[name]);
+    for (var name in headers) {
+      try {
+        console.log("name:"+name+",value:"+headers[name]);
+        if(name && name!='Connection')
+          this.transport.setRequestHeader(name, headers[name]);
+      } catch (e) {
+      }
+    }
   },
 
   success: function() {
