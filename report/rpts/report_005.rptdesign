@@ -714,6 +714,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
     </page-setup>
     <body>
         <text-data id="67">
+            <property name="style">s-params-block</property>
             <expression name="valueExpr">"日期："+params["date_order"].value+"&lt;br>"+
 "渠道："+params["channel"].displayText</expression>
             <property name="contentType">html</property>
