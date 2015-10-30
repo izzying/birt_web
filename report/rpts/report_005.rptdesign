@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">柳溪</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【商城】客户端新增转化率统计</text-property>
+    <text-property name="title">【商城】新增转化率统计-APP</text-property>
     <html-property name="description">统计每个客户端在各个渠道的新增转化率数据</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
@@ -535,6 +535,12 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">n_user_order_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["n_user_order_device_count"]*100/row["device_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="40"/>
             <column id="41"/>
@@ -623,7 +629,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
                     </cell>
                     <cell id="53">
                         <data id="60">
-                            <property name="resultSetColumn">Column Binding</property>
+                            <property name="resultSetColumn">n_user_order_rate</property>
                         </data>
                     </cell>
                 </row>
