@@ -606,8 +606,7 @@ select clients.id, clients.label, clients.package, count(1) as n_user_cart_count
     <body>
         <text-data id="67">
             <property name="style">s-params-block</property>
-            <expression name="valueExpr">"日期："+params["date_order"].value+"&lt;br>"+
-"渠道："+params["channel"].displayText+"&lt;br>"+
+            <expression name="valueExpr">"日期："+params["date_order"].value+"&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"+"渠道："+params["channel"].displayText+"&lt;br>"+
 "注：这里的&lt;span class='text text-danger'>加购&lt;/span>是&lt;span class='text text-danger'>加入购物车&lt;/span>的简称"</expression>
             <property name="contentType">html</property>
         </text-data>
