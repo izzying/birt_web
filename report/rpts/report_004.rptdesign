@@ -660,7 +660,7 @@ select
                     </cell>
                     <cell id="13">
                         <label id="14">
-                            <text-property name="text">设备数</text-property>
+                            <text-property name="text">激活设备数</text-property>
                         </label>
                     </cell>
                     <cell id="15">
