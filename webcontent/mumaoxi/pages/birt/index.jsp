@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>报表列表</title>
+    <title>统计报表</title>
     <link href="<%=request.getContextPath()%>/webcontent/mumaoxi/bootstrap-3.3.5-dist/css/bootstrap.css"
           rel="stylesheet"/>
     <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon
@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>报表列表</h2>
+    <h2>统计报表</h2>
     <table class="table table-hover table-striped table-condensed">
         <tr>
             <th>#id</th>
