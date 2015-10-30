@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">柳溪</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【优店】日增订单积分统计</text-property>
+    <text-property name="title">【优店】日增订单-积分</text-property>
     <html-property name="description">微店每日订单积分产生</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>

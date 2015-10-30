@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">柳溪</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【商城】新增转化率统计-APP</text-property>
+    <text-property name="title">【商城】新增转化率-APP</text-property>
     <html-property name="description">统计每个客户端在各个渠道的新增转化率数据</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
