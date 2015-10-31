@@ -159,9 +159,22 @@
         Viewer Filter used to set the request character encoding to UTF-8.
     -->
     <filter>
+        <filter-name>AppFilter</filter-name>
+        <filter-class>com.mumaoxi.birt.filter.AppFilter</filter-class>
+    </filter>
+    <filter>
         <filter-name>ViewerFilter</filter-name>
         <filter-class>org.eclipse.birt.report.filter.ViewerFilter</filter-class>
     </filter>
+
+    <filter-mapping>
+        <filter-name>AppFilter</filter-name>
+        <servlet-name>BirtServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AppFilter</filter-name>
+        <servlet-name>ViewerServlet</servlet-name>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>ViewerFilter</filter-name>
         <servlet-name>ViewerServlet</servlet-name>
