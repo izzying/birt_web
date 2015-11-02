@@ -357,10 +357,17 @@
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(100*row["send_out_count"]/row["assign_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="26"/>
             <column id="27"/>
             <column id="28"/>
+            <column id="35"/>
             <header>
                 <row id="8">
                     <cell id="9">
@@ -379,6 +386,11 @@
                         <label id="14">
                             <property name="textAlign">left</property>
                             <text-property name="text">发货</text-property>
+                        </label>
+                    </cell>
+                    <cell id="32">
+                        <label id="36">
+                            <text-property name="text">成单率</text-property>
                         </label>
                     </cell>
                 </row>
@@ -400,6 +412,11 @@
                             <property name="resultSetColumn">send_out_count</property>
                         </data>
                     </cell>
+                    <cell id="33">
+                        <data id="38">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
@@ -419,6 +436,7 @@
                             <property name="resultSetColumn">Aggregation_1</property>
                         </data>
                     </cell>
+                    <cell id="34"/>
                 </row>
             </footer>
         </table>
