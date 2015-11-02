@@ -705,7 +705,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     </Outline>
     <Visible>true</Visible>
   </Block>
-  <Dimension>Two_Dimensional</Dimension>
+  <Dimension>Two_Dimensional_With_Depth</Dimension>
   <Script>
 </Script>
   <Units>Points</Units>
@@ -1315,8 +1315,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <property name="inheritColumns">true</property>
             <property name="pageBreakBefore">auto</property>
             <property name="pageBreakAfter">auto</property>
-            <property name="height">350px</property>
-            <property name="width">600px</property>
+            <property name="height">4.611111111111111in</property>
+            <property name="width">7.819444444444445in</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
