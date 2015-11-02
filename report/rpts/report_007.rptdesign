@@ -312,6 +312,11 @@
         </simple-master-page>
     </page-setup>
     <body>
+        <text-data id="39">
+            <property name="style">s-params-block</property>
+            <expression name="valueExpr">"认领日期："+params["date_assign"].value</expression>
+            <property name="contentType">html</property>
+        </text-data>
         <table id="7">
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
