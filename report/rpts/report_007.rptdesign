@@ -399,6 +399,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     </cell>
                     <cell id="32">
                         <label id="36">
+                            <property name="textAlign">left</property>
                             <text-property name="text">成单率</text-property>
                         </label>
                     </cell>
@@ -486,7 +487,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>客服业绩构成饼图</Value>
+          <Value>客服认领订单发货构成</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
