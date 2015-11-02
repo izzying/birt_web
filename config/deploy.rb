@@ -79,3 +79,9 @@ task :deploy => :environment do
     end
   end
 end
+
+
+desc 'restart server'
+task :restart => :environment do
+  queue! "cd #{app_path} ; source ~/.bash_profile ; restart_tomcat.sh"
+end
