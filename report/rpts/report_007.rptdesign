@@ -449,7 +449,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </row>
             </footer>
         </table>
-        <extended-item extensionName="Chart" id="40">
+        <extended-item extensionName="Chart" id="64">
             <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.6.1</Version>
   <Type>Pie Chart</Type>
@@ -486,7 +486,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>Chart Title</Value>
+          <Value>客服业绩构成饼图</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -678,8 +678,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     <Bounds>
       <Left>0.0</Left>
       <Top>0.0</Top>
-      <Width>0.0</Width>
-      <Height>0.0</Height>
+      <Width>571.0</Width>
+      <Height>285.5</Height>
     </Bounds>
     <Insets>
       <Top>3.0</Top>
@@ -705,6 +705,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     <Visible>true</Visible>
   </Block>
   <Dimension>Two_Dimensional</Dimension>
+  <Script>
+</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <GridColumnCount>0</GridColumnCount>
@@ -720,6 +722,9 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
       <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
       <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
     </OrthogonalSampleData>
+    <AncillarySampleData>
+      <DataSetRepresentation>Series 1</DataSetRepresentation>
+    </AncillarySampleData>
   </SampleData>
   <Interactivity/>
   <EmptyMessage>
@@ -950,6 +955,9 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     <SeriesDefinitions>
       <Query>
         <Definition></Definition>
+        <Grouping>
+          <GroupType>Numeric</GroupType>
+        </Grouping>
       </Query>
       <SeriesPalette>
         <Entries xsi:type="attribute:ColorDefinition">
@@ -1176,11 +1184,12 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
         <DataDefinition>
           <Definition>row[&quot;send_out_count&quot;]</Definition>
           <Grouping>
+            <Enabled>false</Enabled>
             <GroupType>Text</GroupType>
-            <AggregateExpression>Sum</AggregateExpression>
+            <AggregateExpression xsi:nil="true"/>
           </Grouping>
         </DataDefinition>
-        <SeriesIdentifier>Series 1</SeriesIdentifier>
+        <SeriesIdentifier></SeriesIdentifier>
         <DataPoint>
           <Components>
             <Type>Orthogonal_Value</Type>
@@ -1303,6 +1312,10 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
 ]]></xml-property>
             <property name="outputFormat">SVG</property>
             <property name="inheritColumns">true</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="height">350px</property>
+            <property name="width">600px</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
