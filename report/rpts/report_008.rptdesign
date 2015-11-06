@@ -997,12 +997,12 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
        `shippingorders` .state as sp_state
   from orders
   inner join users on orders.`coordinator_id`= users.id
-  left join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
-  and(shippingorders.`state` is null
-    or shippingorders.`state` not in (6, 8, 7, 9))
+  inner join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
  where orders.assigned_at> ?
    and orders.assigned_at< date_add(date(?), INTERVAL 1 DAY)
    and orders.coordinator_id= ?
+   and(shippingorders.`state` is null
+    or shippingorders.`state` not in (6, 8, 7, 9))
    and(`come_from`= 'Self_App'
     or `client_id`> 0)]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -2437,6 +2437,18 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">device_id</property>
+                    <text-property name="displayName">device_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["device_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">phone_1</property>
+                    <text-property name="displayName">phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["phone"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <column id="183"/>
