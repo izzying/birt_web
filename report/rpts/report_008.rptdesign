@@ -2423,7 +2423,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </structure>
                 <structure>
                     <property name="name">[sp_express_num]</property>
-                    <expression name="expression" type="javascript">row["sp_express_num"]</expression>
+                    <expression name="expression" type="javascript">row["sp_company"]+"："+row["sp_express_num"]</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -2484,6 +2484,13 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="181">
                         <data id="186">
                             <property name="resultSetColumn">[id]</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">"http://www.yepcolor.com/orders/"+row["id"]+"/show_v2"</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="162">
@@ -2504,6 +2511,13 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="168">
                         <data id="188">
                             <property name="resultSetColumn">[sp_express_num]</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">"http://www.yepcolor.com/shippingorders/"+row["sp_id"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                 </row>
