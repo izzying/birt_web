@@ -2417,7 +2417,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </structure>
                 <structure>
                     <property name="name">[id]</property>
-                    <expression name="expression" type="javascript">dataSetRow["state"]</expression>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
                     <property name="dataType">decimal</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -2429,8 +2429,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </structure>
                 <structure>
                     <property name="name">Aggregation</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
