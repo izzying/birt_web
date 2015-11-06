@@ -493,6 +493,108 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding_4</property>
+                    <expression name="expression" type="javascript">row["send_out_shipping_count"]-row["complete_count"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["assign_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["send_out_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_5</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_1"]*100/row["Aggregation"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["send_out_shipping_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["sign_ok_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_6</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]*100/row["Aggregation_2"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_4</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["sign_fail_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_7</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_4"]*100/row["Aggregation_2"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_8</property>
+                    <expression name="expression" type="javascript">row["Aggregation_2"]-row["Aggregation_3"]-row["Aggregation_4"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_9</property>
+                    <expression name="expression" type="javascript">BirtMath.round((row["send_out_shipping_count"]-row["complete_count"])*100/row["send_out_shipping_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">float_rate_total</property>
+                    <expression name="expression" type="javascript">BirtMath.round((row["Aggregation_2"]-row["Aggregation_3"]-row["Aggregation_4"])*100/row["Aggregation_2"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="100"/>
             <column id="101"/>
@@ -503,57 +605,74 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <column id="115"/>
             <column id="105"/>
             <column id="121"/>
+            <column id="133"/>
             <column id="127"/>
             <header>
                 <row id="67">
                     <cell id="68">
                         <label id="69">
+                            <property name="textAlign">left</property>
                             <text-property name="text">客服</text-property>
                         </label>
                     </cell>
                     <cell id="70">
                         <label id="71">
+                            <property name="textAlign">left</property>
                             <text-property name="text">认领单数</text-property>
                         </label>
                     </cell>
                     <cell id="72">
                         <label id="73">
+                            <property name="textAlign">left</property>
                             <text-property name="text">确认订单数</text-property>
                         </label>
                     </cell>
                     <cell id="106">
                         <label id="110">
+                            <property name="textAlign">left</property>
                             <text-property name="text">成单率</text-property>
                         </label>
                     </cell>
                     <cell id="74">
                         <label id="75">
+                            <property name="textAlign">left</property>
                             <text-property name="text">发货订单数</text-property>
                         </label>
                     </cell>
                     <cell id="76">
                         <label id="77">
+                            <property name="textAlign">left</property>
                             <text-property name="text">签收单数</text-property>
                         </label>
                     </cell>
                     <cell id="112">
                         <label id="116">
+                            <property name="textAlign">left</property>
                             <text-property name="text">签收率</text-property>
                         </label>
                     </cell>
                     <cell id="78">
                         <label id="79">
+                            <property name="textAlign">left</property>
                             <text-property name="text">拒签单数</text-property>
                         </label>
                     </cell>
                     <cell id="118">
                         <label id="122">
+                            <property name="textAlign">left</property>
                             <text-property name="text">拒签率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="130">
+                        <label id="134">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">漂单数</text-property>
                         </label>
                     </cell>
                     <cell id="124">
                         <label id="128">
-                            <text-property name="text">漂单数</text-property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">漂单率</text-property>
                         </label>
                     </cell>
                 </row>
@@ -605,6 +724,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                             <property name="resultSetColumn">Column Binding_2</property>
                         </data>
                     </cell>
+                    <cell id="131">
+                        <data id="135">
+                            <property name="resultSetColumn">Column Binding_4</property>
+                        </data>
+                    </cell>
                     <cell id="125">
                         <data id="129">
                             <property name="resultSetColumn">Column Binding_3</property>
@@ -614,16 +738,61 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </detail>
             <footer>
                 <row id="93">
-                    <cell id="94"/>
-                    <cell id="95"/>
-                    <cell id="96"/>
-                    <cell id="108"/>
-                    <cell id="97"/>
-                    <cell id="98"/>
-                    <cell id="114"/>
-                    <cell id="99"/>
-                    <cell id="120"/>
-                    <cell id="126"/>
+                    <cell id="94">
+                        <label id="136">
+                            <text-property name="text">团队统计</text-property>
+                        </label>
+                    </cell>
+                    <cell id="95">
+                        <data id="137">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="96">
+                        <data id="138">
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="108">
+                        <data id="140">
+                            <property name="resultSetColumn">Column Binding_5</property>
+                        </data>
+                    </cell>
+                    <cell id="97">
+                        <data id="141">
+                            <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="98">
+                        <data id="142">
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                    <cell id="114">
+                        <data id="143">
+                            <property name="resultSetColumn">Column Binding_6</property>
+                        </data>
+                    </cell>
+                    <cell id="99">
+                        <data id="144">
+                            <property name="resultSetColumn">Aggregation_4</property>
+                        </data>
+                    </cell>
+                    <cell id="120">
+                        <data id="146">
+                            <property name="resultSetColumn">Column Binding_7</property>
+                        </data>
+                    </cell>
+                    <cell id="132">
+                        <data id="147">
+                            <property name="resultSetColumn">Column Binding_8</property>
+                        </data>
+                    </cell>
+                    <cell id="126">
+                        <data id="148">
+                            <property name="resultSetColumn">float_rate_total</property>
+                        </data>
+                    </cell>
                 </row>
             </footer>
         </table>
