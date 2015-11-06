@@ -727,6 +727,34 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="131">
                         <data id="135">
                             <property name="resultSetColumn">Column Binding_4</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">report_008.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">date_assign_start</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_assign_start"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">date_assign_end</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_assign_end"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">user</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["coordinator_id"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="125">

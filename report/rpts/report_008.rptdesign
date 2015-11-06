@@ -998,11 +998,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
   from orders
   inner join users on orders.`coordinator_id`= users.id
   left join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
+  and(shippingorders.`state` is null
+    or shippingorders.`state` not in (6, 8, 7, 9))
  where orders.assigned_at> ?
    and orders.assigned_at< date_add(date(?), INTERVAL 1 DAY)
-   and users.id= ?
-   and(shippingorders.`state` is null
-    or shippingorders.`state` not in (6, 8, 7, 9))
+   and orders.coordinator_id= ?
    and(`come_from`= 'Self_App'
     or `client_id`> 0)
  group by `coordinator_id`]]></xml-property>
