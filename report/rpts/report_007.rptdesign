@@ -17,9 +17,27 @@
         </structure>
     </list-property>
     <parameters>
-        <scalar-parameter name="date_assign" id="6">
-            <text-property name="helpText">认领日期</text-property>
-            <text-property name="promptText">认领日期</text-property>
+        <scalar-parameter name="date_assign_start" id="6">
+            <text-property name="helpText">认领开始日期</text-property>
+            <text-property name="promptText">认领开始日期</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var date = new Date(new Date().getTime()-7*24*60*60*1000);
+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="date_assign_end" id="65">
+            <text-property name="helpText">认领结束日期</text-property>
+            <text-property name="promptText">认领结束日期</text-property>
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
@@ -87,6 +105,30 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <text-property name="displayName">send_out_count</text-property>
                     <text-property name="heading">send_out_count</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">send_out_shipping_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">send_out_shipping_count</text-property>
+                    <text-property name="heading">send_out_shipping_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sign_ok_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">sign_ok_count</text-property>
+                    <text-property name="heading">sign_ok_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sign_fail_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">sign_fail_count</text-property>
+                    <text-property name="heading">sign_fail_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">complete_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">complete_count</text-property>
+                    <text-property name="heading">complete_count</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -132,6 +174,26 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                         <property name="name">send_out_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">send_out_shipping_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">sign_ok_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">sign_fail_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">complete_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -162,16 +224,49 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="name">send_out_count</property>
                     <property name="nativeName">send_out_count</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">send_out_shipping_count</property>
+                    <property name="nativeName">send_out_shipping_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">sign_ok_count</property>
+                    <property name="nativeName">sign_ok_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">sign_fail_count</property>
+                    <property name="nativeName">sign_fail_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">complete_count</property>
+                    <property name="nativeName">complete_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select orders.`coordinator_id`,
        users.`username`,
-       count(DISTINCT(orders.device_id)) as `assign_count`,
-       count(DISTINCT(`devices` .id*orders.`export_to_erp`)) -1 as `send_out_count`
+       count(DISTINCT(orders.device_id+ date(`orders` .assigned_at))) as `assign_count`,
+       sum(orders.`state`in('已发货，准备收货', '等待配货', '正在配货', '客户签收，订单完成', '客户拒签,原件返回')) as `send_out_count`,
+       sum(orders.`export_to_erp`) as `send_out_shipping_count`,
+       sum(shippingorders.`state` in(6, 8)) as `sign_ok_count`,
+       sum(shippingorders.`state` in(7, 9)) as `sign_fail_count`,
+       sum(shippingorders.`state` in(6, 8, 7, 9)) as `complete_count`
   from orders
   INNER JOIN `devices` on `devices` .device_id= orders.`device_id`
   inner join users on orders.`coordinator_id`= users.id
+  left join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
  where orders.assigned_at> ?
    and orders.assigned_at< date_add(date(?), INTERVAL 1 DAY)
    and(`come_from`= 'Self_App'
@@ -319,10 +414,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
     <body>
         <text-data id="39">
             <property name="style">s-params-block</property>
-            <expression name="valueExpr">"认领日期："+params["date_assign"].value</expression>
+            <expression name="valueExpr">"认领开始日期："+params["date_assign_start"].value+"&lt;br>"+
+"认领结束日期："+params["date_assign_end"].value</expression>
             <property name="contentType">html</property>
         </text-data>
-        <table id="7">
+        <table id="66">
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -344,982 +440,23 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">Aggregation</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["assign_count"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
+                    <property name="name">send_out_shipping_count</property>
+                    <text-property name="displayName">send_out_shipping_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["send_out_shipping_count"]</expression>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">Aggregation_1</property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["send_out_count"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
+                    <property name="name">sign_ok_count</property>
+                    <text-property name="displayName">sign_ok_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sign_ok_count"]</expression>
+                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
-                    <property name="name">Column Binding</property>
-                    <expression name="expression" type="javascript">BirtMath.round(100*row["send_out_count"]/row["assign_count"],2)+"%"</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
+                    <property name="name">sign_fail_count</property>
+                    <text-property name="displayName">sign_fail_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sign_fail_count"]</expression>
+                    <property name="dataType">decimal</property>
                 </structure>
-            </list-property>
-            <column id="26"/>
-            <column id="27"/>
-            <column id="28"/>
-            <column id="35"/>
-            <header>
-                <row id="8">
-                    <cell id="9">
-                        <label id="10">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">客服</text-property>
-                        </label>
-                    </cell>
-                    <cell id="11">
-                        <label id="12">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">认领</text-property>
-                        </label>
-                    </cell>
-                    <cell id="13">
-                        <label id="14">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">发货</text-property>
-                        </label>
-                    </cell>
-                    <cell id="32">
-                        <label id="36">
-                            <property name="textAlign">left</property>
-                            <text-property name="text">成单率</text-property>
-                        </label>
-                    </cell>
-                </row>
-            </header>
-            <detail>
-                <row id="15">
-                    <cell id="16">
-                        <data id="17">
-                            <property name="resultSetColumn">username</property>
-                        </data>
-                    </cell>
-                    <cell id="18">
-                        <data id="19">
-                            <property name="resultSetColumn">assign_count</property>
-                        </data>
-                    </cell>
-                    <cell id="20">
-                        <data id="21">
-                            <property name="resultSetColumn">send_out_count</property>
-                        </data>
-                    </cell>
-                    <cell id="33">
-                        <data id="38">
-                            <property name="resultSetColumn">Column Binding</property>
-                        </data>
-                    </cell>
-                </row>
-            </detail>
-            <footer>
-                <row id="22">
-                    <cell id="23">
-                        <label id="29">
-                            <text-property name="text">统计</text-property>
-                        </label>
-                    </cell>
-                    <cell id="24">
-                        <data id="30">
-                            <property name="resultSetColumn">Aggregation</property>
-                        </data>
-                    </cell>
-                    <cell id="25">
-                        <data id="31">
-                            <property name="resultSetColumn">Aggregation_1</property>
-                        </data>
-                    </cell>
-                    <cell id="34"/>
-                </row>
-            </footer>
-        </table>
-        <extended-item extensionName="Chart" id="64">
-            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
-  <Version>2.6.1</Version>
-  <Type>Pie Chart</Type>
-  <SubType>Standard</SubType>
-  <Block>
-    <Children xsi:type="layout:TitleBlock">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value>客服认领订单发货构成</Value>
-          <Font>
-            <Size>16.0</Size>
-            <Bold>true</Bold>
-            <Alignment>
-              <horizontalAlignment>Center</horizontalAlignment>
-              <verticalAlignment>Center</verticalAlignment>
-            </Alignment>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>true</Visible>
-      </Label>
-    </Children>
-    <Children xsi:type="layout:Plot">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <HorizontalSpacing>5</HorizontalSpacing>
-      <VerticalSpacing>5</VerticalSpacing>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>0.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>0.0</Right>
-        </Insets>
-      </ClientArea>
-    </Children>
-    <Children xsi:type="layout:Legend">
-      <Bounds>
-        <Left>0.0</Left>
-        <Top>0.0</Top>
-        <Width>0.0</Width>
-        <Height>0.0</Height>
-      </Bounds>
-      <Insets>
-        <Top>3.0</Top>
-        <Left>3.0</Left>
-        <Bottom>3.0</Bottom>
-        <Right>3.0</Right>
-      </Insets>
-      <Row>-1</Row>
-      <Column>-1</Column>
-      <Rowspan>-1</Rowspan>
-      <Columnspan>-1</Columnspan>
-      <Outline>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>false</Visible>
-      </Outline>
-      <Visible>true</Visible>
-      <ClientArea>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>0</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>2.0</Top>
-          <Left>2.0</Left>
-          <Bottom>2.0</Bottom>
-          <Right>2.0</Right>
-        </Insets>
-      </ClientArea>
-      <Text>
-        <Value></Value>
-        <Font>
-          <Alignment/>
-        </Font>
-      </Text>
-      <Orientation>Vertical</Orientation>
-      <Direction>Top_Bottom</Direction>
-      <Separator>
-        <Style>Solid</Style>
-        <Thickness>1</Thickness>
-        <Color>
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Color>
-        <Visible>true</Visible>
-      </Separator>
-      <Position>Right</Position>
-      <ItemType>Categories</ItemType>
-      <Title>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Title>
-      <TitlePosition>Above</TitlePosition>
-    </Children>
-    <Bounds>
-      <Left>0.0</Left>
-      <Top>0.0</Top>
-      <Width>571.0</Width>
-      <Height>285.5</Height>
-    </Bounds>
-    <Insets>
-      <Top>3.0</Top>
-      <Left>3.0</Left>
-      <Bottom>3.0</Bottom>
-      <Right>3.0</Right>
-    </Insets>
-    <Row>-1</Row>
-    <Column>-1</Column>
-    <Rowspan>-1</Rowspan>
-    <Columnspan>-1</Columnspan>
-    <Outline>
-      <Style>Solid</Style>
-      <Thickness>1</Thickness>
-      <Color>
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Color>
-      <Visible>false</Visible>
-    </Outline>
-    <Visible>true</Visible>
-  </Block>
-  <Dimension>Two_Dimensional_With_Depth</Dimension>
-  <Script>
-</Script>
-  <Units>Points</Units>
-  <SeriesThickness>10.0</SeriesThickness>
-  <GridColumnCount>0</GridColumnCount>
-  <ExtendedProperties>
-    <Name>enable.area.alt</Name>
-    <Value>false</Value>
-  </ExtendedProperties>
-  <SampleData>
-    <BaseSampleData>
-      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
-    </BaseSampleData>
-    <OrthogonalSampleData>
-      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
-      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
-    </OrthogonalSampleData>
-    <AncillarySampleData>
-      <DataSetRepresentation>Series 1</DataSetRepresentation>
-    </AncillarySampleData>
-  </SampleData>
-  <Interactivity/>
-  <EmptyMessage>
-    <Caption>
-      <Value>This chart contains no data.</Value>
-      <Font>
-        <Alignment>
-          <horizontalAlignment>Center</horizontalAlignment>
-          <verticalAlignment>Center</verticalAlignment>
-        </Alignment>
-      </Font>
-    </Caption>
-    <Background xsi:type="attribute:ColorDefinition">
-      <Transparency>64</Transparency>
-      <Red>127</Red>
-      <Green>127</Green>
-      <Blue>127</Blue>
-    </Background>
-    <Outline>
-      <Color>
-        <Transparency>128</Transparency>
-        <Red>127</Red>
-        <Green>127</Green>
-        <Blue>127</Blue>
-      </Color>
-      <Visible>true</Visible>
-    </Outline>
-    <Insets>
-      <Top>10.0</Top>
-      <Left>10.0</Left>
-      <Bottom>10.0</Bottom>
-      <Right>10.0</Right>
-    </Insets>
-    <Visible>false</Visible>
-  </EmptyMessage>
-  <SeriesDefinitions>
-    <Query>
-      <Definition></Definition>
-    </Query>
-    <SeriesPalette>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>166</Green>
-        <Blue>218</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>242</Red>
-        <Green>88</Green>
-        <Blue>106</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>232</Red>
-        <Green>172</Green>
-        <Blue>57</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>64</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>170</Red>
-        <Green>85</Green>
-        <Blue>85</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>192</Red>
-        <Green>192</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>192</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>7</Red>
-        <Green>146</Green>
-        <Blue>94</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>128</Green>
-        <Blue>192</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>64</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>80</Red>
-        <Green>240</Green>
-        <Blue>120</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>0</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>0</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>64</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>128</Red>
-        <Green>128</Green>
-        <Blue>128</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>64</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>0</Red>
-        <Green>0</Green>
-        <Blue>0</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>255</Green>
-        <Blue>255</Blue>
-      </Entries>
-      <Entries xsi:type="attribute:ColorDefinition">
-        <Transparency>255</Transparency>
-        <Red>255</Red>
-        <Green>128</Green>
-        <Blue>0</Blue>
-      </Entries>
-    </SeriesPalette>
-    <SeriesDefinitions>
-      <Query>
-        <Definition></Definition>
-        <Grouping>
-          <GroupType>Numeric</GroupType>
-        </Grouping>
-      </Query>
-      <SeriesPalette>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>166</Green>
-          <Blue>218</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>242</Red>
-          <Green>88</Green>
-          <Blue>106</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>232</Red>
-          <Green>172</Green>
-          <Blue>57</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>64</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>170</Red>
-          <Green>85</Green>
-          <Blue>85</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>192</Red>
-          <Green>192</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>192</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>7</Red>
-          <Green>146</Green>
-          <Blue>94</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>128</Green>
-          <Blue>192</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>64</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>80</Red>
-          <Green>240</Green>
-          <Blue>120</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>0</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>0</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>64</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>128</Red>
-          <Green>128</Green>
-          <Blue>128</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>64</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>0</Red>
-          <Green>0</Green>
-          <Blue>0</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Entries>
-        <Entries xsi:type="attribute:ColorDefinition">
-          <Transparency>255</Transparency>
-          <Red>255</Red>
-          <Green>128</Green>
-          <Blue>0</Blue>
-        </Entries>
-      </SeriesPalette>
-      <Series xsi:type="type:PieSeries">
-        <Visible>true</Visible>
-        <Label>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-            <Visible>false</Visible>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>false</Visible>
-        </Label>
-        <DataDefinition>
-          <Definition>row[&quot;send_out_count&quot;]</Definition>
-          <Grouping>
-            <Enabled>false</Enabled>
-            <GroupType>Text</GroupType>
-            <AggregateExpression xsi:nil="true"/>
-          </Grouping>
-        </DataDefinition>
-        <SeriesIdentifier></SeriesIdentifier>
-        <DataPoint>
-          <Components>
-            <Type>Orthogonal_Value</Type>
-          </Components>
-          <Separator>, </Separator>
-        </DataPoint>
-        <LabelPosition>Outside</LabelPosition>
-        <Stacked>false</Stacked>
-        <Triggers>
-          <Condition>onmouseover</Condition>
-          <Action>
-            <Type>Show_Tooltip</Type>
-            <Value xsi:type="attribute:TooltipValue">
-              <Text></Text>
-              <Delay>200</Delay>
-            </Value>
-          </Action>
-        </Triggers>
-        <Explosion>0</Explosion>
-        <Title>
-          <Caption>
-            <Value></Value>
-            <Font>
-              <Size>16.0</Size>
-              <Bold>true</Bold>
-              <Alignment/>
-            </Font>
-          </Caption>
-          <Background xsi:type="attribute:ColorDefinition">
-            <Transparency>0</Transparency>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-          </Background>
-          <Outline>
-            <Style>Solid</Style>
-            <Thickness>1</Thickness>
-            <Color>
-              <Transparency>255</Transparency>
-              <Red>0</Red>
-              <Green>0</Green>
-              <Blue>0</Blue>
-            </Color>
-          </Outline>
-          <Insets>
-            <Top>0.0</Top>
-            <Left>2.0</Left>
-            <Bottom>0.0</Bottom>
-            <Right>3.0</Right>
-          </Insets>
-          <Visible>true</Visible>
-        </Title>
-        <TitlePosition>Below</TitlePosition>
-        <LeaderLineAttributes>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Visible>true</Visible>
-        </LeaderLineAttributes>
-        <LeaderLineLength>10.0</LeaderLineLength>
-      </Series>
-      <Grouping>
-        <GroupType>Text</GroupType>
-        <AggregateExpression>Sum</AggregateExpression>
-      </Grouping>
-    </SeriesDefinitions>
-    <Series>
-      <Visible>true</Visible>
-      <Label>
-        <Caption>
-          <Value></Value>
-          <Font>
-            <Alignment/>
-          </Font>
-        </Caption>
-        <Background xsi:type="attribute:ColorDefinition">
-          <Transparency>0</Transparency>
-          <Red>255</Red>
-          <Green>255</Green>
-          <Blue>255</Blue>
-        </Background>
-        <Outline>
-          <Style>Solid</Style>
-          <Thickness>1</Thickness>
-          <Color>
-            <Transparency>255</Transparency>
-            <Red>0</Red>
-            <Green>0</Green>
-            <Blue>0</Blue>
-          </Color>
-          <Visible>false</Visible>
-        </Outline>
-        <Insets>
-          <Top>0.0</Top>
-          <Left>2.0</Left>
-          <Bottom>0.0</Bottom>
-          <Right>3.0</Right>
-        </Insets>
-        <Visible>false</Visible>
-      </Label>
-      <DataDefinition>
-        <Definition>row[&quot;username&quot;]</Definition>
-      </DataDefinition>
-      <SeriesIdentifier></SeriesIdentifier>
-      <DataPoint>
-        <Components>
-          <Type>Orthogonal_Value</Type>
-        </Components>
-        <Separator>, </Separator>
-      </DataPoint>
-      <LabelPosition>Outside</LabelPosition>
-      <Stacked>false</Stacked>
-    </Series>
-    <Grouping>
-      <Enabled>true</Enabled>
-      <GroupType>Text</GroupType>
-      <AggregateExpression>Sum</AggregateExpression>
-    </Grouping>
-  </SeriesDefinitions>
-</model:ChartWithoutAxes>
-]]></xml-property>
-            <property name="outputFormat">SVG</property>
-            <property name="inheritColumns">true</property>
-            <property name="pageBreakBefore">auto</property>
-            <property name="pageBreakAfter">auto</property>
-            <property name="height">4.611111111111111in</property>
-            <property name="width">7.819444444444445in</property>
-            <property name="dataSet">ds_001</property>
-            <list-property name="boundDataColumns">
                 <structure>
                     <property name="name">coordinator_id</property>
                     <text-property name="displayName">coordinator_id</text-property>
@@ -1327,24 +464,168 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="name">username</property>
-                    <text-property name="displayName">username</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["username"]</expression>
+                    <property name="name">complete_count</property>
+                    <text-property name="displayName">complete_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["complete_count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["send_out_count"]*100/row["assign_count"],2)+"%"</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">assign_count</property>
-                    <text-property name="displayName">assign_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["assign_count"]</expression>
-                    <property name="dataType">decimal</property>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["sign_ok_count"]*100/row["send_out_shipping_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">send_out_count</property>
-                    <text-property name="displayName">send_out_count</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["send_out_count"]</expression>
-                    <property name="dataType">decimal</property>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["sign_fail_count"]*100/row["send_out_shipping_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_3</property>
+                    <expression name="expression" type="javascript">BirtMath.round((row["send_out_shipping_count"]-row["complete_count"])*100/row["send_out_shipping_count"],2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
-        </extended-item>
+            <column id="100"/>
+            <column id="101"/>
+            <column id="102"/>
+            <column id="109"/>
+            <column id="103"/>
+            <column id="104"/>
+            <column id="115"/>
+            <column id="105"/>
+            <column id="121"/>
+            <column id="127"/>
+            <header>
+                <row id="67">
+                    <cell id="68">
+                        <label id="69">
+                            <text-property name="text">客服</text-property>
+                        </label>
+                    </cell>
+                    <cell id="70">
+                        <label id="71">
+                            <text-property name="text">认领单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="72">
+                        <label id="73">
+                            <text-property name="text">确认订单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="106">
+                        <label id="110">
+                            <text-property name="text">成单率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="74">
+                        <label id="75">
+                            <text-property name="text">发货订单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="76">
+                        <label id="77">
+                            <text-property name="text">签收单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="112">
+                        <label id="116">
+                            <text-property name="text">签收率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="78">
+                        <label id="79">
+                            <text-property name="text">拒签单数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="118">
+                        <label id="122">
+                            <text-property name="text">拒签率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="124">
+                        <label id="128">
+                            <text-property name="text">漂单数</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="80">
+                    <cell id="81">
+                        <data id="82">
+                            <property name="resultSetColumn">username</property>
+                        </data>
+                    </cell>
+                    <cell id="83">
+                        <data id="84">
+                            <property name="resultSetColumn">assign_count</property>
+                        </data>
+                    </cell>
+                    <cell id="85">
+                        <data id="86">
+                            <property name="resultSetColumn">send_out_count</property>
+                        </data>
+                    </cell>
+                    <cell id="107">
+                        <data id="111">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
+                    <cell id="87">
+                        <data id="88">
+                            <property name="resultSetColumn">send_out_shipping_count</property>
+                        </data>
+                    </cell>
+                    <cell id="89">
+                        <data id="90">
+                            <property name="resultSetColumn">sign_ok_count</property>
+                        </data>
+                    </cell>
+                    <cell id="113">
+                        <data id="117">
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
+                    <cell id="91">
+                        <data id="92">
+                            <property name="resultSetColumn">sign_fail_count</property>
+                        </data>
+                    </cell>
+                    <cell id="119">
+                        <data id="123">
+                            <property name="resultSetColumn">Column Binding_2</property>
+                        </data>
+                    </cell>
+                    <cell id="125">
+                        <data id="129">
+                            <property name="resultSetColumn">Column Binding_3</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="93">
+                    <cell id="94"/>
+                    <cell id="95"/>
+                    <cell id="96"/>
+                    <cell id="108"/>
+                    <cell id="97"/>
+                    <cell id="98"/>
+                    <cell id="114"/>
+                    <cell id="99"/>
+                    <cell id="120"/>
+                    <cell id="126"/>
+                </row>
+            </footer>
+        </table>
     </body>
 </report>
