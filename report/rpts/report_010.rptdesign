@@ -479,7 +479,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
    and orders.`deleted_at` is null
  group by `vd_teams` .id) as b on a.team_id= b.team_id) as t
   inner join users on users.id= t.leader_id
-  order by t.?]]></xml-property>
+  order by ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
