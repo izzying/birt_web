@@ -767,6 +767,114 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <expression name="expression" type="javascript">dataSetRow["leader_phone"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">teams_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["team_id"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_team_sale</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["team_sale_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_team_member_sale</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["member_sale_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_leader_sale</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["leader_sale_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_team_distribute</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["team_distribute_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_member_distribute</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["member_distribute_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_leader_distribute</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["leader_distribute_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_member_score</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["member_score_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">all_leader_score</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["leader_score_sum"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="349"/>
             <column id="359">
@@ -784,51 +892,61 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                 <row id="280">
                     <cell id="283">
                         <label id="284">
+                            <property name="textAlign">left</property>
                             <text-property name="text">团队名称</text-property>
                         </label>
                     </cell>
                     <cell id="303">
                         <label id="304">
+                            <property name="textAlign">left</property>
                             <text-property name="text">队长</text-property>
                         </label>
                     </cell>
                     <cell id="287">
                         <label id="288">
+                            <property name="textAlign">left</property>
                             <text-property name="text">团队销售额</text-property>
                         </label>
                     </cell>
                     <cell id="289">
                         <label id="290">
+                            <property name="textAlign">left</property>
                             <text-property name="text">成员销售额</text-property>
                         </label>
                     </cell>
                     <cell id="291">
                         <label id="292">
+                            <property name="textAlign">left</property>
                             <text-property name="text">队长销售额</text-property>
                         </label>
                     </cell>
                     <cell id="293">
                         <label id="294">
+                            <property name="textAlign">left</property>
                             <text-property name="text">团队分销额</text-property>
                         </label>
                     </cell>
                     <cell id="295">
                         <label id="296">
+                            <property name="textAlign">left</property>
                             <text-property name="text">成员分销额</text-property>
                         </label>
                     </cell>
                     <cell id="297">
                         <label id="298">
+                            <property name="textAlign">left</property>
                             <text-property name="text">队长分销额</text-property>
                         </label>
                     </cell>
                     <cell id="299">
                         <label id="300">
+                            <property name="textAlign">left</property>
                             <text-property name="text">成员新增积分</text-property>
                         </label>
                     </cell>
                     <cell id="301">
                         <label id="302">
+                            <property name="textAlign">left</property>
                             <text-property name="text">队长新增积分</text-property>
                         </label>
                     </cell>
@@ -869,6 +987,40 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <cell id="322">
                         <data id="323">
                             <property name="resultSetColumn">member_distribute_sum</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">report_011.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">date_create_start</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_create_start"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">date_create_end</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_create_end"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">team</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["team_id"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">order_by</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">"member_distribute_sum"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="324">
@@ -879,6 +1031,40 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <cell id="326">
                         <data id="327">
                             <property name="resultSetColumn">member_score_sum</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">report_011.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">date_create_start</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_create_start"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">date_create_end</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["date_create_end"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">team</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["team_id"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">order_by</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">"member_score_sum"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="328">
@@ -895,15 +1081,51 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
-                    <cell id="346"/>
-                    <cell id="338"/>
-                    <cell id="339"/>
-                    <cell id="340"/>
-                    <cell id="341"/>
-                    <cell id="342"/>
-                    <cell id="343"/>
-                    <cell id="344"/>
-                    <cell id="345"/>
+                    <cell id="346">
+                        <data id="368">
+                            <property name="resultSetColumn">teams_count</property>
+                        </data>
+                    </cell>
+                    <cell id="338">
+                        <data id="369">
+                            <property name="resultSetColumn">all_team_sale</property>
+                        </data>
+                    </cell>
+                    <cell id="339">
+                        <data id="370">
+                            <property name="resultSetColumn">all_team_member_sale</property>
+                        </data>
+                    </cell>
+                    <cell id="340">
+                        <data id="371">
+                            <property name="resultSetColumn">all_leader_sale</property>
+                        </data>
+                    </cell>
+                    <cell id="341">
+                        <data id="372">
+                            <property name="resultSetColumn">all_team_distribute</property>
+                        </data>
+                    </cell>
+                    <cell id="342">
+                        <data id="373">
+                            <property name="resultSetColumn">all_member_distribute</property>
+                        </data>
+                    </cell>
+                    <cell id="343">
+                        <data id="374">
+                            <property name="resultSetColumn">all_leader_distribute</property>
+                        </data>
+                    </cell>
+                    <cell id="344">
+                        <data id="375">
+                            <property name="resultSetColumn">all_member_score</property>
+                        </data>
+                    </cell>
+                    <cell id="345">
+                        <data id="376">
+                            <property name="resultSetColumn">all_leader_score</property>
+                        </data>
+                    </cell>
                 </row>
             </footer>
         </table>
