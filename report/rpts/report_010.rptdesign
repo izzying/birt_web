@@ -731,14 +731,16 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                 <structure>
                     <property name="name">member_score_sum</property>
                     <text-property name="displayName">member_score_sum</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["member_score_sum"]</expression>
+                    <expression name="expression" type="javascript">BirtMath.round(dataSetRow["member_score_sum"],2)</expression>
                     <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">leader_score_sum</property>
                     <text-property name="displayName">leader_score_sum</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["leader_score_sum"]</expression>
+                    <expression name="expression" type="javascript">BirtMath.round(dataSetRow["leader_score_sum"],2)</expression>
                     <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">leader_name</property>
