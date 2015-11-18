@@ -668,7 +668,8 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
         <text-data id="277">
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"订单创建开始日期："+params["date_create_start"].value+"&lt;br>"+
-"订单创建结束日期："+params["date_create_end"].value</expression>
+"订单创建结束日期："+params["date_create_end"].value+"&lt;br>"+
+"排序："+params["order_by"].displayText</expression>
             <property name="contentType">html</property>
         </text-data>
         <table id="279">
