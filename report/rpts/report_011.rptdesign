@@ -519,8 +519,9 @@ select `users`.`id` as user_id,
                 <structure>
                     <property name="name">member_score_sum</property>
                     <text-property name="displayName">member_score_sum</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["member_score_sum"]</expression>
+                    <expression name="expression" type="javascript">BirtMath.round(dataSetRow["member_score_sum"],2)</expression>
                     <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">members_count</property>
@@ -553,7 +554,7 @@ select `users`.`id` as user_id,
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["member_score_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["member_score_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>

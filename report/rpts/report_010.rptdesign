@@ -786,7 +786,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["team_sale_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["team_sale_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -798,7 +798,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["member_sale_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["member_sale_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -810,7 +810,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["leader_sale_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["leader_sale_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -822,7 +822,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["team_distribute_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["team_distribute_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -834,7 +834,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["member_distribute_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["member_distribute_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -846,7 +846,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["leader_distribute_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["leader_distribute_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -858,7 +858,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["member_score_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["member_score_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -870,7 +870,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["leader_score_sum"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["leader_score_sum"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
