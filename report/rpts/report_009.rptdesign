@@ -400,7 +400,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </structure>
                 <structure>
                     <property name="name">param_2</property>
-                    <property name="paramName">date_assign_start</property>
+                    <property name="paramName">date_assign_end</property>
                     <property name="nativeName"></property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">-1</property>
