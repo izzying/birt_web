@@ -18,8 +18,8 @@
     </list-property>
     <parameters>
         <scalar-parameter name="date_create_start" id="6">
-            <text-property name="helpText">订单开始日期</text-property>
-            <text-property name="promptText">订单开始日期</text-property>
+            <text-property name="helpText">开始日期</text-property>
+            <text-property name="promptText">开始日期</text-property>
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
@@ -36,8 +36,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </structure>
         </scalar-parameter>
         <scalar-parameter name="date_create_end" id="65">
-            <text-property name="helpText">订单结束日期</text-property>
-            <text-property name="promptText">订单结束日期</text-property>
+            <text-property name="helpText">结束日期</text-property>
+            <text-property name="promptText">结束日期</text-property>
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
@@ -54,8 +54,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </structure>
         </scalar-parameter>
         <scalar-parameter name="order_by" id="366">
-            <text-property name="helpText">排序</text-property>
-            <text-property name="promptText">排序</text-property>
+            <text-property name="helpText">排序按</text-property>
+            <text-property name="promptText">排序按</text-property>
             <property name="valueType">static</property>
             <property name="sortBy">label</property>
             <property name="sortDirection">asc</property>
@@ -463,7 +463,7 @@ select `vd_teams` .id as team_id, `vd_teams`.name as team_name, `vd_teams`.`user
    and orders.`deleted_at` is null
  group by `vd_teams` .id) as a
   inner join(
-select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items` .quantity) as team_distribute_sum, sum((`vd_user_infos` .vd_role= 'normal') *(`line_items` .franchise_price*`line_items` .quantity)) as member_distribute_sum, sum((`vd_user_infos` .vd_role= 'black') *(`line_items` .franchise_price*`line_items` .quantity)) as leader_distribute_sum, sum((`vd_user_infos` .vd_role= 'normal') *(`line_items` .franchise_price*`line_items` .quantity*(if(ordinary_rate= 0, 0.05, ordinary_rate)))) as member_score_sum, sum(`line_items` .franchise_price*`line_items` .quantity*(if(ordinary_rate= 0, 0.15, black_belt_rate))) as leader_score_sum
+select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items` .quantity) as team_distribute_sum, sum((`vd_user_infos` .vd_role= 'normal') *(`line_items` .franchise_price*`line_items` .quantity)) as member_distribute_sum, sum((`vd_user_infos` .vd_role= 'black') *(`line_items` .franchise_price*`line_items` .quantity)) as leader_distribute_sum, sum((`vd_user_infos` .vd_role= 'normal') *(`line_items` .franchise_price*`line_items` .quantity*(ordinary_rate))) as member_score_sum, sum(`line_items` .franchise_price*`line_items` .quantity*(black_belt_rate)) as leader_score_sum
   from orders
   inner join `applications` on `applications` .id= orders.`application_id`
   inner join `users` on `users` .id= `applications` .user_id
@@ -679,9 +679,9 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
     <body>
         <text-data id="277">
             <property name="style">s-params-block</property>
-            <expression name="valueExpr">"订单创建开始日期："+params["date_create_start"].value+"&lt;br>"+
-"订单创建结束日期："+params["date_create_end"].value+"&lt;br>"+
-"排序："+params["order_by"].displayText</expression>
+            <expression name="valueExpr">"开始日期："+params["date_create_start"].value+"&lt;br>"+
+"结束日期："+params["date_create_end"].value+"&lt;br>"+
+"排序按："+params["order_by"].displayText</expression>
             <property name="contentType">html</property>
         </text-data>
         <table id="279">
