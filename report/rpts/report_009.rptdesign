@@ -4375,6 +4375,14 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="303">
                         <data id="304">
                             <property name="resultSetColumn">id</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">查看订单详情</property>
+                                    <expression name="uri" type="javascript">"http://www.yepcolor.com/orders/"+row["id"]+"/show_v2"</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="305">
