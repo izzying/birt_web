@@ -7,6 +7,7 @@
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">72</property>
     <list-property name="libraries">
