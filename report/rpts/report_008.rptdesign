@@ -2356,7 +2356,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"认领开始日期："+params["date_assign_start"].value+"&lt;br>"+
 "认领结束日期："+params["date_assign_end"].value+"&lt;br>"+
-"订单的处理人："+params["user"].displayText</expression>
+"订单的处理人："+params["user"].displayText+"("+params["user"].value+")"</expression>
             <property name="contentType">html</property>
         </text-data>
         <table id="151">
@@ -2578,5 +2578,21 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                 </row>
             </footer>
         </table>
+        <list id="213">
+            <property name="dataSet">ds_001</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <detail>
+                <data id="214">
+                    <property name="resultSetColumn">id</property>
+                </data>
+            </detail>
+        </list>
     </body>
 </report>
