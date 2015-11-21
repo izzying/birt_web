@@ -314,11 +314,13 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
        `shippingorders` .state as sp_state
   from orders
   inner join users on orders.`coordinator_id`= users.id
-  inner join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
+  left join `shippingorders` on `shippingorders` .id= `orders` .shippingorder_id
  where orders.assigned_at> ?
    and orders.assigned_at< date_add(date(?), INTERVAL 1 DAY)
    and orders.coordinator_id= ?
-   and shippingorders.`state` not in (6, 8, 7, 9)
+   and orders.`export_to_erp`
+   and(shippingorders.`state` is null
+    or shippingorders.`state` not in(6, 8, 7, 9))
    and(orders.`come_from`= 'Self_App'
     or orders.`client_id`> 0)]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
