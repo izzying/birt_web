@@ -85,49 +85,63 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="columnName">coordinator_id</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">coordinator_id</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">coordinator_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">username</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">username</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">username</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">assign_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">assign_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">assign_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">send_out_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">send_out_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">send_out_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">send_out_shipping_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">send_out_shipping_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">send_out_shipping_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">sign_ok_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">sign_ok_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">sign_ok_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">sign_fail_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">sign_fail_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">sign_fail_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">complete_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">complete_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">complete_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sign_ok_money</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">sign_ok_money</text-property>
+                    <text-property name="heading">sign_ok_money</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -194,6 +208,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                         <property name="name">complete_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">sign_ok_money</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -254,6 +273,13 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">3</property>
                 </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">sign_ok_money</property>
+                    <property name="nativeName">sign_ok_money</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select orders.`coordinator_id`,
        users.`username`,
@@ -262,7 +288,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
        sum(orders.`export_to_erp`) as `send_out_shipping_count`,
        sum(shippingorders.`state` in(6, 8)) as `sign_ok_count`,
        sum(shippingorders.`state` in(7, 9)) as `sign_fail_count`,
-       sum(shippingorders.`state` in(6, 8, 7, 9)) as `complete_count`
+       sum(shippingorders.`state` in(6, 8, 7, 9)) as `complete_count`,
+       sum((shippingorders.`state` in(6, 8))*((orders.`pay_type`=1)*orders.`actual_total` +(orders.`pay_type`=0) *(orders.`shipping_charge`+orders.`item_total` )))   as `sign_ok_money`
   from orders
   INNER JOIN `devices` on `devices` .device_id= orders.`device_id`
   inner join users on orders.`coordinator_id`= users.id
@@ -595,6 +622,24 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">sign_ok_money</property>
+                    <text-property name="displayName">sign_ok_money</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sign_ok_money"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_5</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["sign_ok_money"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="100"/>
             <column id="101"/>
@@ -603,6 +648,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <column id="103"/>
             <column id="104"/>
             <column id="115"/>
+            <column id="152"/>
             <column id="105"/>
             <column id="121"/>
             <column id="133"/>
@@ -649,6 +695,12 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                         <label id="116">
                             <property name="textAlign">left</property>
                             <text-property name="text">签收率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="149">
+                        <label id="153">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">签收金额</text-property>
                         </label>
                     </cell>
                     <cell id="78">
@@ -712,6 +764,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="113">
                         <data id="117">
                             <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
+                    <cell id="150">
+                        <data id="154">
+                            <property name="resultSetColumn">sign_ok_money</property>
                         </data>
                     </cell>
                     <cell id="91">
@@ -799,6 +856,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="114">
                         <data id="143">
                             <property name="resultSetColumn">Column Binding_6</property>
+                        </data>
+                    </cell>
+                    <cell id="151">
+                        <data id="155">
+                            <property name="resultSetColumn">Aggregation_5</property>
                         </data>
                     </cell>
                     <cell id="99">
