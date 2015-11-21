@@ -64,9 +64,6 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <property name="sortDirection">asc</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="constant">5</value>
-            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
@@ -1152,151 +1149,181 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">id</text-property>
                     <text-property name="heading">id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">email</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">email</text-property>
                     <text-property name="heading">email</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">encrypted_password</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">encrypted_password</text-property>
                     <text-property name="heading">encrypted_password</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">reset_password_token</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">reset_password_token</text-property>
                     <text-property name="heading">reset_password_token</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">reset_password_sent_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">reset_password_sent_at</text-property>
                     <text-property name="heading">reset_password_sent_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">remember_created_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">remember_created_at</text-property>
                     <text-property name="heading">remember_created_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">sign_in_count</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">sign_in_count</text-property>
                     <text-property name="heading">sign_in_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">current_sign_in_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">current_sign_in_at</text-property>
                     <text-property name="heading">current_sign_in_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">last_sign_in_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">last_sign_in_at</text-property>
                     <text-property name="heading">last_sign_in_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">current_sign_in_ip</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">current_sign_in_ip</text-property>
                     <text-property name="heading">current_sign_in_ip</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">last_sign_in_ip</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">last_sign_in_ip</text-property>
                     <text-property name="heading">last_sign_in_ip</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">created_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">created_at</text-property>
                     <text-property name="heading">created_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">updated_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">updated_at</text-property>
                     <text-property name="heading">updated_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">role</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">role</text-property>
                     <text-property name="heading">role</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">username</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">username</text-property>
                     <text-property name="heading">username</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">phone</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">phone</text-property>
                     <text-property name="heading">phone</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">qq</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">qq</text-property>
                     <text-property name="heading">qq</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">alipay</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">alipay</text-property>
                     <text-property name="heading">alipay</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">openid</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">openid</text-property>
                     <text-property name="heading">openid</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">reviewed</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">reviewed</text-property>
                     <text-property name="heading">reviewed</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">identification</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">identification</text-property>
                     <text-property name="heading">identification</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">invication_code</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">invication_code</text-property>
                     <text-property name="heading">invication_code</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">invicated_from</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">invicated_from</text-property>
                     <text-property name="heading">invicated_from</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">jm_debt</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">jm_debt</text-property>
                     <text-property name="heading">jm_debt</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">supervisor_id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">supervisor_id</text-property>
                     <text-property name="heading">supervisor_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">wechat</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">wechat</text-property>
                     <text-property name="heading">wechat</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">bbs_username</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">bbs_username</text-property>
                     <text-property name="heading">bbs_username</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">alipay_relate_user</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">alipay_relate_user</text-property>
                     <text-property name="heading">alipay_relate_user</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">rc_user_id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">rc_user_id</text-property>
                     <text-property name="heading">rc_user_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">sex</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">sex</text-property>
                     <text-property name="heading">sex</text-property>
                 </structure>
@@ -2548,77 +2575,6 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <cell id="172"/>
                     <cell id="173"/>
                     <cell id="174"/>
-                </row>
-            </footer>
-        </table>
-        <table id="191">
-            <property name="dataSet">ds_001</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">id</property>
-                    <text-property name="displayName">id</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="name">address</property>
-                    <text-property name="displayName">address</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["address"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">phone</property>
-                    <text-property name="displayName">phone</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["phone"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <column id="210"/>
-            <column id="211"/>
-            <column id="212"/>
-            <header>
-                <row id="192">
-                    <cell id="193">
-                        <label id="194">
-                            <text-property name="text">id</text-property>
-                        </label>
-                    </cell>
-                    <cell id="195">
-                        <label id="196">
-                            <text-property name="text">address</text-property>
-                        </label>
-                    </cell>
-                    <cell id="197">
-                        <label id="198">
-                            <text-property name="text">phone</text-property>
-                        </label>
-                    </cell>
-                </row>
-            </header>
-            <detail>
-                <row id="199">
-                    <cell id="200">
-                        <data id="201">
-                            <property name="resultSetColumn">id</property>
-                        </data>
-                    </cell>
-                    <cell id="202">
-                        <data id="203">
-                            <property name="resultSetColumn">address</property>
-                        </data>
-                    </cell>
-                    <cell id="204">
-                        <data id="205">
-                            <property name="resultSetColumn">phone</property>
-                        </data>
-                    </cell>
-                </row>
-            </detail>
-            <footer>
-                <row id="206">
-                    <cell id="207"/>
-                    <cell id="208"/>
-                    <cell id="209"/>
                 </row>
             </footer>
         </table>
