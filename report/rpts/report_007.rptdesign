@@ -243,7 +243,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="name">send_out_count</property>
                     <property name="nativeName">send_out_count</property>
                     <property name="dataType">decimal</property>
-                    <property name="nativeDataType">3</property>
+                    <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
@@ -283,8 +283,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </list-property>
             <xml-property name="queryText"><![CDATA[select orders.`coordinator_id`,
        users.`username`,
-       count(DISTINCT(orders.device_id+ date(`orders` .assigned_at))) as `assign_count`,
-       sum(orders.`state`in('已发货，准备收货', '等待配货', '正在配货', '客户签收，订单完成', '客户拒签,原件返回')) as `send_out_count`,
+       count(DISTINCT(concat(orders.device_id, date(`orders` .assigned_at)))) as `assign_count`,
+       count(DISTINCT(ELT(orders.`state`in('已发货，准备收货', '等待配货', '正在配货', '客户签收，订单完成', '客户拒签,原件返回'),concat(orders.device_id, date(`orders` .assigned_at))))) as `send_out_count`,
        sum(orders.`export_to_erp`) as `send_out_shipping_count`,
        sum(shippingorders.`state` in(6, 8)) as `sign_ok_count`,
        sum(shippingorders.`state` in(7, 9)) as `sign_fail_count`,
