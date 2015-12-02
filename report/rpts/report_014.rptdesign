@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">柳溪</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【广告统计】APP时段激活用户</text-property>
+    <text-property name="title">【广告统计】APP时段用户APP列表排名</text-property>
     <html-property name="description">显示在特定时间段内，app的新增激活用户数目</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
@@ -1235,6 +1235,77 @@ where name like '首趣坑_%']]></xml-property>
                             <property name="resultSetColumn">Aggregation_1</property>
                         </data>
                     </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="309">
+            <property name="dataSet">ds_001</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">app_package</property>
+                    <text-property name="displayName">app_package</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_package"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_name</property>
+                    <text-property name="displayName">app_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_count</property>
+                    <text-property name="displayName">app_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <column id="328"/>
+            <column id="329"/>
+            <column id="330"/>
+            <header>
+                <row id="310">
+                    <cell id="311">
+                        <label id="312">
+                            <text-property name="text">app_package</text-property>
+                        </label>
+                    </cell>
+                    <cell id="313">
+                        <label id="314">
+                            <text-property name="text">app_name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="315">
+                        <label id="316">
+                            <text-property name="text">app_count</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="317">
+                    <cell id="318">
+                        <data id="319">
+                            <property name="resultSetColumn">app_package</property>
+                        </data>
+                    </cell>
+                    <cell id="320">
+                        <data id="321">
+                            <property name="resultSetColumn">app_name</property>
+                        </data>
+                    </cell>
+                    <cell id="322">
+                        <data id="323">
+                            <property name="resultSetColumn">app_count</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="324">
+                    <cell id="325"/>
+                    <cell id="326"/>
+                    <cell id="327"/>
                 </row>
             </footer>
         </table>
