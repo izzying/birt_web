@@ -23,6 +23,10 @@
             <property name="valueType">static</property>
             <property name="dataType">dateTime</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var date = new Date(new Date().getTime()-24*60*60*1000);
+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -37,12 +41,16 @@
             <property name="valueType">static</property>
             <property name="dataType">dateTime</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var date = new Date();
+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Custom</property>
-                <property name="pattern">Custom: yyyy-MM-dd HH:mm:ss</property>
+                <property name="pattern">yyyy-MM-dd HH:mm:ss</property>
             </structure>
         </scalar-parameter>
     </parameters>
