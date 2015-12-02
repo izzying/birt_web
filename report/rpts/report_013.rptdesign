@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">柳溪</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <text-property name="title">【广告统计】APP时段激活用户</text-property>
+    <html-property name="description">显示在特定时间段内，app的新增激活用户数目</html-property>
+    <property name="units">in</property>
+    <property name="theme">common.defaultTheme</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">72</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">common.rptlibrary</property>
+            <property name="namespace">common</property>
+        </structure>
+    </list-property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://blsmshop.mysql.rds.aliyuncs.com:3306/adultshop_production</property>
+            <property name="odaUser">staging_user</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c3RhZ2luZzEyMDc=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ds_001" id="55">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">app_id</property>
+                    <text-property name="displayName">app_id</text-property>
+                    <text-property name="heading">app_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">app_name</property>
+                    <text-property name="displayName">app_name</text-property>
+                    <text-property name="heading">app_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">active_num</property>
+                    <text-property name="displayName">active_num</text-property>
+                    <text-property name="heading">active_num</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">app_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">app_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">active_num</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">app_id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">app_name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">active_num</property>
+                    <property name="nativeName">active_num</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select applications.id as app_id,applications.name as app_name,count(1) as active_num from tmp_ad_devices 
+inner join applications on applications.id=tmp_ad_devices.application_id
+where (tmp_ad_devices.created_at between '2015-12-01' and '2015-12-03')
+group by tmp_ad_devices.application_id]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>app_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>app_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>app_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>app_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>active_num</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>21</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>active_num</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>active_num</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="56">
+            <property name="dataSet">ds_001</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">app_name</property>
+                    <text-property name="displayName">app_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">active_num</property>
+                    <text-property name="displayName">active_num</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["active_num"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["active_num"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="70"/>
+            <column id="71"/>
+            <header>
+                <row id="57">
+                    <cell id="58">
+                        <label id="59">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">APP客户端名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="60">
+                        <label id="61">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">激活数目</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="62">
+                    <cell id="63">
+                        <data id="64">
+                            <property name="resultSetColumn">app_name</property>
+                        </data>
+                    </cell>
+                    <cell id="65">
+                        <data id="66">
+                            <property name="resultSetColumn">active_num</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="67">
+                    <cell id="68">
+                        <label id="72">
+                            <text-property name="text">合计</text-property>
+                        </label>
+                    </cell>
+                    <cell id="69">
+                        <data id="73">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
