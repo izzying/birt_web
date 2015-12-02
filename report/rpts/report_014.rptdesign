@@ -195,7 +195,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
        `tmp_ad_device_apps` .app_name,
        count(1) as app_count
   FROM `tmp_ad_device_apps`
-  INNER JOIN `tmp_ad_devices` on `tmp_ad_devices` .application_id= ?
+  INNER JOIN `tmp_ad_devices` on  `tmp_ad_devices` .id = tmp_ad_device_apps.`tmp_ad_device_id`  and `tmp_ad_devices` .application_id= ?
  where(tmp_ad_devices.created_at between ?
    and ?)
  GROUP BY `tmp_ad_device_apps` .app_package
