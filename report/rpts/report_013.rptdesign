@@ -166,7 +166,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
             <xml-property name="queryText"><![CDATA[select applications.id as app_id,applications.name as app_name,count(1) as active_num from tmp_ad_devices 
 inner join applications on applications.id=tmp_ad_devices.application_id
 where (tmp_ad_devices.created_at between ? and ?)
-group by tmp_ad_devices.application_id]]></xml-property>
+group by tmp_ad_devices.application_id order by active_num desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
