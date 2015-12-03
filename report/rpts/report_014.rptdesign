@@ -24,8 +24,8 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">var date = new Date(new Date().getTime()-24*60*60*1000);
-date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()</value>
+                <value type="javascript">var date = new Date();
+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" 00:00:00"</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
