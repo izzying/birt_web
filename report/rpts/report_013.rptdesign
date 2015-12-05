@@ -163,10 +163,14 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select applications.id as app_id,applications.name as app_name,count(1) as active_num from tmp_ad_devices 
+            <xml-property name="queryText"><![CDATA[select applications.id as app_id,
+applications.name as app_name,
+count(1) as active_num 
+from tmp_ad_devices 
 inner join applications on applications.id=tmp_ad_devices.application_id
 where (tmp_ad_devices.created_at between ? and ?)
-group by tmp_ad_devices.application_id order by active_num desc]]></xml-property>
+group by tmp_ad_devices.application_id 
+order by active_num desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -325,11 +329,25 @@ group by tmp_ad_devices.application_id order by active_num desc]]></xml-property
                     <expression name="expression" type="javascript">dataSetRow["app_id"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="281"/>
             <column id="70"/>
             <column id="71"/>
+            <column id="287"/>
             <header>
                 <row id="57">
+                    <cell id="278">
+                        <label id="282">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="58">
                         <label id="59">
                             <property name="textAlign">left</property>
@@ -342,10 +360,21 @@ group by tmp_ad_devices.application_id order by active_num desc]]></xml-property
                             <text-property name="text">激活数目</text-property>
                         </label>
                     </cell>
+                    <cell id="284">
+                        <label id="289">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">其他操作</text-property>
+                        </label>
+                    </cell>
                 </row>
             </header>
             <detail>
                 <row id="62">
+                    <cell id="279">
+                        <data id="283">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="63">
                         <data id="64">
                             <property name="resultSetColumn">app_name</property>
@@ -356,8 +385,18 @@ group by tmp_ad_devices.application_id order by active_num desc]]></xml-property
                             <property name="resultSetColumn">active_num</property>
                             <list-property name="action">
                                 <structure>
+                                    <property name="linkType">none</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="285">
+                        <label id="295">
+                            <property name="display">inline</property>
+                            <text-property name="text">用户APP列表</text-property>
+                            <list-property name="action">
+                                <structure>
                                     <property name="linkType">drill-through</property>
-                                    <property name="toolTip">点击查看当前APP在当前时段用户手机应用列表排名</property>
                                     <property name="reportName">report_014.rptdesign</property>
                                     <property name="targetWindow">_blank</property>
                                     <property name="targetFileType">report-design</property>
@@ -383,22 +422,56 @@ group by tmp_ad_devices.application_id order by active_num desc]]></xml-property
                                     </list-property>
                                 </structure>
                             </list-property>
-                        </data>
+                        </label>
+                        <label id="296">
+                            <property name="display">inline</property>
+                            <text-property name="text">渠道详情</text-property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">report_015.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">create_start</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["create_start"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">create_end</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["create_end"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">application_id</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["app_id"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
+                        </label>
                     </cell>
                 </row>
             </detail>
             <footer>
                 <row id="67">
-                    <cell id="68">
+                    <cell id="280">
                         <label id="72">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="68"/>
                     <cell id="69">
                         <data id="73">
                             <property name="resultSetColumn">Aggregation</property>
                         </data>
                     </cell>
+                    <cell id="286"/>
                 </row>
             </footer>
         </table>
