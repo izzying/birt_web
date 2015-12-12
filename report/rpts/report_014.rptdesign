@@ -101,18 +101,27 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     <property name="columnName">app_package</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">app_package</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">app_package</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">app_name</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">app_name</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">app_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">scan_result</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">scan_result</text-property>
+                    <text-property name="heading">scan_result</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">app_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">app_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">app_count</text-property>
                 </structure>
             </list-property>
@@ -162,6 +171,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">scan_result</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">app_count</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -185,6 +199,13 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                 </structure>
                 <structure>
                     <property name="position">3</property>
+                    <property name="name">scan_result</property>
+                    <property name="nativeName">scan_result</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">app_count</property>
                     <property name="nativeName">app_count</property>
                     <property name="dataType">decimal</property>
@@ -193,13 +214,15 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT `tmp_ad_device_apps` .app_package,
        `tmp_ad_device_apps` .app_name,
+       `tmp_ad_apps`.scan_result,
        count(1) as app_count
   FROM `tmp_ad_device_apps`
   INNER JOIN `tmp_ad_devices` on  `tmp_ad_devices` .id = tmp_ad_device_apps.`tmp_ad_device_id`  and `tmp_ad_devices` .application_id= ?
+  inner join `tmp_ad_apps` on `tmp_ad_apps`.app_package=`tmp_ad_device_apps`.app_package 
  where(tmp_ad_devices.created_at between ?
    and ?)
  GROUP BY `tmp_ad_device_apps` .app_package
- order by app_count desc]]></xml-property>
+ order by `tmp_ad_apps`.scan_result='ad' desc ,app_count desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1171,6 +1194,12 @@ where name like '首趣坑_%']]></xml-property>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">scan_result</property>
+                    <text-property name="displayName">scan_result</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["scan_result"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <column id="300"/>
             <column id="299">
@@ -1203,6 +1232,16 @@ where name like '首趣坑_%']]></xml-property>
                 <row id="288">
                     <cell id="291">
                         <data id="292">
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">eq</property>
+                                    <expression name="testExpr" type="javascript">row["scan_result"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">'ad'</value>
+                                    </simple-property-list>
+                                    <property name="style">s-highlight-label</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">app_name</property>
                         </data>
                     </cell>
