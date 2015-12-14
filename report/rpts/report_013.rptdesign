@@ -924,7 +924,7 @@ select `application_id` as app_id, sum(install_count) as install_num
   </SampleData>
   <Interactivity>
     <Enable>true</Enable>
-    <LegendBehavior>None</LegendBehavior>
+    <LegendBehavior>ToggleSerieVisibility</LegendBehavior>
   </Interactivity>
   <EmptyMessage>
     <Caption>
