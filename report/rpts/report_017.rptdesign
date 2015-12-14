@@ -793,6 +793,10 @@ group by scan_result]]></xml-property>
           <Type>URL_Redirect</Type>
           <Value xsi:type="attribute:MultiURLValues">
             <PropertiesMap>
+              <Key>MenuItem</Key>
+              <Value>color:Black;fontSize:10pt;paddingLeft:10px;paddingRight:10px;paddingTop:2px;paddingBottom:2px</Value>
+            </PropertiesMap>
+            <PropertiesMap>
               <Key>Menu</Key>
               <Value>zIndex:99999;backgroundColor:#FAFFF8;width:auto;height:auto;border:1px solid #333333;filter:progid:DXImageTransform.Microsoft.Shadow(Color:#333333,Direction=120,strength=5)</Value>
             </PropertiesMap>
@@ -803,10 +807,6 @@ group by scan_result]]></xml-property>
             <PropertiesMap>
               <Key>OnMouseOver</Key>
               <Value>backgroundColor:#245DDB;color:#FFFFFF</Value>
-            </PropertiesMap>
-            <PropertiesMap>
-              <Key>MenuItem</Key>
-              <Value>color:Black;fontSize:10pt;paddingLeft:10px;paddingRight:10px;paddingTop:2px;paddingBottom:2px</Value>
             </PropertiesMap>
           </Value>
         </Action>
@@ -884,7 +884,7 @@ group by scan_result]]></xml-property>
           <Bottom>0.0</Bottom>
           <Right>3.0</Right>
         </Insets>
-        <Visible>true</Visible>
+        <Visible>false</Visible>
       </Title>
       <TitlePosition>Above</TitlePosition>
     </Children>
@@ -941,7 +941,7 @@ group by scan_result]]></xml-property>
   </SampleData>
   <Interactivity>
     <Enable>true</Enable>
-    <LegendBehavior>ToggleSerieVisibility</LegendBehavior>
+    <LegendBehavior>None</LegendBehavior>
   </Interactivity>
   <EmptyMessage>
     <Caption>
