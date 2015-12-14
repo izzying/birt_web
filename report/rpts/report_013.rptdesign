@@ -1120,7 +1120,7 @@ order by active_num desc]]></xml-property>
             <Visible>true</Visible>
           </Label>
           <DataDefinition>
-            <Definition>row[&quot;active_num&quot;]</Definition>
+            <Definition>BirtMath.round(row[&quot;active_num&quot;]/row[&quot;Aggregation&quot;]*100,2)</Definition>
             <Grouping>
               <Enabled>true</Enabled>
               <GroupType>Text</GroupType>
@@ -1654,6 +1654,18 @@ order by active_num desc]]></xml-property>
                     <text-property name="displayName">active_num</text-property>
                     <expression name="expression" type="javascript">dataSetRow["active_num"]</expression>
                     <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["active_num"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
         </extended-item>
