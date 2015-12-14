@@ -97,6 +97,12 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     <text-property name="displayName">active_num</text-property>
                     <text-property name="heading">active_num</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">install_num</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">install_num</text-property>
+                    <text-property name="heading">install_num</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -119,6 +125,26 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">create_start</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">-1</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_4</property>
+                    <property name="paramName">create_end</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">-1</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -137,6 +163,11 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                         <property name="name">active_num</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">install_num</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -144,14 +175,14 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                 <structure>
                     <property name="position">1</property>
                     <property name="name">app_id</property>
-                    <property name="nativeName">id</property>
+                    <property name="nativeName">app_id</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
                     <property name="name">app_name</property>
-                    <property name="nativeName">name</property>
+                    <property name="nativeName">app_name</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
@@ -162,15 +193,30 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">install_num</property>
+                    <property name="nativeName">install_num</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select applications.id as app_id,
-applications.name as app_name,
-count(1) as active_num 
-from tmp_ad_devices 
-inner join applications on applications.id=tmp_ad_devices.application_id
-where (tmp_ad_devices.created_at between ? and ?)
-group by tmp_ad_devices.application_id 
-order by active_num desc]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select a.*,
+       b.install_num
+  from(
+select applications.id as app_id, applications.name as app_name, count(1) as active_num
+  from tmp_ad_devices
+  inner join applications on applications.id= tmp_ad_devices.application_id
+ where(tmp_ad_devices.created_at between ?
+   and ?)
+ group by tmp_ad_devices.application_id
+ order by active_num desc) as a
+  left join(
+select `application_id` as app_id, sum(install_count) as install_num
+  from `adv_statistics`
+ where(adv_statistics.created_at between ?
+   and ?)
+ GROUP BY `application_id`) as b on a.app_id= b.app_id]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -197,6 +243,36 @@ order by active_num desc]]></xml-property>
           <design:identifier>
             <design:name></design:name>
             <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
           </design:identifier>
           <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
           <design:precision>0</design:precision>
@@ -335,10 +411,42 @@ order by active_num desc]]></xml-property>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">install_num</property>
+                    <expression name="expression" type="javascript">dataSetRow["install_num"]</expression>
+                    <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["install_num"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["install_num"]/row["active_num"]*100,2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_1"]/row["Aggregation"]*100,2)+"%"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="281"/>
             <column id="70"/>
             <column id="71"/>
+            <column id="301"/>
+            <column id="308"/>
             <column id="287"/>
             <header>
                 <row id="57">
@@ -357,7 +465,19 @@ order by active_num desc]]></xml-property>
                     <cell id="60">
                         <label id="61">
                             <property name="textAlign">left</property>
-                            <text-property name="text">激活数目</text-property>
+                            <text-property name="text">APP激活用户</text-property>
+                        </label>
+                    </cell>
+                    <cell id="298">
+                        <label id="302">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">广告安装数</text-property>
+                        </label>
+                    </cell>
+                    <cell id="305">
+                        <label id="309">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">安装转化率</text-property>
                         </label>
                     </cell>
                     <cell id="284">
@@ -388,6 +508,16 @@ order by active_num desc]]></xml-property>
                                     <property name="linkType">none</property>
                                 </structure>
                             </list-property>
+                        </data>
+                    </cell>
+                    <cell id="299">
+                        <data id="303">
+                            <property name="resultSetColumn">install_num</property>
+                        </data>
+                    </cell>
+                    <cell id="306">
+                        <data id="311">
+                            <property name="resultSetColumn">Column Binding_1</property>
                         </data>
                     </cell>
                     <cell id="285">
@@ -469,6 +599,16 @@ order by active_num desc]]></xml-property>
                     <cell id="69">
                         <data id="73">
                             <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="300">
+                        <data id="304">
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="307">
+                        <data id="313">
+                            <property name="resultSetColumn">Column Binding_2</property>
                         </data>
                     </cell>
                     <cell id="286"/>
@@ -1120,7 +1260,7 @@ order by active_num desc]]></xml-property>
             <Visible>true</Visible>
           </Label>
           <DataDefinition>
-            <Definition>BirtMath.round(row[&quot;active_num&quot;]/row[&quot;Aggregation&quot;]*100,2)</Definition>
+            <Definition>row[&quot;active_num&quot;]</Definition>
             <Grouping>
               <Enabled>true</Enabled>
               <GroupType>Text</GroupType>
@@ -1131,11 +1271,6 @@ order by active_num desc]]></xml-property>
           <DataPoint>
             <Components>
               <Type>Orthogonal_Value</Type>
-              <FormatSpecifier xsi:type="attribute:NumberFormatSpecifier">
-                <Prefix></Prefix>
-                <Suffix>%</Suffix>
-                <FractionDigits>1</FractionDigits>
-              </FormatSpecifier>
             </Components>
             <Separator>, </Separator>
           </DataPoint>
