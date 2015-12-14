@@ -1200,7 +1200,14 @@ where name like '首趣坑_%']]></xml-property>
                     <expression name="expression" type="javascript">dataSetRow["scan_result"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="312"/>
             <column id="300"/>
             <column id="299">
                 <property name="repeat">1</property>
@@ -1208,6 +1215,12 @@ where name like '首趣坑_%']]></xml-property>
             <column id="301"/>
             <header>
                 <row id="281">
+                    <cell id="309">
+                        <label id="313">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="284">
                         <label id="285">
                             <property name="textAlign">left</property>
@@ -1230,6 +1243,11 @@ where name like '首趣坑_%']]></xml-property>
             </header>
             <detail>
                 <row id="288">
+                    <cell id="310">
+                        <data id="314">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="291">
                         <data id="292">
                             <list-property name="highlightRules">
@@ -1259,6 +1277,7 @@ where name like '首趣坑_%']]></xml-property>
             </detail>
             <footer>
                 <row id="295">
+                    <cell id="311"/>
                     <cell id="297">
                         <label id="306">
                             <text-property name="text">合计</text-property>
