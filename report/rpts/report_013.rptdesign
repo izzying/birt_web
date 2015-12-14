@@ -512,7 +512,7 @@ order by active_num desc]]></xml-property>
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>APP客户端激活用户对比图</Value>
+          <Value>各APP数据详情</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -696,7 +696,7 @@ order by active_num desc]]></xml-property>
       <ItemType>Categories</ItemType>
       <Title>
         <Caption>
-          <Value></Value>
+          <Value>分类</Value>
           <Font>
             <Alignment/>
           </Font>
@@ -724,7 +724,7 @@ order by active_num desc]]></xml-property>
           <Bottom>0.0</Bottom>
           <Right>3.0</Right>
         </Insets>
-        <Visible>false</Visible>
+        <Visible>true</Visible>
       </Title>
       <TitlePosition>Above</TitlePosition>
     </Children>
@@ -768,7 +768,7 @@ order by active_num desc]]></xml-property>
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
@@ -780,7 +780,7 @@ order by active_num desc]]></xml-property>
   </SampleData>
   <Interactivity>
     <Enable>true</Enable>
-    <LegendBehavior>HighlightSerie</LegendBehavior>
+    <LegendBehavior>None</LegendBehavior>
   </Interactivity>
   <EmptyMessage>
     <Caption>
@@ -1117,10 +1117,10 @@ order by active_num desc]]></xml-property>
               <Bottom>0.0</Bottom>
               <Right>3.0</Right>
             </Insets>
-            <Visible>false</Visible>
+            <Visible>true</Visible>
           </Label>
           <DataDefinition>
-            <Definition>BirtMath.round(row[&quot;active_num&quot;]*100,2)</Definition>
+            <Definition>row[&quot;active_num&quot;]</Definition>
             <Grouping>
               <Enabled>true</Enabled>
               <GroupType>Text</GroupType>
@@ -1633,8 +1633,8 @@ order by active_num desc]]></xml-property>
             <property name="display">inline</property>
             <property name="pageBreakBefore">auto</property>
             <property name="pageBreakAfter">auto</property>
-            <property name="height">4.194444444444445in</property>
-            <property name="width">7.958333333333333in</property>
+            <property name="height">4.208333333333333in</property>
+            <property name="width">8.180555555555555in</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
