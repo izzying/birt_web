@@ -2,8 +2,8 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">mumaoxi</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【广告统计】广告扫描进度</text-property>
-    <html-property name="description">【广告统计】广告扫描进度统计</html-property>
+    <text-property name="title">【广告统计】APP广告扫描进度</text-property>
+    <html-property name="description">【广告统计】APP广告扫描进度统计</html-property>
     <list-property name="userProperties">
         <structure>
             <property name="name">dc_001.ds_001.x</property>
@@ -565,7 +565,7 @@ group by scan_result]]></xml-property>
                     <cell id="260">
                         <label id="261">
                             <property name="textAlign">left</property>
-                            <text-property name="text">所有广告</text-property>
+                            <text-property name="text">所有APP</text-property>
                         </label>
                     </cell>
                     <cell id="262">
