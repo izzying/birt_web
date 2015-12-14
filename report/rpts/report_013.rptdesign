@@ -1633,8 +1633,8 @@ order by active_num desc]]></xml-property>
             <property name="display">inline</property>
             <property name="pageBreakBefore">auto</property>
             <property name="pageBreakAfter">auto</property>
-            <property name="height">4.208333333333333in</property>
-            <property name="width">8.180555555555555in</property>
+            <property name="height">4.069444444444445in</property>
+            <property name="width">1024px</property>
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
                 <structure>
