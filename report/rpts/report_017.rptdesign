@@ -512,7 +512,7 @@
                 </row>
             </detail>
         </table>
-        <extended-item extensionName="Chart" id="320">
+        <extended-item extensionName="Chart" id="52">
             <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.6.1</Version>
   <Type>Pie Chart</Type>
@@ -549,7 +549,7 @@
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>扫描进度</Value>
+          <Value>扫描进度对比</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -741,8 +741,8 @@
     <Bounds>
       <Left>0.0</Left>
       <Top>0.0</Top>
-      <Width>0.0</Width>
-      <Height>0.0</Height>
+      <Width>571.0</Width>
+      <Height>285.5</Height>
     </Bounds>
     <Insets>
       <Top>3.0</Top>
@@ -768,6 +768,8 @@
     <Visible>true</Visible>
   </Block>
   <Dimension>Two_Dimensional</Dimension>
+  <Script>
+</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <GridColumnCount>0</GridColumnCount>
@@ -777,12 +779,15 @@
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
-      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
     </BaseSampleData>
     <OrthogonalSampleData>
       <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
       <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
     </OrthogonalSampleData>
+    <AncillarySampleData>
+      <DataSetRepresentation>Series 1</DataSetRepresentation>
+    </AncillarySampleData>
   </SampleData>
   <Interactivity/>
   <EmptyMessage>
@@ -1234,13 +1239,14 @@
             <Bottom>0.0</Bottom>
             <Right>3.0</Right>
           </Insets>
-          <Visible>false</Visible>
+          <Visible>true</Visible>
         </Label>
         <DataDefinition>
           <Definition>row[&quot;total&quot;]</Definition>
           <Grouping>
+            <Enabled>true</Enabled>
             <GroupType>Text</GroupType>
-            <AggregateExpression>Sum</AggregateExpression>
+            <AggregateExpression>Min</AggregateExpression>
           </Grouping>
         </DataDefinition>
         <DataPoint>
@@ -1293,7 +1299,7 @@
             <Bottom>0.0</Bottom>
             <Right>3.0</Right>
           </Insets>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
         </Title>
         <TitlePosition>Below</TitlePosition>
         <LeaderLineAttributes>
@@ -1345,7 +1351,6 @@
       <DataDefinition>
         <Definition>row[&quot;total&quot;]</Definition>
       </DataDefinition>
-      <SeriesIdentifier></SeriesIdentifier>
       <DataPoint>
         <Components>
           <Type>Orthogonal_Value</Type>
@@ -1361,14 +1366,16 @@
       <AggregateExpression>Sum</AggregateExpression>
     </Grouping>
   </SeriesDefinitions>
+  <MinSlice>0.0</MinSlice>
+  <MinSlicePercent>false</MinSlicePercent>
 </model:ChartWithoutAxes>
 ]]></xml-property>
             <property name="outputFormat">SVG</property>
-            <property name="inheritColumns">false</property>
+            <property name="inheritColumns">true</property>
             <property name="pageBreakBefore">auto</property>
             <property name="pageBreakAfter">auto</property>
-            <property name="height">2.4305555555555554in</property>
-            <property name="width">7.972222222222222in</property>
+            <property name="height">350px</property>
+            <property name="width">600px</property>
             <property name="dataSet">ds_002</property>
             <list-property name="boundDataColumns">
                 <structure>
