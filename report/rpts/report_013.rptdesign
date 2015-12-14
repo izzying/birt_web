@@ -215,7 +215,7 @@ select applications.id as app_id, applications.name as app_name, count(1) as act
 select `application_id` as app_id, sum(install_count) as install_num
   from `adv_statistics`
  where(adv_statistics.created_at between ?
-   and ?)
+   and ?) and `adv_content_id` >0   
  GROUP BY `application_id`) as b on a.app_id= b.app_id]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
