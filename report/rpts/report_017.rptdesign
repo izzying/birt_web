@@ -829,7 +829,7 @@ group by scan_result]]></xml-property>
       <ItemType>Categories</ItemType>
       <Title>
         <Caption>
-          <Value></Value>
+          <Value>分类</Value>
           <Font>
             <Alignment/>
           </Font>
@@ -857,7 +857,7 @@ group by scan_result]]></xml-property>
           <Bottom>0.0</Bottom>
           <Right>3.0</Right>
         </Insets>
-        <Visible>false</Visible>
+        <Visible>true</Visible>
       </Title>
       <TitlePosition>Above</TitlePosition>
     </Children>
@@ -898,7 +898,7 @@ group by scan_result]]></xml-property>
   <GridColumnCount>0</GridColumnCount>
   <ExtendedProperties>
     <Name>enable.area.alt</Name>
-    <Value>false</Value>
+    <Value>true</Value>
   </ExtendedProperties>
   <SampleData>
     <BaseSampleData>
@@ -912,7 +912,10 @@ group by scan_result]]></xml-property>
       <DataSetRepresentation>Series 1</DataSetRepresentation>
     </AncillarySampleData>
   </SampleData>
-  <Interactivity/>
+  <Interactivity>
+    <Enable>true</Enable>
+    <LegendBehavior>HighlightSerie</LegendBehavior>
+  </Interactivity>
   <EmptyMessage>
     <Caption>
       <Value>This chart contains no data.</Value>
@@ -1798,7 +1801,9 @@ group by scan_result]]></xml-property>
       <DataSetRepresentation>Series 1</DataSetRepresentation>
     </AncillarySampleData>
   </SampleData>
-  <Interactivity/>
+  <Interactivity>
+    <LegendBehavior>ToggleSerieVisibility</LegendBehavior>
+  </Interactivity>
   <EmptyMessage>
     <Caption>
       <Value>This chart contains no data.</Value>
