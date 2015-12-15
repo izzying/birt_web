@@ -27,6 +27,7 @@ public class BirtServlet extends MumaoxiServlet {
         resp.getWriter().append("getServletPath:" + req.getServletPath() + "<br>");
         resp.getWriter().append("getContextPath:" + req.getContextPath() + "<br>");
         resp.getWriter().append("pathInfo:" + pathInfo + "<br>");
+        resp.getWriter().append("serverName:" + req.getServerName()+ "<br>");
 
 
         if ("/birts/new".equalsIgnoreCase(pathInfo)) {
