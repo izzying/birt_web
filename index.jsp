@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Birt报表首页</title>
-    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon rel="shortcut icon">
+    <link href="<%= request.getContextPath( )%>/webcontent/mumaoxi/images/report.ico" type=image/x-icon
+          rel="shortcut icon">
     <style>
         .warningMessage {
             color: red;
@@ -114,6 +115,7 @@
         var left = (windowWidth - width) / 2;
         window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
     });
+    $("[data-js-href]").click();//自动跳转到首页
 </script>
 </body>
 </html>
