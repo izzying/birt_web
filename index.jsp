@@ -115,7 +115,7 @@
         var left = (windowWidth - width) / 2;
         window.open(jQuery(this).data('js-href'), "birt", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=" + left + ", width=" + width + ", height=" + height);
     });
-    $("[data-js-href]").click();//自动跳转到首页
+    window.location.href = "<%= request.getContextPath( ) + "/birts" %>"; //自动跳转到首页
 </script>
 </body>
 </html>
