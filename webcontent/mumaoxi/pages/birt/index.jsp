@@ -56,10 +56,12 @@
             <tr>
                 <td><%=report.getId()%>
                 </td>
-                <a href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>" target="_blank">
+                <td>
+                    <a href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
+                       target="_blank">
                     <span data-toggle="tooltip" data-placement="top"
                           title="<%=report.getDescription()%>"><%=report.getTitle() != null ? report.getTitle() : report.getFileName()%></span>
-                </a>
+                    </a>
                 </td>
                 <td><%=report.getAuthor()%>
                 </td>
