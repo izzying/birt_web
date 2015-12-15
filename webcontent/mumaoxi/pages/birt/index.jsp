@@ -26,12 +26,17 @@
 <body>
 <div class="container">
     <br>
+
     <div class="alert alert-warning">
         <h4>重要公告：查看报表前，请务必仔细阅读这些规则</h4>
         <hr>
         <p>【商城】：报表名称以<strong class="text-danger">【商城】</strong>开始，数据不包含<strong class="text-danger">优店</strong>统计数据。</p>
+
         <p>【优店】：报表名称以<strong class="text-danger">【优店】</strong>开始，数据不包含<strong class="text-danger">商城</strong>统计数据。</p>
-        <p>【首趣】：报表名称以<strong class="text-danger">【首趣】</strong>开始，数据包含<strong class="text-danger">商城</strong>和<strong class="text-danger">优店</strong>统计数据。</p>
+
+        <p>【首趣】：报表名称以<strong class="text-danger">【首趣】</strong>开始，数据包含<strong class="text-danger">商城</strong>和<strong
+                class="text-danger">优店</strong>统计数据。</p>
+
         <p class="text-right">---- 2015年10月30日</p>
     </div>
     <div class="panel panel-info">
@@ -51,8 +56,10 @@
             <tr>
                 <td><%=report.getId()%>
                 </td>
-                <td><span data-toggle="tooltip" data-placement="top"
+                <a href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>" target="_blank">
+                    <span data-toggle="tooltip" data-placement="top"
                           title="<%=report.getDescription()%>"><%=report.getTitle() != null ? report.getTitle() : report.getFileName()%></span>
+                </a>
                 </td>
                 <td><%=report.getAuthor()%>
                 </td>
@@ -60,7 +67,7 @@
                 <th>
                     <a class="btn btn-xs btn-default" target="_blank"
                        href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>"
-                       data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看
+                       data-js-href="<%= request.getContextPath( )%>/frameset?__report=<%=report.getFileName()%>">查看详情
                     </a>
                 </th>
             </tr>
