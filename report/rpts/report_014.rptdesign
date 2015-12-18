@@ -1261,6 +1261,14 @@ where name like '首趣坑_%']]></xml-property>
                                 </structure>
                             </list-property>
                             <property name="resultSetColumn">app_name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">查看应用详情</property>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row["app_package"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="289">
@@ -1277,12 +1285,12 @@ where name like '首趣坑_%']]></xml-property>
             </detail>
             <footer>
                 <row id="295">
-                    <cell id="311"/>
-                    <cell id="297">
+                    <cell id="311">
                         <label id="306">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="297"/>
                     <cell id="296">
                         <data id="307">
                             <property name="resultSetColumn">Aggregation</property>
