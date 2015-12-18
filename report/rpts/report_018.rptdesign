@@ -554,7 +554,14 @@ select `users`.`id` as user_id,
                     <expression name="expression" type="javascript">dataSetRow["vd_role"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="428"/>
             <column id="400"/>
             <column id="421"/>
             <column id="401"/>
@@ -563,6 +570,11 @@ select `users`.`id` as user_id,
             <column id="403"/>
             <header>
                 <row id="371">
+                    <cell id="425">
+                        <label id="429">
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="374">
                         <label id="375">
                             <property name="textAlign">left</property>
@@ -603,6 +615,11 @@ select `users`.`id` as user_id,
             </header>
             <detail>
                 <row id="382">
+                    <cell id="426">
+                        <data id="430">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="385">
                         <image id="424">
                             <property name="display">inline</property>
@@ -653,11 +670,12 @@ select `users`.`id` as user_id,
             </detail>
             <footer>
                 <row id="393">
-                    <cell id="395">
+                    <cell id="427">
                         <label id="404">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="395"/>
                     <cell id="420"/>
                     <cell id="396">
                         <data id="405">
