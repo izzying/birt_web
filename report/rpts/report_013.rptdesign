@@ -496,8 +496,24 @@ select `application_id` as app_id, sum(install_count) as install_num
                         </data>
                     </cell>
                     <cell id="63">
+                        <image id="314">
+                            <property name="display">inline</property>
+                            <property name="height">15px</property>
+                            <property name="width">15px</property>
+                            <property name="source">url</property>
+                            <expression name="uri" type="javascript">"http://birt.aihuo360.com/myapps/icon?pkg="+row["app_name"].replace(/.*\(/,'').replace(")",'')</expression>
+                        </image>
                         <data id="64">
+                            <property name="display">inline</property>
                             <property name="resultSetColumn">app_name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">应用宝详情</property>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row["app_name"].replace(/.*\(/,'').replace(")",'')</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="65">
