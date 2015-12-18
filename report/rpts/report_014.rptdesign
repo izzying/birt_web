@@ -1249,7 +1249,15 @@ where name like '首趣坑_%']]></xml-property>
                         </data>
                     </cell>
                     <cell id="291">
+                        <image id="317">
+                            <property name="display">inline</property>
+                            <property name="height">15px</property>
+                            <property name="width">15px</property>
+                            <property name="source">url</property>
+                            <expression name="uri" type="javascript">"http://birt.aihuo360.com/myapps/icon?pkg="+row["app_package"]</expression>
+                        </image>
                         <data id="292">
+                            <property name="display">inline</property>
                             <list-property name="highlightRules">
                                 <structure>
                                     <property name="operator">eq</property>

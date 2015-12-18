@@ -37,4 +37,19 @@ public class MumaoxiServlet extends HttpServlet {
         relativeTemplateName = relativeTemplateName.endsWith(".jsp") ? relativeTemplateName : (relativeTemplateName + ".jsp");
         getServletConfig().getServletContext().getRequestDispatcher(layoutPath + relativeTemplateName).forward(req, resp);
     }
+
+    /**
+     * 渲染json数据
+     *
+     * @param req
+     * @param resp
+     * @param jsonString json数据
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void renderJSON(HttpServletRequest req, HttpServletResponse resp, String jsonString) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
+    }
 }

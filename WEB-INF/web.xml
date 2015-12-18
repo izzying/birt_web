@@ -211,6 +211,10 @@
         <servlet-name>BirtServlet</servlet-name>
         <servlet-class>com.mumaoxi.birt.servlet.BirtServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyappServlet</servlet-name>
+        <servlet-class>com.mumaoxi.birt.servlet.MyappServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>ViewerServlet</servlet-name>
@@ -255,6 +259,11 @@
     <servlet-mapping>
         <servlet-name>BirtServlet</servlet-name>
         <url-pattern>/birts/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MyappServlet</servlet-name>
+        <url-pattern>/myapps/*</url-pattern>
     </servlet-mapping>
 
 
