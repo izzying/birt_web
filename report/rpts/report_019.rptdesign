@@ -2,8 +2,8 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="author">lx</property>
     <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
-    <text-property name="title">【优店】团队排行榜</text-property>
-    <html-property name="description">团队排行版</html-property>
+    <text-property name="title">【优店】团队签收额排行榜</text-property>
+    <html-property name="description">团队排行榜</html-property>
     <property name="units">in</property>
     <property name="theme">common.defaultTheme</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -67,15 +67,15 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <list-property name="selectionList">
                 <structure>
                     <property name="value">team_sale_sum</property>
-                    <property name="label">团队销售额</property>
+                    <property name="label">团队签收额</property>
                 </structure>
                 <structure>
                     <property name="value">member_sale_sum</property>
-                    <property name="label">成员销售额</property>
+                    <property name="label">成员签收额</property>
                 </structure>
                 <structure>
                     <property name="value">leader_sale_sum</property>
-                    <property name="label">队长销售额</property>
+                    <property name="label">队长签收额</property>
                 </structure>
                 <structure>
                     <property name="value">team_distribute_sum</property>
@@ -459,7 +459,7 @@ select `vd_teams` .id as team_id, `vd_teams`.name as team_name, `vd_teams`.`user
    and orders.`created_at`< date_add(date(?), INTERVAL 1 DAY)
    and orders.`come_from`= 'Union_App'
    and orders.`client_id` is null
-   and `orders` .export_to_erp= true
+   and `orders`.state='客户签收，订单完成'
    and orders.`deleted_at` is null
  group by `vd_teams` .id) as a
   inner join(
@@ -476,7 +476,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
    and orders.`created_at`< ?
    and orders.`come_from`= 'Union_App'
    and orders.`client_id` is null
-   and `orders` .export_to_erp= true
+   and `orders`.state='客户签收，订单完成'
    and orders.`deleted_at` is null
  group by `vd_teams` .id) as b on a.team_id= b.team_id) as t
   inner join users on users.id= t.leader_id
@@ -682,7 +682,7 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
             <expression name="valueExpr">"开始日期："+params["date_create_start"].value+"&lt;br>"+
 "结束日期："+params["date_create_end"].value+"&lt;br>"+
 "排序按："+params["order_by"].displayText+"&lt;br>"+
-"&lt;span class='text text-danger'>注：以订单创建时间统计，销售额、分销额、积分等已订单已发货为准。&lt;/span>"</expression>
+"&lt;span class='text text-danger'>注：以订单创建时间统计，签收额、分销额、积分等已订单已签收为准。&lt;/span>"</expression>
             <property name="contentType">html</property>
         </text-data>
         <table id="279">
@@ -906,19 +906,19 @@ select `vd_teams` .id as team_id, sum(`line_items` .franchise_price*`line_items`
                     <cell id="287">
                         <label id="288">
                             <property name="textAlign">left</property>
-                            <text-property name="text">团队销售额</text-property>
+                            <text-property name="text">团队签收额</text-property>
                         </label>
                     </cell>
                     <cell id="289">
                         <label id="290">
                             <property name="textAlign">left</property>
-                            <text-property name="text">成员销售额</text-property>
+                            <text-property name="text">成员签收额</text-property>
                         </label>
                     </cell>
                     <cell id="291">
                         <label id="292">
                             <property name="textAlign">left</property>
-                            <text-property name="text">队长销售额</text-property>
+                            <text-property name="text">队长签收额</text-property>
                         </label>
                     </cell>
                     <cell id="293">
