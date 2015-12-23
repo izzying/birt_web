@@ -155,6 +155,42 @@
                     <property name="fontFamily">fantasy</property>
                     <property name="color">#FF0000</property>
                 </style>
+                <style name="table-group-header-1" id="22">
+                    <property name="backgroundColor">#F0F0F0</property>
+                    <property name="borderBottomColor">#DDDDDD</property>
+                    <property name="borderBottomStyle">dotted</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="paddingTop">5px</property>
+                    <property name="paddingLeft">5px</property>
+                    <property name="paddingBottom">5px</property>
+                    <property name="paddingRight">5px</property>
+                </style>
+                <style name="table-group-header-cell" id="23">
+                    <property name="fontFamily">"Kokonor"</property>
+                    <property name="fontSize">larger</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                </style>
+                <style name="table-group-footer-cell" id="24">
+                    <property name="fontSize">12pt</property>
+                    <property name="fontStyle">italic</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">underline</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                </style>
+                <style name="table-group-footer-1" id="25">
+                    <property name="backgroundColor">#FEFEFE</property>
+                    <property name="borderBottomColor">#DDDDDD</property>
+                    <property name="borderBottomStyle">dotted</property>
+                    <property name="borderBottomWidth">1px</property>
+                </style>
             </styles>
         </theme>
     </themes>
