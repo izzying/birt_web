@@ -1356,12 +1356,25 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="342"/>
             <column id="276"/>
             <column id="277"/>
             <column id="278"/>
             <header>
                 <row id="258">
+                    <cell id="339">
+                        <label id="343">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="259">
                         <label id="260">
                             <property name="textAlign">left</property>
@@ -1384,6 +1397,11 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </header>
             <detail>
                 <row id="265">
+                    <cell id="340">
+                        <data id="345">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="266">
                         <data id="267">
                             <property name="resultSetColumn">name</property>
@@ -1403,11 +1421,12 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </detail>
             <footer>
                 <row id="272">
-                    <cell id="273">
+                    <cell id="341">
                         <label id="282">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="273"/>
                     <cell id="274">
                         <data id="283">
                             <property name="resultSetColumn">Aggregation</property>
@@ -1470,12 +1489,25 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="349"/>
             <column id="306"/>
             <column id="307"/>
             <column id="308"/>
             <header>
                 <row id="288">
+                    <cell id="346">
+                        <label id="350">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="289">
                         <label id="290">
                             <property name="textAlign">left</property>
@@ -1498,6 +1530,11 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </header>
             <detail>
                 <row id="295">
+                    <cell id="347">
+                        <data id="351">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="296">
                         <data id="297">
                             <property name="resultSetColumn">name</property>
@@ -1517,11 +1554,12 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </detail>
             <footer>
                 <row id="302">
-                    <cell id="303">
+                    <cell id="348">
                         <label id="309">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="303"/>
                     <cell id="304">
                         <data id="310">
                             <property name="resultSetColumn">Aggregation</property>
@@ -1584,12 +1622,25 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="355"/>
             <column id="333"/>
             <column id="334"/>
             <column id="335"/>
             <header>
                 <row id="315">
+                    <cell id="352">
+                        <label id="356">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="316">
                         <label id="317">
                             <property name="textAlign">left</property>
@@ -1612,6 +1663,11 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </header>
             <detail>
                 <row id="322">
+                    <cell id="353">
+                        <data id="358">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="323">
                         <data id="324">
                             <property name="resultSetColumn">name</property>
@@ -1631,11 +1687,12 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
             </detail>
             <footer>
                 <row id="329">
-                    <cell id="330">
+                    <cell id="354">
                         <label id="336">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="330"/>
                     <cell id="331">
                         <data id="337">
                             <property name="resultSetColumn">Aggregation</property>
