@@ -556,7 +556,7 @@ sum(pv) pv_total,
 left join applications on `applications` .id = adv_shortcut_stats.`application_id` 
 where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INTERVAL 1 DAY)
 GROUP BY  `applications` .id
-order by pv_total desc, ipv_total desc]]></xml-property>
+order by pv_total desc , ipv_total desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -824,7 +824,7 @@ left join `adv_sim_operators`  on `adv_sim_operators` .id = adv_shortcut_stats.`
 where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INTERVAL 1 DAY)
 GROUP BY  `adv_sim_operators` .id
 
-order by pv_total desc, ipv_total desc]]></xml-property>
+order by pv_total desc , ipv_total desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1090,7 +1090,7 @@ order by pv_total desc, ipv_total desc]]></xml-property>
   left join `adv_regions` on `adv_regions` .id= adv_shortcut_stats.`adv_region_id`
 where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INTERVAL 1 DAY)
  GROUP BY `adv_regions` .id
- order by pv_total desc,
+ order by pv_total desc ,
          ipv_total desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1249,8 +1249,8 @@ where adv_shortcut_id=? and stat_date >= ? and stat_date < date_add(date(?), INT
     <body>
         <text-data id="255">
             <property name="style">s-params-block</property>
-            <expression name="valueExpr">"快捷方式："+params["adv_shortcut_id"].displayText+"&lt;br>"
-"开始日期："+params["date_start"].value+"&lt;br>"
+            <expression name="valueExpr">"快捷方式："+params["adv_shortcut_id"].displayText+"&lt;br>"+
+"开始日期："+params["date_start"].value+"&lt;br>"+
 "结束日期："+params["date_end"].value</expression>
             <property name="contentType">html</property>
         </text-data>
