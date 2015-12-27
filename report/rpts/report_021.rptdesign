@@ -57,7 +57,7 @@
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">var date = new Date(new Date().getTime()-60*60*24*1000);
+                <value type="javascript">var date = new Date();
 date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </simple-property-list>
             <list-property name="selectionList"/>
