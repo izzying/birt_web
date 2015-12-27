@@ -251,18 +251,29 @@
                     <property name="textUnderline">none</property>
                 </style>
                 <style name="crosstab-column-grand-total" id="33">
+                    <property name="fontFamily">"Andale Mono"</property>
+                    <property name="fontStyle">italic</property>
+                    <property name="color">#95B9E6</property>
                     <property name="borderBottomColor">#DDDDDD</property>
                     <property name="borderBottomStyle">dotted</property>
-                    <property name="borderBottomWidth">10px</property>
+                    <property name="borderBottomWidth">1px</property>
                     <property name="borderTopColor">#DDDDDD</property>
                     <property name="borderTopStyle">dotted</property>
-                    <property name="borderTopWidth">10px</property>
+                    <property name="borderTopWidth">1px</property>
                 </style>
                 <style name="crosstab-column-sub-total" id="34">
+                    <property name="fontFamily">"Al Nile"</property>
+                    <property name="fontStyle">italic</property>
+                    <property name="color">#CBD9EC</property>
                     <property name="borderBottomColor">#DDDDDD</property>
                     <property name="borderBottomWidth">1px</property>
                     <property name="borderTopColor">#DDDDDD</property>
                     <property name="borderTopWidth">1px</property>
+                </style>
+                <style name="crosstab-row-grand-total" id="35">
+                    <property name="fontFamily">"Andale Mono"</property>
+                    <property name="fontStyle">italic</property>
+                    <property name="color">#95B9E6</property>
                 </style>
             </styles>
         </theme>
