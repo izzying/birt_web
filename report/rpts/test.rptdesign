@@ -1279,8 +1279,8 @@ If you can see this report, it means that the BIRT viewer is installed correctly
 </model:ChartWithAxes>
 ]]></xml-property>
                                 <property name="outputFormat">SVG</property>
-                                <property name="height">130pt</property>
-                                <property name="width">212pt</property>
+                                <property name="height">2.611111111111111in</property>
+                                <property name="width">3.6805555555555554in</property>
                                 <list-property name="boundDataColumns">
                                     <structure>
                                         <property name="name">CUSTOMERNUMBER_2</property>

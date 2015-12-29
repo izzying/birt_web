@@ -355,7 +355,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
 select clients.id, clients .label, clients.package, count(1) as device_count
   from device_infos
   inner join `devices` on `devices` .device_id= `device_infos` .device_id
-  left join `clients` on `clients` .id= `device_infos` .client_id
+  right join `clients` on `clients` .id= `device_infos` .client_id
  where device_infos.client_id> 0
    and device_infos.created_at> ?
    and device_infos.created_at< date_add(date(?),INTERVAL 1 DAY)
@@ -364,7 +364,7 @@ select clients.id, clients .label, clients.package, count(1) as device_count
   inner join(
 select clients.id, clients.label, clients.package, count(1) as order_count, count(DISTINCT(orders.`device_id`)) as order_device_count
   from orders
-  inner join clients on clients.id= orders.client_id
+  right join clients on clients.id= orders.client_id
   inner join devices on devices.`device_id`= orders.`device_id`
  where orders.deleted_at is null
    and(orders.client_id> 0
@@ -377,7 +377,7 @@ select clients.id, clients.label, clients.package, count(1) as order_count, coun
 select clients.id, clients.label, clients.package, count(1) as n_user_order_count, count(DISTINCT(orders.`device_id`)) as n_user_order_device_count
   from orders
   inner join `device_infos` ON `device_infos` .`device_id`= `orders` .device_id
-  inner join clients on clients.id= orders.client_id
+  right join clients on clients.id= orders.client_id
   inner join devices on devices.`device_id`= orders.`device_id`
    and `device_infos` .client_id> 0
  where orders.deleted_at is null
@@ -387,7 +387,8 @@ select clients.id, clients.label, clients.package, count(1) as n_user_order_coun
    and orders.created_at< date_add(date(?),INTERVAL 1 DAY)
    and `devices` .channel_id like ?
    and date(orders.`created_at`)= date(`device_infos` .created_at)
- group by clients.id) as tmp_n_user_order on tmp_order.id= tmp_n_user_order.id]]></xml-property>
+ group by clients.id) as tmp_n_user_order on tmp_order.id= tmp_n_user_order.id
+ order by tmp_device.device_count desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
