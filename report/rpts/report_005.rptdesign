@@ -361,7 +361,7 @@ select clients.id, clients .label, clients.package, count(1) as device_count
    and device_infos.created_at< date_add(date(?),INTERVAL 1 DAY)
    and `devices` .channel_id like ?
  group by `clients` .id) as tmp_device
-  inner join(
+  left join(
 select clients.id, clients.label, clients.package, count(1) as order_count, count(DISTINCT(orders.`device_id`)) as order_device_count
   from orders
   right join clients on clients.id= orders.client_id
@@ -373,7 +373,7 @@ select clients.id, clients.label, clients.package, count(1) as order_count, coun
    and orders.created_at< date_add(date(?),INTERVAL 1 DAY)
    and `devices` .channel_id like ?
  group by clients.id) as tmp_order on tmp_device.id= tmp_order.id
-  inner join(
+  left join(
 select clients.id, clients.label, clients.package, count(1) as n_user_order_count, count(DISTINCT(orders.`device_id`)) as n_user_order_device_count
   from orders
   inner join `device_infos` ON `device_infos` .`device_id`= `orders` .device_id
