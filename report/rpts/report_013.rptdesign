@@ -552,13 +552,13 @@ select `application_id` as app_id, sum(install_count) as install_num
                                         <structure>
                                             <property name="paramName">create_start</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">params["create_start"].value</value>
+                                                <value type="javascript">params["date_create_start"].value</value>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
                                             <property name="paramName">create_end</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">params["create_end"].value</value>
+                                                <value type="javascript">params["date_create_end"].value</value>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
@@ -584,13 +584,13 @@ select `application_id` as app_id, sum(install_count) as install_num
                                         <structure>
                                             <property name="paramName">create_start</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">params["create_start"].value</value>
+                                                <value type="javascript">params["date_create_start"].value</value>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
                                             <property name="paramName">create_end</property>
                                             <simple-property-list name="expression">
-                                                <value type="javascript">params["create_end"].value</value>
+                                                <value type="javascript">params["date_create_end"].value</value>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
