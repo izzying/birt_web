@@ -349,105 +349,126 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">id</text-property>
                     <text-property name="heading">id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">name</text-property>
                     <text-property name="heading">name</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">created_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">created_at</text-property>
                     <text-property name="heading">created_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">updated_at</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">updated_at</text-property>
                     <text-property name="heading">updated_at</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">api_key</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">api_key</text-property>
                     <text-property name="heading">api_key</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">secret_key</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">secret_key</text-property>
                     <text-property name="heading">secret_key</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">description</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">description</text-property>
                     <text-property name="heading">description</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">platform</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">platform</text-property>
                     <text-property name="heading">platform</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">user_id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">user_id</text-property>
                     <text-property name="heading">user_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">display_advertising</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">display_advertising</text-property>
                     <text-property name="heading">display_advertising</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">getui_app_id</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">getui_app_id</text-property>
                     <text-property name="heading">getui_app_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">getui_app_key</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">getui_app_key</text-property>
                     <text-property name="heading">getui_app_key</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">getui_master_secret</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">getui_master_secret</text-property>
                     <text-property name="heading">getui_master_secret</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">getui_app_secret</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">getui_app_secret</text-property>
                     <text-property name="heading">getui_app_secret</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">umeng_app_key</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">umeng_app_key</text-property>
                     <text-property name="heading">umeng_app_key</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">qr_scene_id</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">qr_scene_id</text-property>
                     <text-property name="heading">qr_scene_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">qr_ticket</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">qr_ticket</text-property>
                     <text-property name="heading">qr_ticket</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">splash</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">splash</text-property>
                     <text-property name="heading">splash</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">greet</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">greet</text-property>
                     <text-property name="heading">greet</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">prom_shop</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">prom_shop</text-property>
                     <text-property name="heading">prom_shop</text-property>
                 </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -697,7 +718,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours(
             </list-property>
             <xml-property name="queryText"><![CDATA[select * 
 from applications 
-where name like '首趣坑_%']]></xml-property>
+where name like '首趣坑_%' or name like '觅恋_%']]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
