@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">柳溪</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <text-property name="title">【广告统计】广告的激活转化</text-property>
+    <html-property name="description">【广告统计】广告的激活转化</html-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">dc_001.ds_001.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">dc_001.ds_001.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="dc_001.ds_001.x">135</property>
+    <property name="dc_001.ds_001.y">80</property>
+    <property name="units">in</property>
+    <property name="theme">common.defaultTheme</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">72</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">common.rptlibrary</property>
+            <property name="namespace">common</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="date_create" id="524">
+            <text-property name="helpText">统计日期</text-property>
+            <text-property name="promptText">统计日期</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var date = new Date();
+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://blsmshop.mysql.rds.aliyuncs.com:3306/adultshop_production</property>
+            <property name="odaUser">staging_user</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c3RhZ2luZzEyMDc=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ds_001" id="441">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">title</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">title</text-property>
+                    <text-property name="heading">title</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">price</text-property>
+                    <text-property name="heading">price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">adv_content_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">adv_content_id</text-property>
+                    <text-property name="heading">adv_content_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">r_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">r_count</text-property>
+                    <text-property name="heading">r_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">i_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">i_count</text-property>
+                    <text-property name="heading">i_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">active_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">active_count</text-property>
+                    <text-property name="heading">active_count</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">title</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">adv_content_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">r_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">i_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">active_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">title</property>
+                    <property name="nativeName">title</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">price</property>
+                    <property name="nativeName">price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">adv_content_id</property>
+                    <property name="nativeName">adv_content_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">r_count</property>
+                    <property name="nativeName">r_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">i_count</property>
+                    <property name="nativeName">i_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">active_count</property>
+                    <property name="nativeName">count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select `adv_contents` .id,
+       `adv_contents`.`title`,
+       `adv_contents` .price,
+       a.*,
+       b.`count` as active_count
+  from `adv_contents`
+  inner join(
+select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_count
+  from `adv_statistics`
+ where date(`created_at`)= '2016-01-27'
+ GROUP BY `adv_content_id`) as a on a.adv_content_id= `adv_contents` .id
+  left join `adv_advertiser_reports` as b on b.`adv_content_id`= a.adv_content_id
+ where `adv_contents`.`activity`= true
+   and `adv_contents`.`trash`= false
+ order by i_count desc]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>username</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>username</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>username</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>phone</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>phone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>phone</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>black_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>black_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>username</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>black_username</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>black_username</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>phone</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>black_phone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>black_phone</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="483">
+            <property name="dataSet">ds_001</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">title</property>
+                    <text-property name="displayName">title</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["title"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">price</property>
+                    <text-property name="displayName">price</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["price"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">r_count</property>
+                    <text-property name="displayName">r_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["r_count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">i_count</property>
+                    <text-property name="displayName">i_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["i_count"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">active_count</property>
+                    <text-property name="displayName">active_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["active_count"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["r_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["i_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["i_count"]/row["r_count"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_1"]/row["Aggregation"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["active_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["active_count"]/row["i_count"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_3</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_2"]/row["Aggregation_1"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_4</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["active_count"]*row["price"],2)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Column Binding_4"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_5</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_4"]/row["r_count"],2)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_6</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]/row["Aggregation"],2)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_7</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_4"]/row["i_count"],2)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_8</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_6"]/row["Aggregation_1"],2)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="518"/>
+            <column id="519"/>
+            <column id="520"/>
+            <column id="521"/>
+            <column id="528"/>
+            <column id="522"/>
+            <column id="533"/>
+            <column id="538"/>
+            <column id="543"/>
+            <column id="548"/>
+            <header>
+                <row id="484">
+                    <cell id="487">
+                        <label id="488">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">广告名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="489">
+                        <label id="490">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">单价</text-property>
+                        </label>
+                    </cell>
+                    <cell id="491">
+                        <label id="492">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">展示</text-property>
+                        </label>
+                    </cell>
+                    <cell id="493">
+                        <label id="494">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">安装</text-property>
+                        </label>
+                    </cell>
+                    <cell id="525">
+                        <label id="529">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">安装率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="495">
+                        <label id="496">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">激活</text-property>
+                        </label>
+                    </cell>
+                    <cell id="530">
+                        <label id="534">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">转化率</text-property>
+                        </label>
+                    </cell>
+                    <cell id="535">
+                        <label id="539">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">收入</text-property>
+                        </label>
+                    </cell>
+                    <cell id="540">
+                        <label id="544">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">单次收入</text-property>
+                        </label>
+                    </cell>
+                    <cell id="545">
+                        <label id="549">
+                            <text-property name="text">安装价值</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="497">
+                    <cell id="500">
+                        <data id="501">
+                            <property name="resultSetColumn">title</property>
+                        </data>
+                    </cell>
+                    <cell id="502">
+                        <data id="503">
+                            <property name="resultSetColumn">price</property>
+                        </data>
+                    </cell>
+                    <cell id="504">
+                        <data id="505">
+                            <property name="resultSetColumn">r_count</property>
+                        </data>
+                    </cell>
+                    <cell id="506">
+                        <data id="507">
+                            <property name="resultSetColumn">i_count</property>
+                        </data>
+                    </cell>
+                    <cell id="526">
+                        <data id="553">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
+                    <cell id="508">
+                        <data id="509">
+                            <property name="resultSetColumn">active_count</property>
+                        </data>
+                    </cell>
+                    <cell id="531">
+                        <data id="556">
+                            <property name="resultSetColumn">Column Binding_2</property>
+                        </data>
+                    </cell>
+                    <cell id="536">
+                        <data id="559">
+                            <property name="resultSetColumn">Column Binding_4</property>
+                        </data>
+                    </cell>
+                    <cell id="541">
+                        <data id="563">
+                            <property name="resultSetColumn">Column Binding_5</property>
+                        </data>
+                    </cell>
+                    <cell id="546">
+                        <data id="565">
+                            <property name="resultSetColumn">Column Binding_7</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="510">
+                    <cell id="512">
+                        <label id="523">
+                            <text-property name="text">合计</text-property>
+                        </label>
+                    </cell>
+                    <cell id="513"/>
+                    <cell id="514">
+                        <data id="550">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="515">
+                        <data id="551">
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="527">
+                        <data id="554">
+                            <property name="resultSetColumn">Column Binding_1</property>
+                        </data>
+                    </cell>
+                    <cell id="516">
+                        <data id="555">
+                            <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="532">
+                        <data id="557">
+                            <property name="resultSetColumn">Column Binding_3</property>
+                        </data>
+                    </cell>
+                    <cell id="537">
+                        <data id="562">
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                    <cell id="542">
+                        <data id="564">
+                            <property name="resultSetColumn">Column Binding_6</property>
+                        </data>
+                    </cell>
+                    <cell id="547">
+                        <data id="566">
+                            <property name="resultSetColumn">Column Binding_8</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
