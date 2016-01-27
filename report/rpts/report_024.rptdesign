@@ -151,7 +151,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <structure>
                         <property name="position">6</property>
                         <property name="name">i_count</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
@@ -201,8 +201,8 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="position">6</property>
                     <property name="name">i_count</property>
                     <property name="nativeName">i_count</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">4</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
@@ -219,7 +219,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
        b.`count` as active_count
   from `adv_contents`
   inner join(
-select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_count
+select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i_count
   from `adv_statistics`
  where date(`created_at`)= '2016-01-27'
  GROUP BY `adv_content_id`) as a on a.adv_content_id= `adv_contents` .id
@@ -457,7 +457,11 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
                 </structure>
                 <structure>
                     <property name="name">Column Binding_1</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_1"]/row["Aggregation"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["Aggregation"]==0||row["Aggregation"]==undefined){
+	0
+}else{
+	BirtMath.round(row["Aggregation_1"]/row["Aggregation"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -475,13 +479,21 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
                 </structure>
                 <structure>
                     <property name="name">Column Binding_2</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["active_count"]/row["i_count"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["i_count"]==0||row["i_count"]==undefined){
+	0
+}else{
+	BirtMath.round(row["active_count"]/row["i_count"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">Column Binding_3</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_2"]/row["Aggregation_1"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["Aggregation_1"]==0||row["Aggregation_1"]==undefined){
+	0
+}else{
+	BirtMath.round(row["Aggregation_2"]/row["Aggregation_1"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -505,25 +517,41 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
                 </structure>
                 <structure>
                     <property name="name">Column Binding_5</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_4"]/row["r_count"],2)</expression>
+                    <expression name="expression" type="javascript">if(row["r_count"]==0||row["r_count"]==undefined){
+	0
+}else{
+BirtMath.round(row["Column Binding_4"]/row["r_count"],2)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">Column Binding_6</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Aggregation_3"]/row["Aggregation"],2)</expression>
+                    <expression name="expression" type="javascript">if(row["Aggregation"]==0||row["Aggregation"]==undefined){
+	0
+}else{
+	BirtMath.round(row["Aggregation_3"]/row["Aggregation"],2)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">Column Binding_7</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_4"]/row["i_count"],2)</expression>
+                    <expression name="expression" type="javascript">if(row["i_count"]==0||row["i_count"]==undefined){
+	0 
+}else{
+	BirtMath.round(row["Column Binding_4"]/row["i_count"],2)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">Column Binding_8</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["Column Binding_6"]/row["Aggregation_1"],2)</expression>
+                    <expression name="expression" type="javascript">if(row["Aggregation_1"]==0||row["Aggregation_1"]==undefined){
+	0
+}else{
+BirtMath.round(row["Column Binding_6"]/row["Aggregation_1"],2)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
