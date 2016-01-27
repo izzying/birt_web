@@ -394,8 +394,9 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
                 <structure>
                     <property name="name">title</property>
                     <text-property name="displayName">title</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["title"]</expression>
+                    <expression name="expression" type="javascript">row["id"]+"_"+dataSetRow["title"]</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">price</property>
