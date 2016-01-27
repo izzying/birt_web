@@ -505,7 +505,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
                 </structure>
                 <structure>
                     <property name="name">Aggregation_3</property>
-                    <property name="dataType">float</property>
+                    <property name="dataType">decimal</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
