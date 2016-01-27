@@ -377,6 +377,11 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
         </simple-master-page>
     </page-setup>
     <body>
+        <text-data id="255">
+            <property name="style">s-params-block</property>
+            <expression name="valueExpr">"统计日期："+params["date_create"].value</expression>
+            <property name="contentType">html</property>
+        </text-data>
         <table id="483">
             <property name="dataSet">ds_001</property>
             <list-property name="boundDataColumns">
@@ -442,7 +447,11 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
                 </structure>
                 <structure>
                     <property name="name">Column Binding</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["i_count"]/row["r_count"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["r_count"]==0||row["r_count"]==undefined){
+	0
+} else {
+	BirtMath.round(row["i_count"]/row["r_count"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -489,7 +498,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, `install_count` as i_coun
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["Column Binding_4"]</expression>
+                            <expression name="value" type="javascript">BirtMath.round(row["Column Binding_4"],2)</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
