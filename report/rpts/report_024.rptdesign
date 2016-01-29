@@ -81,42 +81,49 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="columnName">id</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">id</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">title</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">title</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">title</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">price</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">price</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">price</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">adv_content_id</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">adv_content_id</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">adv_content_id</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">r_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">r_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">r_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">i_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">i_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">i_count</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">active_count</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">active_count</text-property>
+                    <property name="onColumnLayout">false</property>
                     <text-property name="heading">active_count</text-property>
                 </structure>
             </list-property>
@@ -128,6 +135,16 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">-1</property>
                     <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">date_create</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">-1</property>
+                    <property name="position">2</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -237,6 +254,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
   left join `adv_advertiser_reports` as b on b.`adv_content_id`= a.adv_content_id
  where `adv_contents`.`activity`= true
    and `adv_contents`.`trash`= false
+   and `adv_advertiser_reports`.report_date= ?
  order by i_count desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -249,6 +267,21 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
           <design:identifier>
             <design:name></design:name>
             <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
           </design:identifier>
           <design:nativeDataTypeCode>-1</design:nativeDataTypeCode>
           <design:precision>0</design:precision>
