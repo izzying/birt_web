@@ -1014,7 +1014,7 @@ BirtMath.round(row["Column Binding_6"]/row["Aggregation_1"],2)
         <Visible>true</Visible>
       </Separator>
       <Position>Right</Position>
-      <ItemType>Series</ItemType>
+      <ItemType>Categories</ItemType>
       <Title>
         <Caption>
           <Value>分类</Value>
