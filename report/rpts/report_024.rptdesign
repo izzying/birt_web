@@ -826,7 +826,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
       <Type>Linear</Type>
       <Title>
         <Caption>
-          <Value>Y-Axis Title</Value>
+          <Value>安装量</Value>
           <Font>
             <Size>14.0</Size>
             <Bold>true</Bold>
@@ -858,7 +858,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
           <Bottom>0.0</Bottom>
           <Right>3.0</Right>
         </Insets>
-        <Visible>false</Visible>
+        <Visible>true</Visible>
       </Title>
       <TitlePosition>Left</TitlePosition>
       <SeriesDefinitions>
@@ -1096,7 +1096,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
             </Grouping>
           </DataDefinition>
           <DataDefinition>
-            <Definition>row[&quot;r_count&quot;]</Definition>
+            <Definition>row[&quot;r_count&quot;]*row[&quot;Column Binding_7&quot;]</Definition>
             <Grouping>
               <Enabled>false</Enabled>
               <GroupType>Text</GroupType>
@@ -1203,6 +1203,7 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
         <Visible>true</Visible>
       </Label>
       <LabelPosition>Left</LabelPosition>
+      <Staggered>false</Staggered>
       <MajorGrid>
         <LineAttributes>
           <Style>Solid</Style>
@@ -1258,9 +1259,6 @@ select `adv_content_id`, SUM(`read_count`) as r_count, SUM(`install_count`) as i
       </Scale>
       <Origin>
         <Type>Min</Type>
-        <Value xsi:type="data:NumberDataElement">
-          <Value>0.0</Value>
-        </Value>
       </Origin>
       <PrimaryAxis>true</PrimaryAxis>
       <Percent>false</Percent>
