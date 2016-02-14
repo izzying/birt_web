@@ -752,7 +752,14 @@ select application_id, sum(real_cost) as r_cost
                     <expression name="expression" type="javascript">dataSetRow["device_total"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">row.__rownum+1</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
+            <column id="625"/>
             <column id="607"/>
             <column id="618"/>
             <column id="609"/>
@@ -762,6 +769,12 @@ select application_id, sum(real_cost) as r_cost
             <column id="613"/>
             <header>
                 <row id="569">
+                    <cell id="622">
+                        <label id="626">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">排名</text-property>
+                        </label>
+                    </cell>
                     <cell id="570">
                         <label id="571">
                             <property name="textAlign">left</property>
@@ -808,9 +821,30 @@ select application_id, sum(real_cost) as r_cost
             </header>
             <detail>
                 <row id="584">
+                    <cell id="623">
+                        <data id="627">
+                            <property name="resultSetColumn">Column Binding</property>
+                        </data>
+                    </cell>
                     <cell id="585">
+                        <image id="628">
+                            <property name="display">inline</property>
+                            <property name="height">15px</property>
+                            <property name="width">15px</property>
+                            <property name="source">url</property>
+                            <expression name="uri" type="javascript">"http://birt.aihuo360.com/myapps/icon?pkg="+row["name"].replace(/.*\(/,'').replace(")",'')</expression>
+                        </image>
                         <data id="586">
+                            <property name="display">inline</property>
                             <property name="resultSetColumn">name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <property name="toolTip">应用宝详情</property>
+                                    <expression name="uri" type="javascript">"http://android.myapp.com/myapp/detail.htm?apkName="+row["name"].replace(/.*\(/,'').replace(")",'')</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                     <cell id="616">
@@ -847,11 +881,12 @@ select application_id, sum(real_cost) as r_cost
             </detail>
             <footer>
                 <row id="599">
-                    <cell id="600">
+                    <cell id="624">
                         <label id="621">
                             <text-property name="text">合计</text-property>
                         </label>
                     </cell>
+                    <cell id="600"/>
                     <cell id="617"/>
                     <cell id="602"/>
                     <cell id="603"/>
