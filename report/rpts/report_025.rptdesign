@@ -737,14 +737,16 @@ select application_id, sum(real_cost) as r_cost
                 <structure>
                     <property name="name">adv_income</property>
                     <text-property name="displayName">adv_income</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["adv_income"]</expression>
+                    <expression name="expression" type="javascript">BirtMath.round(dataSetRow["adv_income"],2)</expression>
                     <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">r_cost</property>
                     <text-property name="displayName">r_cost</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["r_cost"]</expression>
+                    <expression name="expression" type="javascript">BirtMath.round(dataSetRow["r_cost"],2)</expression>
                     <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">device_total</property>
@@ -758,15 +760,57 @@ select application_id, sum(real_cost) as r_cost
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">show_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["r_count"]/row["device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">install_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["i_count"]/row["device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">active_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["adv_active_count"]/row["i_count"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">arpu</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["adv_income"]/row["device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">cpa</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["r_cost"]/row["device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">roi</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["adv_income"]/row["r_cost"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="625"/>
             <column id="607"/>
             <column id="618"/>
             <column id="609"/>
+            <column id="632"/>
             <column id="610"/>
+            <column id="638"/>
             <column id="611"/>
+            <column id="648"/>
             <column id="612"/>
+            <column id="654"/>
             <column id="613"/>
+            <column id="660"/>
+            <column id="666"/>
             <header>
                 <row id="569">
                     <cell id="622">
@@ -790,19 +834,36 @@ select application_id, sum(real_cost) as r_cost
                     <cell id="574">
                         <label id="575">
                             <property name="textAlign">left</property>
-                            <text-property name="text">广告展现数</text-property>
+                            <text-property name="text">展示</text-property>
+                        </label>
+                    </cell>
+                    <cell id="629">
+                        <label id="633">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">展示率</text-property>
                         </label>
                     </cell>
                     <cell id="576">
                         <label id="577">
                             <property name="textAlign">left</property>
-                            <text-property name="text">广告安装数</text-property>
+                            <text-property name="text">安装完成</text-property>
+                        </label>
+                    </cell>
+                    <cell id="635">
+                        <label id="639">
+                            <text-property name="text">安装率</text-property>
                         </label>
                     </cell>
                     <cell id="578">
                         <label id="579">
                             <property name="textAlign">left</property>
-                            <text-property name="text">广告激活数</text-property>
+                            <text-property name="text">激活</text-property>
+                        </label>
+                    </cell>
+                    <cell id="645">
+                        <label id="649">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">激活率</text-property>
                         </label>
                     </cell>
                     <cell id="580">
@@ -811,10 +872,28 @@ select application_id, sum(real_cost) as r_cost
                             <text-property name="text">收入</text-property>
                         </label>
                     </cell>
+                    <cell id="651">
+                        <label id="655">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">ARPU</text-property>
+                        </label>
+                    </cell>
                     <cell id="582">
                         <label id="583">
                             <property name="textAlign">left</property>
                             <text-property name="text">投入</text-property>
+                        </label>
+                    </cell>
+                    <cell id="657">
+                        <label id="661">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">CPA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="663">
+                        <label id="667">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">ROI</text-property>
                         </label>
                     </cell>
                 </row>
@@ -857,9 +936,19 @@ select application_id, sum(real_cost) as r_cost
                             <property name="resultSetColumn">r_count</property>
                         </data>
                     </cell>
+                    <cell id="630">
+                        <data id="634">
+                            <property name="resultSetColumn">show_rate</property>
+                        </data>
+                    </cell>
                     <cell id="591">
                         <data id="592">
                             <property name="resultSetColumn">i_count</property>
+                        </data>
+                    </cell>
+                    <cell id="636">
+                        <data id="640">
+                            <property name="resultSetColumn">install_rate</property>
                         </data>
                     </cell>
                     <cell id="593">
@@ -867,14 +956,34 @@ select application_id, sum(real_cost) as r_cost
                             <property name="resultSetColumn">adv_active_count</property>
                         </data>
                     </cell>
+                    <cell id="646">
+                        <data id="650">
+                            <property name="resultSetColumn">active_rate</property>
+                        </data>
+                    </cell>
                     <cell id="595">
                         <data id="596">
                             <property name="resultSetColumn">adv_income</property>
                         </data>
                     </cell>
+                    <cell id="652">
+                        <data id="656">
+                            <property name="resultSetColumn">arpu</property>
+                        </data>
+                    </cell>
                     <cell id="597">
                         <data id="598">
                             <property name="resultSetColumn">r_cost</property>
+                        </data>
+                    </cell>
+                    <cell id="658">
+                        <data id="662">
+                            <property name="resultSetColumn">cpa</property>
+                        </data>
+                    </cell>
+                    <cell id="664">
+                        <data id="668">
+                            <property name="resultSetColumn">roi</property>
                         </data>
                     </cell>
                 </row>
@@ -889,10 +998,16 @@ select application_id, sum(real_cost) as r_cost
                     <cell id="600"/>
                     <cell id="617"/>
                     <cell id="602"/>
+                    <cell id="631"/>
                     <cell id="603"/>
+                    <cell id="637"/>
                     <cell id="604"/>
+                    <cell id="647"/>
                     <cell id="605"/>
+                    <cell id="653"/>
                     <cell id="606"/>
+                    <cell id="659"/>
+                    <cell id="665"/>
                 </row>
             </footer>
         </table>
