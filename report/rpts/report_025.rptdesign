@@ -35,6 +35,7 @@
             <text-property name="helpText">开始日期</text-property>
             <text-property name="promptText">开始日期</text-property>
             <property name="valueType">static</property>
+            <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -43,6 +44,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Custom</property>
@@ -53,6 +55,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             <text-property name="helpText">结束日期</text-property>
             <text-property name="promptText">结束日期</text-property>
             <property name="valueType">static</property>
+            <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -61,6 +64,7 @@ date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Custom</property>
