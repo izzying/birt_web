@@ -762,37 +762,169 @@ select application_id, sum(real_cost) as r_cost
                 </structure>
                 <structure>
                     <property name="name">show_rate</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["r_count"]/row["device_total"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["device_total"]==0||row["device_total"]==undefined){
+	0
+}else{
+BirtMath.round(row["r_count"]/row["device_total"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">install_rate</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["i_count"]/row["device_total"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["device_total"]==0||row["device_total"]==undefined){
+	0
+}else{
+BirtMath.round(row["i_count"]/row["device_total"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">active_rate</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["adv_active_count"]/row["i_count"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["i_count"]==0||row["i_count"]==undefined){
+	0
+}else{
+BirtMath.round(row["adv_active_count"]/row["i_count"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">arpu</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["adv_income"]/row["device_total"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["device_total"]==0||row["device_total"]==undefined){
+	0
+}else{
+BirtMath.round(row["adv_income"]/row["device_total"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">cpa</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["r_cost"]/row["device_total"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["device_total"]==0||row["device_total"]==undefined){
+	0
+}else{
+BirtMath.round(row["r_cost"]/row["device_total"],3)
+}</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">roi</property>
-                    <expression name="expression" type="javascript">BirtMath.round(row["adv_income"]/row["r_cost"],3)</expression>
+                    <expression name="expression" type="javascript">if(row["r_cost"]==0||row["r_cost"]==undefined){
+	0
+}else{
+BirtMath.round(row["adv_income"]/row["r_cost"],3)
+}</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_device_total</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["device_total"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_r_count</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["r_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_show_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_r_count"]/row["t_device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_i_count</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["i_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_adv_active_count</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["adv_active_count"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_adv_income</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["adv_income"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_r_cost</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["r_cost"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_install_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_i_count"]/row["t_device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_active_rate</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_adv_active_count"]/row["t_i_count"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_arpu</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_adv_income"]/row["t_device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_cpa</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_r_cost"]/row["t_device_total"],3)</expression>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">t_roi</property>
+                    <expression name="expression" type="javascript">BirtMath.round(row["t_adv_income"]/row["t_r_cost"],3)</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -996,18 +1128,66 @@ select application_id, sum(real_cost) as r_cost
                         </label>
                     </cell>
                     <cell id="600"/>
-                    <cell id="617"/>
-                    <cell id="602"/>
-                    <cell id="631"/>
-                    <cell id="603"/>
-                    <cell id="637"/>
-                    <cell id="604"/>
-                    <cell id="647"/>
-                    <cell id="605"/>
-                    <cell id="653"/>
-                    <cell id="606"/>
-                    <cell id="659"/>
-                    <cell id="665"/>
+                    <cell id="617">
+                        <data id="670">
+                            <property name="resultSetColumn">t_device_total</property>
+                        </data>
+                    </cell>
+                    <cell id="602">
+                        <data id="671">
+                            <property name="resultSetColumn">t_r_count</property>
+                        </data>
+                    </cell>
+                    <cell id="631">
+                        <data id="673">
+                            <property name="resultSetColumn">t_show_rate</property>
+                        </data>
+                    </cell>
+                    <cell id="603">
+                        <data id="674">
+                            <property name="resultSetColumn">t_i_count</property>
+                        </data>
+                    </cell>
+                    <cell id="637">
+                        <data id="680">
+                            <property name="resultSetColumn">t_install_rate</property>
+                        </data>
+                    </cell>
+                    <cell id="604">
+                        <data id="676">
+                            <property name="resultSetColumn">t_adv_active_count</property>
+                        </data>
+                    </cell>
+                    <cell id="647">
+                        <data id="681">
+                            <property name="resultSetColumn">t_active_rate</property>
+                        </data>
+                    </cell>
+                    <cell id="605">
+                        <data id="677">
+                            <property name="resultSetColumn">t_adv_income</property>
+                        </data>
+                    </cell>
+                    <cell id="653">
+                        <data id="683">
+                            <property name="resultSetColumn">t_arpu</property>
+                        </data>
+                    </cell>
+                    <cell id="606">
+                        <data id="678">
+                            <property name="resultSetColumn">t_r_cost</property>
+                        </data>
+                    </cell>
+                    <cell id="659">
+                        <data id="684">
+                            <property name="resultSetColumn">t_cpa</property>
+                        </data>
+                    </cell>
+                    <cell id="665">
+                        <data id="685">
+                            <property name="resultSetColumn">t_roi</property>
+                        </data>
+                    </cell>
                 </row>
             </footer>
         </table>
