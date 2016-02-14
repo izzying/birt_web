@@ -363,7 +363,7 @@ select app.id, app.`name`, count(1) as device_total
    and app_device.`created_at`< date_add(date(?), INTERVAL 1 DAY)
  GROUP BY app.id) as app_active
   left join(
-select t.application_id, t.r_count, t.i_count, sum(t.active_count) as adv_active_count, sum(t.active_count*t.price) as adv_income
+select t.application_id, sum(t.r_count) as r_count, sum(t.i_count) as i_count, sum(t.active_count) as adv_active_count, sum(t.active_count*t.price) as adv_income
   from(
 select c.*, c.i_count/b.i_count as i_rate,(c.i_count/b.i_count) *a.adv_active_count as active_count, `adv_contents`.`price`
   from(
@@ -697,7 +697,7 @@ select application_id, sum(real_cost) as r_cost
         <text-data id="255">
             <property name="style">s-params-block</property>
             <expression name="valueExpr">"开始日期："+params["date_start"].value+
-"结束日期："+params["date_end"].value</expression>
+"&lt;br>结束日期："+params["date_end"].value</expression>
             <property name="contentType">html</property>
         </text-data>
         <table id="568">
