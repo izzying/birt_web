@@ -732,7 +732,8 @@ select application_id, sum(real_cost) as r_cost
                     <property name="name">adv_active_count</property>
                     <text-property name="displayName">adv_active_count</text-property>
                     <expression name="expression" type="javascript">dataSetRow["adv_active_count"]</expression>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">adv_income</property>
