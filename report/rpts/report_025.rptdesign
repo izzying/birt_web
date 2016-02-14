@@ -391,7 +391,8 @@ select application_id, sum(real_cost) as r_cost
   from adv_application_costs
  where adv_application_costs.`stat_date`> ?
    and adv_application_costs.`stat_date`< date_add(date(?), INTERVAL 1 DAY)
- GROUP BY application_id) as app_cost on app_cost.application_id= t2.application_id]]></xml-property>
+ GROUP BY application_id) as app_cost on app_cost.application_id= t2.application_id
+ order by (adv_income-r_cost) desc]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
